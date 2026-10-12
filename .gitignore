@@ -1,0 +1,18 @@
+# ESP-IDF & PlatformIO Build Artifacts
+build/
+.pio/
+.pioenvs/
+.piolibdeps/
+sdkconfig.old
+sdkconfig
+
+# Editor & OS artifacts
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*~
