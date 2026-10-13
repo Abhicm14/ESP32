@@ -1,4 +1,4 @@
-# FreeRTOS on ESP32
+# ESP32 — Real-Time Firmware & FreeRTOS Architecture
 
 A dedicated repository for real-time firmware development, multi-tasking architectures, and synchronization mechanisms using **FreeRTOS** on the **ESP32** microcontroller (ESP-IDF / Arduino core).
 
@@ -24,7 +24,7 @@ This repository is designed to house firmware implementations and architectural 
 ## 📂 Recommended Directory Layout
 
 ```plaintext
-RTOS_ESP32/
+ESP32/
 ├── 01_Task_Creation/         # Task creation, priority preemption, core pinning
 ├── 02_Queues/                # Queue messaging between sensor tasks & processing tasks
 ├── 03_Semaphores_Mutexes/    # Shared bus protection (I2C/SPI), race condition resolution
@@ -38,5 +38,4 @@ RTOS_ESP32/
 ## 🛠️ Toolchains & Frameworks Supported
 
 * **ESP-IDF** (Espressif IoT Development Framework)
-* **PlatformIO** (VS Code extension with ESP-IDF or Arduino-ESP32 framework)
 * **Arduino IDE** (with ESP32 board support package)
