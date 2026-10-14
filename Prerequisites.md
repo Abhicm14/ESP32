@@ -1,6 +1,6 @@
 # 🔌 Basic Electronics Prerequisites: Everything a Total Beginner Must Know Before Touching a Microcontroller
 
-**Read this once, slowly, before you power up an ESP32, Arduino, or any sensor.** It assumes you know *nothing* about electronics. Nothing is skipped. Every idea is explained with everyday things you already understand — mostly water and pipes.
+**Read this once, slowly, before you power up an ESP32, Arduino, or any sensor.** It assumes you know *nothing* about electronics. Nothing is skipped. Every idea is explained with everyday things you already understand — mostly water, pipes, and visual diagrams.
 
 > **How to read this guide**  
 > Don't memorise formulas. Just understand the *idea* behind each one. Every section ends with **"In one sentence"** — if you understand that line, you understand the topic.
@@ -64,18 +64,15 @@ That's why wires are **copper on the inside** (electrons flow) and **plastic on 
 
 > **In one sentence: Electricity is just electrons moving through a wire.**
 
+---
+
 ### A3. Electrons only move in a complete loop (a "circuit")
 
 Electrons will not leave a battery and vanish. They only move if there is a **complete, unbroken path** from the power source, through your device, and back again.
 
-```
-❌ BROKEN LOOP (nothing happens)        ✅ COMPLETE LOOP (it works)
-
-[Battery +] ──► [Bulb]                  [Battery +] ──► [Bulb]
-                   │                          ▲             │
-             ✂ broken here!                    │             ▼
-[Battery −] ──                          [Battery −] ◄────────┘
-```
+<p align="center">
+  <img src="assets/circuit_loop.svg" alt="Circuit Loop Comparison: Complete vs Open vs Short Circuit" width="100%" />
+</p>
 
 - Any gap = **open circuit** = nothing works.
 - A light switch is nothing more than a mechanical gap-maker. OFF = gap. ON = no gap.
@@ -100,28 +97,11 @@ Every circuit in the world, from a phone to a satellite, is described by just th
 | **Current** | I | ampere (A, mA) | **Amount** of water flowing per second |
 | **Resistance** | R | ohm (Ω) | A **narrow** section of pipe |
 
-### The water tank picture
+### The Water Tank Analogy Visualized
 
-```
-      WATER SYSTEM                        ELECTRICAL CIRCUIT
-
-    ┌──────────────┐                    ┌──────────────┐
-    │  WATER TANK  │                    │   BATTERY    │
-    │   (up high)  │                    │    (3.3 V)   │
-    └──────┬───────┘                    └──────┬───────┘
-           │                                   │
-           │ ← pressure = VOLTAGE              │ ← push = VOLTAGE
-           │                                   │
-     ┌─────┴─────┐                       ┌─────┴─────┐
-     │  NARROW   │ ← squeeze =            │ RESISTOR  │ ← RESISTANCE
-     │   PIPE    │   RESISTANCE           │  (1 kΩ)   │
-     └─────┬─────┘                       └─────┬─────┘
-           │                                   │
-           ▼ ← flow rate = CURRENT            ▼ ← flow = CURRENT
-    ┌──────────────┐                    ┌──────────────┐
-    │ GROUND POND  │                    │    GND (0 V) │
-    └──────────────┘                    └──────────────┘
-```
+<p align="center">
+  <img src="assets/water_analogy.svg" alt="Water Pipe Analogy vs Electrical Circuit" width="100%" />
+</p>
 
 ---
 
@@ -183,25 +163,15 @@ Standard resistor symbol:        ───/\/\/\/\───      or     ──�
 
 # PART C — Ohm's Law
 
-This one formula connects all three. Everything else in this guide uses it.
+This one formula connects all three. Everything else in this guide uses it:
 
-```
-              V  =  I  ×  R
+$$\mathbf{V = I \times R} \qquad (\text{Voltage} = \text{Current} \times \text{Resistance})$$
 
-        Voltage = Current × Resistance
-```
+### The Triangle Trick
 
-### The triangle trick
-
-Write it like this:
-
-```
-            ┌───────────┐
-            │     V     │
-            │  ───────  │
-            │  I  ×  R  │
-            └───────────┘
-```
+<p align="center">
+  <img src="assets/ohms_law.svg" alt="Ohm's Law Magic Triangle: V = I x R" width="100%" />
+</p>
 
 Now **cover the letter you want** with your finger — the two remaining letters tell you what to do:
 
@@ -211,7 +181,7 @@ Now **cover the letter you want** with your finger — the two remaining letters
 | Current | I | V ÷ R | Current = Voltage ÷ Resistance |
 | Resistance | R | V ÷ I | Resistance = Voltage ÷ Current |
 
-### Two everyday examples
+### Two Everyday Examples
 
 **Example 1 — How much current flows through a 1 kΩ resistor on 3.3 V?**
 
@@ -242,11 +212,9 @@ The pin can only give 0.02 A. It dies instantly. **This is why every LED needs a
 
 When electrons are forced through resistance, there is friction. Friction makes **heat**.
 
-The rate of energy being used is called **power (P)**, measured in **watts (W)**.
+The rate of energy being used is called **power (P)**, measured in **watts (W)**:
 
-```
-P = V × I
-```
+$$\mathbf{P = V \times I}$$
 
 ### Why this matters: resistors have a heat limit
 
@@ -276,6 +244,10 @@ You're dumping 1.44 W into a part rated for 0.25 W. It will smoke and go black i
 # PART E — Series and Parallel Circuits
 
 There are only two ways to connect things. Learn these two rules and you understand every circuit diagram.
+
+<p align="center">
+  <img src="assets/series_parallel.svg" alt="Series vs Parallel Circuits Comparison" width="100%" />
+</p>
 
 ```
 ╔══════════════════════════════════════════════════════════════╗
@@ -341,7 +313,7 @@ Two 10 kΩ in parallel → (10 × 10) ÷ (10 + 10) = 5 kΩ
 ```
 **Rule: two identical resistors in parallel halve the resistance.**
 
-### Side by side
+### Side by Side
 
 | | **Series** | **Parallel** |
 |---|---|---|
@@ -360,15 +332,9 @@ Two 10 kΩ in parallel → (10 × 10) ÷ (10 + 10) = 5 kΩ
 
 A microcontroller is a digital machine. The real world is analog. Bridging those two is half of embedded engineering.
 
-```
-DIGITAL (only two states)                ANALOG (any value in between)
-
-3.3 V ─┐     ┌──────┐                    3.3 V ──    ╭──╮
-       │     │      │                             ╭╯   ╰╮     ╭──╮
-       │     │      │                           ╭╯      ╰╮  ╭╯  ╰╮
-  0 V ─┴─────┘      └────                  0 V ─╯          ╰─╯    ╰────
-       HIGH  LOW   HIGH                             smooth, endless values
-```
+<p align="center">
+  <img src="assets/signals_adc.svg" alt="Digital Square Wave vs Analog Sine Wave and 12-bit ADC Sampling" width="100%" />
+</p>
 
 ### Digital signals — only 0 or 1
 
@@ -425,17 +391,13 @@ Highest number = (2 ^ number_of_bits) − 1
 
 This works on **every** chip, at **every** bit setting:
 
-```
-        Voltage = ( raw_reading ÷ max_reading ) × reference_voltage
+$$\mathbf{V_{\text{measured}} = \left(\frac{\text{raw\_reading}}{\text{max\_reading}}\right) \times V_{\text{reference}}}$$
 
-        For the ESP32 (default 12-bit):  Voltage = ( raw ÷ 4095 ) × 3.3 V
-```
+$$\text{For the ESP32 (default 12-bit): } \mathbf{V = \left(\frac{\text{raw}}{4095.0}\right) \times 3.3\text{ V}}$$
 
 Reverse it, if you know the voltage and want the raw number:
 
-```
-        raw = ( voltage ÷ reference_voltage ) × max_reading
-```
+$$\mathbf{\text{raw} = \left(\frac{\text{voltage}}{V_{\text{reference}}}\right) \times \text{max\_reading}}$$
 
 | Term | Meaning |
 |---|---|
@@ -505,7 +467,7 @@ float voltage = (raw / 4095.0) * 3.3;   // the universal formula, in code
 
 # PART H — Logic Levels: 3.3 V vs 5 V
 
-### The golden rule
+### The Golden Rule
 
 > ⚠️ **THE ESP32 RUNS ON 3.3 V. ITS PINS ARE NOT 5 V TOLERANT.**
 
@@ -523,7 +485,7 @@ float voltage = (raw / 4095.0) * 3.3;   // the universal formula, in code
 
 Inside the chip, transistors are microscopic — the insulating layers are only a few atoms thick. At 3.3 V they hold. At 5 V the pressure punches a permanent microscopic hole. That pin is dead **forever**. There is no error message — just failure.
 
-### Two safe ways to connect a 5 V sensor
+### Two Safe Ways to Connect a 5 V Sensor
 
 **Way 1 — Resistor divider (sensor → ESP32 only, one direction):**
 
@@ -550,7 +512,11 @@ A tiny cheap module (built around BSS138 MOSFETs). Connect 5 V to `HV`, 3.3 V to
 
 This is the **number-one beginner bug** in all of embedded work.
 
-### The bug
+<p align="center">
+  <img src="assets/floating_pin.svg" alt="Floating Pin Antenna Noise vs Stable Pull-Up Resistor" width="100%" />
+</p>
+
+### The Bug
 
 ```
    Button pressed  → LED on.  ✅
@@ -575,7 +541,7 @@ When the button is not pressed, the pin is connected to *nothing* — just a pie
 
 An open pin has almost infinite resistance, so it behaves like a **radio antenna** and picks up noise. The chip reads that noise as random presses.
 
-### The fix: a "leash" resistor
+### The Fix: A "Leash" Resistor
 
 **Pull-up (the most common setup):**
 
@@ -614,31 +580,21 @@ pressed     → LOW      (this is called "active-low")
 
 # PART J — Voltage Dividers (Measuring High Voltages Safely)
 
-### The problem
+### The Problem
 
 You want to monitor a **12 V car battery** with an ESP32. But the ADC pin dies above 3.3 V.
 
-### The solution
+### The Solution
 
 Two resistors in series scale the voltage down **proportionally**.
 
-```
-              V_in (12 V)
-                │
-             [R1 = 10 kΩ]
-                │
-                ├──────► V_out  → to ESP32 ADC pin
-                │
-             [R2 = 3.3 kΩ]
-                │
-               GND
-```
+<p align="center">
+  <img src="assets/voltage_divider.svg" alt="Voltage Divider Circuit scaling 12V to 2.97V" width="100%" />
+</p>
 
-**The formula:**
+**The Formula:**
 
-```
-V_out = V_in × ( R2 ÷ (R1 + R2) )
-```
+$$\mathbf{V_{\text{out}} = V_{\text{in}} \times \left(\frac{R_2}{R_1 + R_2}\right)}$$
 
 **With our numbers:**
 
@@ -651,9 +607,7 @@ V_out = 12 × ( 3300 ÷ (10000 + 3300) )
 
 ### Turning the reading back into the real voltage, in code
 
-```
-V_battery = V_measured × ( (R1 + R2) ÷ R2 )
-```
+$$\mathbf{V_{\text{battery}} = V_{\text{measured}} \times \left(\frac{R_1 + R_2}{R_2}\right)}$$
 
 > **In one sentence: Two resistors in series shrink a big voltage down to a safe one you can measure.**
 
@@ -672,7 +626,11 @@ V_battery = V_measured × ( (R1 + R2) ÷ R2 )
       POP! Smoke. Dead LED (and possibly a dead pin).
 ```
 
-### Forward voltage (V_f) — the "toll booth"
+<p align="center">
+  <img src="assets/led_resistor.svg" alt="LED and Current-Limiting Resistor Circuit" width="100%" />
+</p>
+
+### Forward Voltage (V_f) — the "Toll Booth"
 
 Every LED steals a fixed amount of voltage just to switch on:
 
@@ -682,7 +640,7 @@ Every LED steals a fixed amount of voltage just to switch on:
 | Yellow / green | ≈ 2.2 V |
 | Blue / white | ≈ 3.0 V |
 
-### Calculating the resistor, step by step
+### Calculating the Resistor, Step by Step
 
 Goal: light a **red LED** from a 3.3 V pin at **10 mA**.
 
@@ -722,15 +680,11 @@ With 220 Ω:  I = 1.3 ÷ 220 = 5.9 mA    → bright and cool ✅
 
 A **tiny rechargeable battery** that charges in microseconds and can dump all its energy instantly. It acts like a **shock absorber** for voltage.
 
-```
-   Normal running:               Wi-Fi transmit burst!
-   3.3 V ──┬──► MCU             3.3 V ──┬──► MCU
-           │                             │
-       [capacitor]                   [capacitor] ──► dumps its stored charge!
-       (slowly fills)                (saves the MCU from crashing)
-```
+<p align="center">
+  <img src="assets/capacitor_decoupling.svg" alt="Decoupling Capacitors preventing Brownout resets" width="100%" />
+</p>
 
-### The famous "Brownout" problem
+### The Famous "Brownout" Problem
 
 When your code calls `WiFi.begin()`, the radio demands a sudden **240 mA burst**. If your USB cable is long or your breadboard wires are thin, the 3.3 V rail sags to 2.8 V. The ESP32 detects the dip and **resets itself**, printing:
 
@@ -738,7 +692,7 @@ When your code calls `WiFi.begin()`, the radio demands a sudden **240 mA burst**
 Brownout detector was triggered
 ```
 
-### The fix
+### The Fix
 
 Put two capacitors right next to the ESP32, across the power rails:
 
@@ -794,7 +748,7 @@ A **10 kΩ resistor + 100 nF capacitor** across the button smooths the ripples o
 
 # PART N — Transistors and MOSFETs (Muscles)
 
-### The problem
+### The Problem
 
 A GPIO pin can safely give **about 20 mA at 3.3 V**. What if you want to switch on:
 
@@ -804,7 +758,7 @@ A GPIO pin can safely give **about 20 mA at 3.3 V**. What if you want to switch 
 
 Connect any of those directly and the pin **vaporises**.
 
-### The solution: an electronic switch
+### The Solution: An Electronic Switch
 
 A transistor is a valve. A **tiny** signal from the ESP32 controls a **huge** flow of power from a separate supply.
 
@@ -1005,6 +959,10 @@ A multimeter is your **eyes** into an invisible world. It saves hundreds of hour
 # PART T — SENSOR PROTOCOLS ⭐ (How Sensors Actually Talk to Your Board)
 
 This is the part that matters most once you start connecting sensors. Read it slowly.
+
+<p align="center">
+  <img src="assets/sensor_protocols.svg" alt="Sensor Communication Protocols: UART vs I2C vs SPI" width="100%" />
+</p>
 
 ### T1. First, what is a "protocol"?
 

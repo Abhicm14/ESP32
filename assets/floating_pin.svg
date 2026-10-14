@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 360" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; stroke: #30363d; stroke-width: 1.5; rx: 12px; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 17px; font-weight: 700; }
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 600; fill: #e6edf3; }
+      .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 13px; }
+      .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #8b949e; }
+      .chip { fill: #161b22; stroke: #30363d; stroke-width: 2; rx: 6px; }
+      .antenna-wave { stroke: #f85149; stroke-width: 2; fill: none; animation: wobble 0.6s infinite alternate; }
+      .clean-wire { stroke: #3fb950; stroke-width: 3; fill: none; }
+      .resistor { fill: #21262d; stroke: #d29922; stroke-width: 2; rx: 3px; }
+      @keyframes wobble {
+        0% { stroke-dashoffset: 0; opacity: 0.4; transform: translateY(0); }
+        100% { stroke-dashoffset: 8; opacity: 1; transform: translateY(-3px); }
+      }
+      .flicker { animation: text-flicker 0.4s infinite alternate; }
+      @keyframes text-flicker {
+        from { opacity: 0.3; }
+        to { opacity: 1; }
+      }
+    </style>
+  </defs>
+
+  <!-- Left: The Floating Pin Problem -->
+  <rect x="20" y="15" width="395" height="330" class="bg" />
+  <text x="40" y="45" class="header" fill="#f85149">❌ THE FLOATING PIN (UNSTABLE)</text>
+  <text x="40" y="65" class="sub">Open wire acts like a radio antenna picking up noise</text>
+
+  <!-- ESP32 Chip representation -->
+  <rect x="40" y="120" width="100" height="130" class="chip" stroke="#f85149"/>
+  <text x="55" y="150" class="title" fill="#58a6ff">ESP32</text>
+  <text x="50" y="195" class="mono" fill="#f85149">GPIO Pin</text>
+  <text x="45" y="225" class="sub" font-size="9px">High Impedance</text>
+
+  <!-- Dangling wire with open button -->
+  <line x1="140" y1="190" x2="250" y2="190" stroke="#f85149" stroke-width="3"/>
+  <circle cx="250" cy="190" r="4" fill="#f85149"/>
+  <circle cx="290" cy="190" r="4" fill="#8b949e"/>
+  <line x1="290" y1="190" x2="330" y2="190" stroke="#8b949e" stroke-width="2"/>
+  <line x1="330" y1="190" x2="330" y2="230" stroke="#8b949e" stroke-width="2"/>
+  <text x="315" y="245" class="sub">GND</text>
+
+  <!-- Disconnected button contact -->
+  <line x1="250" y1="190" x2="285" y2="165" stroke="#f85149" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Radio noise wave acting on floating wire -->
+  <path d="M 180 130 Q 200 150 220 130 T 260 130" class="antenna-wave"/>
+  <path d="M 170 145 Q 195 165 220 145 T 270 145" class="antenna-wave"/>
+  <text x="175" y="115" class="sub" fill="#f85149" font-weight="bold">Wi-Fi &amp; Static Noise 📶</text>
+
+  <rect x="50" y="270" width="335" height="55" rx="6" fill="#161b22" stroke="#f85149" stroke-width="1.5"/>
+  <text x="65" y="292" class="mono flicker" fill="#f85149">digitalRead() = 0, 1, 0, 0, 1, 1...</text>
+  <text x="65" y="312" class="sub">Reads random garbage! LED flickers when you wave hands!</text>
+
+  <!-- Right: The Pull-Up Resistor Solution -->
+  <rect x="435" y="15" width="395" height="330" class="bg" />
+  <text x="455" y="45" class="header" fill="#3fb950">✅ PULL-UP RESISTOR (STABLE)</text>
+  <text x="455" y="65" class="sub">The "gentle leash" anchors pin to 3.3V until pressed</text>
+
+  <!-- ESP32 Chip representation -->
+  <rect x="455" y="120" width="100" height="130" class="chip" stroke="#3fb950"/>
+  <text x="470" y="150" class="title" fill="#58a6ff">ESP32</text>
+  <text x="465" y="195" class="mono" fill="#3fb950">GPIO Pin</text>
+
+  <!-- 3.3V Rail -->
+  <line x1="620" y1="90" x2="620" y2="120" stroke="#58a6ff" stroke-width="3"/>
+  <circle cx="620" cy="90" r="5" fill="#58a6ff"/>
+  <text x="635" y="95" class="mono" fill="#58a6ff" font-weight="bold">3.3V</text>
+
+  <!-- Pull-Up Resistor -->
+  <rect x="605" y="120" width="30" height="45" class="resistor"/>
+  <text x="645" y="145" class="title" fill="#d29922">10 kΩ</text>
+  <text x="645" y="160" class="sub">Pull-up leash</text>
+
+  <!-- Junction Node -->
+  <line x1="555" y1="190" x2="620" y2="190" class="clean-wire"/>
+  <line x1="620" y1="165" x2="620" y2="190" class="clean-wire"/>
+  <circle cx="620" cy="190" r="5" fill="#3fb950"/>
+
+  <!-- Button to GND -->
+  <line x1="620" y1="190" x2="670" y2="190" stroke="#8b949e" stroke-width="2.5"/>
+  <circle cx="670" cy="190" r="4" fill="#3fb950"/>
+  <circle cx="710" cy="190" r="4" fill="#8b949e"/>
+  <line x1="710" y1="190" x2="740" y2="190" stroke="#8b949e" stroke-width="2.5"/>
+  <line x1="740" y1="190" x2="740" y2="225" stroke="#8b949e" stroke-width="2.5"/>
+  <text x="725" y="240" class="sub">GND</text>
+
+  <!-- Open Push Button Contact -->
+  <line x1="670" y1="190" x2="705" y2="170" stroke="#e6edf3" stroke-width="2.5" stroke-linecap="round"/>
+
+  <rect x="465" y="270" width="335" height="55" rx="6" fill="#161b22" stroke="#3fb950" stroke-width="1.5"/>
+  <text x="480" y="292" class="mono" fill="#3fb950">Not Pressed: HIGH (3.3V) | Pressed: LOW (0V)</text>
+  <text x="480" y="312" class="sub">100% stable reading • Built-in: pinMode(pin, INPUT_PULLUP)</text>
+</svg>

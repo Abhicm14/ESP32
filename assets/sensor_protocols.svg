@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; stroke: #30363d; stroke-width: 1.5; rx: 12px; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 17px; font-weight: 700; }
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; font-weight: 600; fill: #e6edf3; }
+      .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; }
+      .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #8b949e; }
+      .chip { fill: #161b22; stroke: #30363d; stroke-width: 1.5; rx: 6px; }
+      .bus-uart { stroke: #58a6ff; stroke-width: 2.5; stroke-dasharray: 6 4; animation: tx-flow 1.5s linear infinite; }
+      .bus-i2c { stroke: #3fb950; stroke-width: 2.5; stroke-dasharray: 6 4; animation: tx-flow 1.2s linear infinite; }
+      .bus-spi { stroke: #d29922; stroke-width: 2.5; stroke-dasharray: 4 3; animation: tx-flow 0.8s linear infinite; }
+      @keyframes tx-flow {
+        to { stroke-dashoffset: -20; }
+      }
+    </style>
+  </defs>
+
+  <!-- Top Title -->
+  <rect x="15" y="15" width="820" height="390" class="bg" />
+  <text x="35" y="45" class="header" fill="#58a6ff">📡 SENSOR PROTOCOLS: HOW CHIPS TALK</text>
+  <text x="35" y="65" class="sub" font-size="12px">Compare the three major communication buses used in embedded hardware</text>
+
+  <!-- Section 1: UART (2-Wire Point-to-Point) -->
+  <g transform="translate(30, 85)">
+    <rect x="0" y="0" width="790" height="85" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="1.2"/>
+    <text x="15" y="24" class="title" fill="#58a6ff">1. UART (Universal Asynchronous Receiver-Transmitter)</text>
+    <text x="15" y="40" class="sub">Point-to-point • Always CROSS TX and RX! • GPS, Bluetooth, Serial Monitor</text>
+
+    <!-- ESP32 Side -->
+    <rect x="25" y="48" width="70" height="26" class="chip"/>
+    <text x="38" y="65" class="mono" fill="#58a6ff">ESP32</text>
+
+    <!-- Lines -->
+    <line x1="95" y1="54" x2="685" y2="68" class="bus-uart"/>
+    <line x1="95" y1="68" x2="685" y2="54" stroke="#79c0ff" stroke-width="2.5" stroke-dasharray="6 4" style="animation: tx-flow 1.5s linear infinite reverse;"/>
+
+    <text x="105" y="52" class="mono" fill="#58a6ff">TX ───────► (Transmits)</text>
+    <text x="105" y="78" class="mono" fill="#79c0ff">RX ◄─────── (Receives)</text>
+
+    <!-- Module Side -->
+    <rect x="685" y="48" width="85" height="26" class="chip"/>
+    <text x="700" y="65" class="mono" fill="#e6edf3">Sensor</text>
+    <text x="645" y="52" class="mono" fill="#79c0ff">RX</text>
+    <text x="645" y="78" class="mono" fill="#58a6ff">TX</text>
+  </g>
+
+  <!-- Section 2: I2C (2-Wire Multi-Device Bus) -->
+  <g transform="translate(30, 185)">
+    <rect x="0" y="0" width="790" height="100" rx="8" fill="#161b22" stroke="#3fb950" stroke-width="1.2"/>
+    <text x="15" y="24" class="title" fill="#3fb950">2. I²C (Inter-Integrated Circuit)</text>
+    <text x="15" y="40" class="sub">2 wires for 100+ sensors • Uses device addresses (e.g. 0x76, 0x68) • Needs pull-ups!</text>
+
+    <!-- ESP32 Master -->
+    <rect x="25" y="52" width="70" height="36" class="chip"/>
+    <text x="35" y="74" class="mono" fill="#3fb950">Master</text>
+
+    <!-- SDA and SCL Shared Bus Wires -->
+    <line x1="95" y1="62" x2="660" y2="62" class="bus-i2c"/>
+    <line x1="95" y1="78" x2="660" y2="78" stroke="#7ee787" stroke-width="2.5" stroke-dasharray="6 4" style="animation: tx-flow 1.8s linear infinite;"/>
+    <text x="105" y="58" class="mono" fill="#3fb950">SDA (Data)</text>
+    <text x="105" y="90" class="mono" fill="#7ee787">SCL (Clock)</text>
+
+    <!-- Pull-up indicator -->
+    <g transform="translate(240, 48)">
+      <rect x="0" y="0" width="55" height="42" rx="4" fill="#21262d" stroke="#d29922"/>
+      <text x="8" y="16" class="sub" fill="#d29922">4.7kΩ Pullup</text>
+      <text x="12" y="32" class="sub">to 3.3V</text>
+    </g>
+
+    <!-- Sensor 1 (BME280) -->
+    <g transform="translate(360, 52)">
+      <rect x="0" y="0" width="90" height="36" class="chip"/>
+      <text x="10" y="18" class="mono" fill="#e6edf3">BME280</text>
+      <text x="10" y="30" class="sub" fill="#3fb950">Addr: 0x76</text>
+    </g>
+
+    <!-- Sensor 2 (OLED) -->
+    <g transform="translate(500, 52)">
+      <rect x="0" y="0" width="90" height="36" class="chip"/>
+      <text x="10" y="18" class="mono" fill="#e6edf3">OLED Screen</text>
+      <text x="10" y="30" class="sub" fill="#3fb950">Addr: 0x3C</text>
+    </g>
+
+    <!-- Sensor 3 (MPU6050) -->
+    <g transform="translate(640, 52)">
+      <rect x="0" y="0" width="90" height="36" class="chip"/>
+      <text x="10" y="18" class="mono" fill="#e6edf3">MPU6050</text>
+      <text x="10" y="30" class="sub" fill="#3fb950">Addr: 0x68</text>
+    </g>
+  </g>
+
+  <!-- Section 3: SPI (4-Wire High Speed) -->
+  <g transform="translate(30, 300)">
+    <rect x="0" y="0" width="790" height="90" rx="8" fill="#161b22" stroke="#d29922" stroke-width="1.2"/>
+    <text x="15" y="24" class="title" fill="#d29922">3. SPI (Serial Peripheral Interface)</text>
+    <text x="15" y="40" class="sub">Ultra-fast (10–80 MHz) • 4 wires: MOSI, MISO, SCK + dedicated CS pin per device • SD cards, displays</text>
+
+    <!-- ESP32 Master -->
+    <rect x="25" y="48" width="70" height="32" class="chip"/>
+    <text x="35" y="68" class="mono" fill="#d29922">Master</text>
+
+    <!-- High Speed SPI Wires -->
+    <line x1="95" y1="56" x2="480" y2="56" class="bus-spi"/>
+    <line x1="95" y1="68" x2="480" y2="68" class="bus-spi"/>
+    <text x="105" y="52" class="mono" fill="#d29922">MOSI / MISO / SCK (Shared Fast Lines)</text>
+
+    <!-- Device 1: MicroSD Card -->
+    <g transform="translate(480, 48)">
+      <rect x="0" y="0" width="115" height="32" class="chip"/>
+      <text x="8" y="16" class="mono" fill="#e6edf3">MicroSD Card</text>
+      <text x="8" y="27" class="sub" fill="#d29922">Selected by CS1</text>
+    </g>
+
+    <!-- Device 2: Color TFT Display -->
+    <g transform="translate(640, 48)">
+      <rect x="0" y="0" width="115" height="32" class="chip"/>
+      <text x="8" y="16" class="mono" fill="#e6edf3">TFT Display</text>
+      <text x="8" y="27" class="sub" fill="#d29922">Selected by CS2</text>
+    </g>
+  </g>
+</svg>

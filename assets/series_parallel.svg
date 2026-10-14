@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 380" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; stroke: #30363d; stroke-width: 1.5; rx: 12px; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 17px; font-weight: 700; }
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 600; fill: #e6edf3; }
+      .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 13px; }
+      .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #8b949e; }
+      .wire { fill: none; stroke-linecap: round; }
+      .wire-series { stroke: #58a6ff; stroke-width: 3.5; stroke-dasharray: 8 6; animation: series-flow 1.5s linear infinite; }
+      .wire-p1 { stroke: #3fb950; stroke-width: 4; stroke-dasharray: 6 4; animation: p1-flow 1s linear infinite; }
+      .wire-p2 { stroke: #d29922; stroke-width: 2.5; stroke-dasharray: 6 4; animation: p2-flow 2s linear infinite; }
+      .resistor { fill: #21262d; stroke-width: 2; rx: 4px; }
+      @keyframes series-flow {
+        to { stroke-dashoffset: -28; }
+      }
+      @keyframes p1-flow {
+        to { stroke-dashoffset: -20; }
+      }
+      @keyframes p2-flow {
+        to { stroke-dashoffset: -20; }
+      }
+    </style>
+  </defs>
+
+  <!-- Left: Series Circuit -->
+  <rect x="20" y="15" width="395" height="350" class="bg" />
+  <text x="40" y="45" class="header" fill="#58a6ff">🛤️ SERIES CIRCUIT</text>
+  <text x="40" y="65" class="sub">One single track • Head-to-tail connection</text>
+
+  <!-- Series Wire Path -->
+  <path d="M 100 95 L 100 295" stroke="#21262d" stroke-width="5" fill="none"/>
+  <path d="M 100 95 L 100 295" class="wire wire-series"/>
+
+  <!-- Source 3.3V -->
+  <circle cx="100" cy="95" r="7" fill="#58a6ff"/>
+  <text x="115" y="100" class="mono" fill="#58a6ff" font-weight="bold">3.3V (Source)</text>
+
+  <!-- Resistor 1 -->
+  <rect x="85" y="125" width="30" height="45" class="resistor" stroke="#58a6ff"/>
+  <text x="125" y="145" class="title">R1 = 1 kΩ</text>
+  <text x="125" y="162" class="sub" fill="#58a6ff">Drops 1.1 V</text>
+
+  <!-- Point A -->
+  <circle cx="100" cy="195" r="5" fill="#f0883e"/>
+  <line x1="100" y1="195" x2="135" y2="195" stroke="#f0883e" stroke-width="2" stroke-dasharray="3 3"/>
+  <text x="145" y="200" class="mono" fill="#f0883e" font-weight="bold">Point A = 2.2V</text>
+
+  <!-- Resistor 2 -->
+  <rect x="85" y="220" width="30" height="45" class="resistor" stroke="#58a6ff"/>
+  <text x="125" y="240" class="title">R2 = 2 kΩ</text>
+  <text x="125" y="257" class="sub" fill="#58a6ff">Drops 2.2 V</text>
+
+  <!-- Ground 0V -->
+  <circle cx="100" cy="295" r="7" fill="#8b949e"/>
+  <text x="115" y="300" class="mono" fill="#8b949e">GND (0V)</text>
+
+  <!-- Summary Box Series -->
+  <g transform="translate(260, 110)">
+    <text x="0" y="0" class="title" fill="#3fb950">✅ SAME Current</text>
+    <text x="0" y="18" class="mono" fill="#8b949e" font-size="11px">I = 1.1 mA everywhere</text>
+    <text x="0" y="45" class="title" fill="#f0883e">⚡ SPLITS Voltage</text>
+    <text x="0" y="63" class="mono" fill="#8b949e" font-size="11px">1.1V + 2.2V = 3.3V</text>
+    <text x="0" y="90" class="title" fill="#58a6ff">📈 R Adds UP</text>
+    <text x="0" y="108" class="mono" fill="#8b949e" font-size="11px">1k + 2k = 3000 Ω</text>
+  </g>
+
+  <!-- Right: Parallel Circuit -->
+  <rect x="435" y="15" width="395" height="350" class="bg" />
+  <text x="455" y="45" class="header" fill="#3fb950">🔀 PARALLEL CIRCUIT</text>
+  <text x="455" y="65" class="sub">Multiple branches • Side-by-side connection</text>
+
+  <!-- Top 3.3V Bus -->
+  <line x1="480" y1="110" x2="680" y2="110" stroke="#3fb950" stroke-width="4"/>
+  <circle cx="480" cy="110" r="7" fill="#3fb950"/>
+  <text x="470" y="95" class="mono" fill="#3fb950" font-weight="bold">3.3V Common Rail</text>
+
+  <!-- Branch 1 (Wide Lane, Less R = 1k) -->
+  <path d="M 540 110 L 540 270" stroke="#21262d" stroke-width="4" fill="none"/>
+  <path d="M 540 110 L 540 270" class="wire wire-p1"/>
+  <rect x="525" y="165" width="30" height="45" class="resistor" stroke="#3fb950"/>
+  <text x="500" y="225" class="title" fill="#3fb950">R1 = 1kΩ</text>
+  <text x="495" y="240" class="sub">I = 3.3 mA</text>
+
+  <!-- Branch 2 (Narrow Lane, More R = 2k) -->
+  <path d="M 640 110 L 640 270" stroke="#21262d" stroke-width="3" fill="none"/>
+  <path d="M 640 110 L 640 270" class="wire wire-p2"/>
+  <rect x="625" y="165" width="30" height="45" class="resistor" stroke="#d29922"/>
+  <text x="600" y="225" class="title" fill="#d29922">R2 = 2kΩ</text>
+  <text x="600" y="240" class="sub">I = 1.65 mA</text>
+
+  <!-- Bottom GND Bus -->
+  <line x1="480" y1="270" x2="680" y2="270" stroke="#8b949e" stroke-width="4"/>
+  <circle cx="480" cy="270" r="7" fill="#8b949e"/>
+  <text x="470" y="295" class="mono" fill="#8b949e">GND Common Rail</text>
+
+  <!-- Summary Box Parallel -->
+  <g transform="translate(695, 110)">
+    <text x="0" y="0" class="title" fill="#58a6ff">⚡ SAME Voltage</text>
+    <text x="0" y="18" class="mono" fill="#8b949e" font-size="11px">3.3V on ALL parts</text>
+    <text x="0" y="45" class="title" fill="#3fb950">🔀 SPLITS Current</text>
+    <text x="0" y="63" class="mono" fill="#8b949e" font-size="11px">3.3mA + 1.65mA</text>
+    <text x="0" y="90" class="title" fill="#d29922">📉 R DECREASES</text>
+    <text x="0" y="108" class="mono" fill="#8b949e" font-size="11px">667 Ω (&lt; smallest!)</text>
+  </g>
+</svg>

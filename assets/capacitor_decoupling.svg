@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 330" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; stroke: #30363d; stroke-width: 1.5; rx: 12px; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 17px; font-weight: 700; fill: #58a6ff; }
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; font-weight: 600; fill: #e6edf3; }
+      .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 12px; }
+      .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #8b949e; }
+      .card { fill: #161b22; stroke: #30363d; stroke-width: 1.5; rx: 8px; }
+      .dip-curve { stroke: #f85149; stroke-width: 3; fill: none; stroke-linecap: round; }
+      .stable-curve { stroke: #3fb950; stroke-width: 3; fill: none; stroke-linecap: round; }
+      .pulse-burst { animation: burst 1.8s infinite; }
+      @keyframes burst {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 1; filter: drop-shadow(0 0 8px #f85149); }
+      }
+    </style>
+  </defs>
+
+  <rect x="15" y="15" width="820" height="300" class="bg" />
+  <text x="35" y="45" class="header">🔋 Capacitors: The Shock Absorbers of Power Rails</text>
+  <text x="35" y="65" class="sub">How decoupling capacitors stop sudden Wi-Fi current bursts from triggering Brownout crashes</text>
+
+  <!-- Left: Without Capacitor (Brownout Crash) -->
+  <g transform="translate(35, 85)">
+    <rect x="0" y="0" width="375" height="210" class="card" stroke="#f85149" stroke-width="1.2"/>
+    <text x="20" y="25" class="title" fill="#f85149">❌ WITHOUT CAPACITOR (BROWNOUT)</text>
+    <text x="20" y="42" class="sub">Wi-Fi turns on → 240mA burst → Voltage collapses!</text>
+
+    <!-- Voltage Sag Graph -->
+    <line x1="30" y1="75" x2="340" y2="75" stroke="#30363d" stroke-dasharray="3 3"/>
+    <text x="30" y="68" class="mono" fill="#58a6ff" font-size="10px">Normal 3.3 V</text>
+
+    <line x1="30" y1="115" x2="340" y2="115" stroke="#f85149" stroke-dasharray="3 3" opacity="0.6"/>
+    <text x="30" y="128" class="mono" fill="#f85149" font-size="10px">Brownout Threshold ~ 2.8 V</text>
+
+    <!-- Sag Dip Path -->
+    <path d="M 30 75 L 120 75 Q 160 145 190 75 L 340 75" class="dip-curve"/>
+    <circle cx="160" cy="120" r="5" fill="#f85149" class="pulse-burst"/>
+
+    <rect x="20" y="145" width="335" height="50" rx="6" fill="#0d1117" stroke="#f85149"/>
+    <text x="30" y="165" class="mono" fill="#f85149">💥 Brownout detector was triggered</text>
+    <text x="30" y="183" class="sub">The ESP32 detects the voltage dip and resets in a loop!</text>
+  </g>
+
+  <!-- Right: With Decoupling Capacitors (Smooth & Stable) -->
+  <g transform="translate(435, 85)">
+    <rect x="0" y="0" width="375" height="210" class="card" stroke="#3fb950" stroke-width="1.2"/>
+    <text x="20" y="25" class="title" fill="#3fb950">✅ WITH CAPACITORS (ROCK SOLID)</text>
+    <text x="20" y="42" class="sub">Capacitor dumps stored charge to fill the dip instantly!</text>
+
+    <!-- Voltage Graph -->
+    <line x1="30" y1="75" x2="340" y2="75" stroke="#30363d" stroke-dasharray="3 3"/>
+    <text x="30" y="68" class="mono" fill="#58a6ff" font-size="10px">Normal 3.3 V</text>
+
+    <!-- Flat Stable Line with tiny harmless ripple -->
+    <path d="M 30 75 L 130 75 Q 160 82 190 75 L 340 75" class="stable-curve"/>
+
+    <!-- Capacitor symbols -->
+    <g transform="translate(130, 95)">
+      <rect x="0" y="0" width="55" height="35" rx="4" fill="#21262d" stroke="#58a6ff"/>
+      <text x="6" y="16" class="sub" fill="#58a6ff" font-weight="bold">10 µF Bulk</text>
+      <text x="6" y="28" class="sub" font-size="9px">Electrolytic</text>
+    </g>
+
+    <g transform="translate(200, 95)">
+      <rect x="0" y="0" width="60" height="35" rx="4" fill="#21262d" stroke="#3fb950"/>
+      <text x="6" y="16" class="sub" fill="#3fb950" font-weight="bold">100 nF Fast</text>
+      <text x="6" y="28" class="sub" font-size="9px">Ceramic</text>
+    </g>
+
+    <rect x="20" y="145" width="335" height="50" rx="6" fill="#0d1117" stroke="#3fb950"/>
+    <text x="30" y="165" class="mono" fill="#3fb950">✅ 3.3 V Rail Stays Completely Flat</text>
+    <text x="30" y="183" class="sub">Wi-Fi sends packets smoothly with zero random resets!</text>
+  </g>
+</svg>

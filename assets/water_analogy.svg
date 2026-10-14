@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 380" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; stroke: #30363d; stroke-width: 1.5; rx: 12px; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 17px; font-weight: 700; fill: #58a6ff; }
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 600; fill: #e6edf3; }
+      .text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; fill: #c9d1d9; }
+      .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #8b949e; }
+      .water { fill: #388bfd; opacity: 0.8; }
+      .pipe { fill: none; stroke: #30363d; stroke-width: 28; stroke-linecap: round; }
+      .constriction { stroke: #d29922; stroke-width: 8; }
+      .circuit-wire { fill: none; stroke: #238636; stroke-width: 3.5; stroke-dasharray: 8 6; animation: electron-flow 1.5s linear infinite; }
+      .drop { fill: #79c0ff; animation: drop-fall 1.4s ease-in infinite; }
+      .drop-delay { animation-delay: 0.7s; }
+      @keyframes drop-fall {
+        0% { transform: translateY(0); opacity: 0.2; }
+        20% { opacity: 1; }
+        80% { opacity: 1; }
+        100% { transform: translateY(140px); opacity: 0; }
+      }
+      @keyframes electron-flow {
+        to { stroke-dashoffset: -28; }
+      }
+      .bubble { animation: pulse 2s ease-in-out infinite alternate; }
+      @keyframes pulse {
+        from { transform: scale(0.97); }
+        to { transform: scale(1.02); }
+      }
+    </style>
+  </defs>
+
+  <!-- Left Card: Water System -->
+  <rect x="20" y="15" width="395" height="350" class="bg" />
+  <text x="40" y="45" class="header">🌊 Water Pipe Analogy</text>
+  <text x="40" y="65" class="sub">Mechanical, intuitive &amp; visible</text>
+
+  <!-- Water Tank (Voltage) -->
+  <rect x="60" y="90" width="130" height="70" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+  <rect x="62" y="115" width="126" height="43" rx="4" class="water"/>
+  <text x="75" y="110" class="title" fill="#58a6ff">WATER TANK</text>
+  <text x="70" y="140" class="text" font-weight="bold" fill="#ffffff">High Pressure</text>
+  
+  <!-- Height Marker = Voltage -->
+  <line x1="205" y1="90" x2="205" y2="300" stroke="#58a6ff" stroke-width="2" stroke-dasharray="4 4"/>
+  <polygon points="205,90 200,100 210,100" fill="#58a6ff"/>
+  <polygon points="205,300 200,290 210,290" fill="#58a6ff"/>
+  <text x="215" y="185" class="title" fill="#58a6ff">VOLTAGE (V)</text>
+  <text x="215" y="202" class="sub">Height = Pressure</text>
+
+  <!-- Pipe -->
+  <path d="M 125 160 L 125 210" stroke="#30363d" stroke-width="20" fill="none"/>
+  
+  <!-- Constriction (Resistance) -->
+  <rect x="110" y="205" width="30" height="30" rx="4" fill="#21262d" stroke="#d29922" stroke-width="2"/>
+  <line x1="110" y1="220" x2="140" y2="220" stroke="#d29922" stroke-width="6"/>
+  <text x="155" y="218" class="title" fill="#d29922">RESISTANCE (R)</text>
+  <text x="155" y="233" class="sub">Constriction / Squeeze</text>
+
+  <!-- Falling Water Drops (Current) -->
+  <g transform="translate(122, 240)">
+    <circle cx="3" cy="5" r="4.5" class="drop"/>
+    <circle cx="3" cy="5" r="4.5" class="drop drop-delay"/>
+  </g>
+  <text x="155" y="270" class="title" fill="#3fb950">CURRENT (I)</text>
+  <text x="155" y="285" class="sub">Flow Rate (Liters / sec)</text>
+
+  <!-- Bottom Drain (Ground) -->
+  <rect x="60" y="300" width="130" height="40" rx="8" fill="#161b22" stroke="#8b949e" stroke-width="1.5"/>
+  <text x="80" y="325" class="sub" font-weight="bold">GROUND (0V Drain)</text>
+
+  <!-- Right Card: Electrical Circuit -->
+  <rect x="435" y="15" width="395" height="350" class="bg" />
+  <text x="455" y="45" class="header">⚡ Real Electrical Circuit</text>
+  <text x="455" y="65" class="sub">Identical behavior with electrons</text>
+
+  <!-- Circuit Loop Wire -->
+  <rect x="480" y="95" width="230" height="205" rx="12" fill="none" stroke="#21262d" stroke-width="4"/>
+  <rect x="480" y="95" width="230" height="205" rx="12" class="circuit-wire"/>
+
+  <!-- Battery (3.3V) -->
+  <rect x="460" y="165" width="40" height="65" rx="6" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+  <text x="472" y="190" class="title" fill="#58a6ff">+</text>
+  <text x="474" y="215" class="title" fill="#8b949e">−</text>
+  <text x="510" y="195" class="title" fill="#58a6ff">BATTERY (3.3V)</text>
+  <text x="510" y="210" class="sub">Electrical Push (Voltage)</text>
+
+  <!-- Resistor (1k Ohm) -->
+  <rect x="695" y="170" width="30" height="55" rx="4" fill="#21262d" stroke="#d29922" stroke-width="2"/>
+  <path d="M 710 170 L 710 225" stroke="#d29922" stroke-width="4" stroke-dasharray="3 3"/>
+  <text x="610" y="145" class="title" fill="#d29922">RESISTOR (1 kΩ)</text>
+  <text x="610" y="160" class="sub">Opposes electron flow</text>
+
+  <!-- Current flow indicator -->
+  <g transform="translate(560, 290)">
+    <polygon points="20,10 0,5 0,15" fill="#3fb950"/>
+    <text x="30" y="14" class="title" fill="#3fb950">CURRENT (I = 3.3 mA)</text>
+  </g>
+
+  <!-- Ground Reference (0V) -->
+  <g transform="translate(470, 310)">
+    <line x1="10" y1="0" x2="30" y2="0" stroke="#8b949e" stroke-width="2"/>
+    <line x1="13" y1="5" x2="27" y2="5" stroke="#8b949e" stroke-width="2"/>
+    <line x1="17" y1="10" x2="23" y2="10" stroke="#8b949e" stroke-width="2"/>
+    <text x="40" y="8" class="sub">GND = 0V Reference</text>
+  </g>
+</svg>
