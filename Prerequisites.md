@@ -724,8 +724,23 @@ For the ESP32:
 
 ---
 
-### The Golden Formula for Converting ADC Reading to Voltage
+### The Universal Formula of ADC (Works for Any Microcontroller & Bit Width)
 
+No matter what microcontroller you use (ESP32, STM32, Arduino) and no matter what bit resolution you configure, the relationship between measured voltage and raw ADC counts is governed by one **Universal Formula**:
+
+$$\mathbf{V_{\text{measured}} = \left(\frac{\text{ADC\_RAW}}{2^n - 1}\right) \times V_{\text{ref}}}$$
+
+And conversely, to predict what ADC count corresponds to a given physical voltage:
+
+$$\mathbf{\text{ADC\_RAW} = \left(\frac{V_{\text{measured}}}{V_{\text{ref}}}\right) \times (2^n - 1)}$$
+
+Where:
+* **$\text{ADC\_RAW}$**: The integer reading returned by the ADC hardware ($0 \dots \text{Max Value}$).
+* **$n$**: The bit width / resolution in bits (e.g., $9, 10, 11, 12, 16$).
+* **$2^n - 1$**: The maximum digital value for $n$ bits ($511, 1023, 2047, 4095, 65535$).
+* **$V_{\text{ref}}$**: The full-scale reference voltage ($3.3\text{ V}$ on ESP32 with 11dB attenuation).
+
+For the default ESP32 12-bit setting ($n = 12$, $V_{\text{ref}} = 3.3\text{V}$):
 $$\mathbf{V_{\text{measured}} = \left(\frac{\text{ADC\_RAW}}{4095.0}\right) \times 3.3\text{ V}}$$
 
 * If `adc_raw == 0`: Voltage $= (0 / 4095.0) \times 3.3 = \mathbf{0.00\text{ V}}$
@@ -733,8 +748,56 @@ $$\mathbf{V_{\text{measured}} = \left(\frac{\text{ADC\_RAW}}{4095.0}\right) \tim
 * If `adc_raw == 4095`: Voltage $= (4095 / 4095.0) \times 3.3 = \mathbf{3.30\text{ V}}$
 
 #### What is the Smallest Voltage the ESP32 Can Detect? (Step Size / Resolution)
-$$\text{Step Size} = \frac{3.3\text{ V}}{4095} = 0.000806\text{ V} \approx \mathbf{0.8\text{ millivolts (mV)}}$$
-Every single tick of the ADC represents a tiny $0.8\text{ mV}$ change!
+$$\text{Step Size} = \frac{V_{\text{ref}}}{2^n - 1} = \frac{3.3\text{ V}}{4095} = 0.000806\text{ V} \approx \mathbf{0.806\text{ millivolts (mV)}}$$
+Every single tick of the ADC represents a tiny $0.806\text{ mV}$ change!
+
+---
+
+### What Happens If You Change the Bit Width?
+
+The ESP32 actually lets you change the resolution in software. Under the hood, it just uses fewer bits of the same register:
+
+```c
+// 12-bit (DEFAULT) — uses all 12 bits of the register
+analogReadResolution(12);
+int val = analogRead(34);  // 0 to 4095
+// Register: [b11 b10 b9 b8 b7 b6 b5 b4 b3 b2 b1 b0]
+//            1    1   1  1  1  1  1  1  1  1  1  1  = 4095
+
+// 10-bit — uses only 10 bits (top 2 bits ignored)
+analogReadResolution(10);
+int val = analogRead(34);  // 0 to 1023
+// Register: [ x   x  b9 b8 b7 b6 b5 b4 b3 b2 b1 b0]
+//                        1  1  1  1  1  1  1  1  1  1 = 1023
+
+// 9-bit — uses only 9 bits
+analogReadResolution(9);
+int val = analogRead(34);  // 0 to 511
+// Register: [ x   x   x  b8 b7 b6 b5 b4 b3 b2 b1 b0]
+//                           1  1  1  1  1  1  1  1  1 = 511
+```
+
+```text
+┌──────────┬───────────┬──────────┬───────────────────────────┐
+│ Setting  │ Bits Used │ Max Value│ Register View             │
+├──────────┼───────────┼──────────┼───────────────────────────┤
+│ 12-bit   │ 12        │ 4095     │ [1111 1111 1111]         │
+│ 11-bit   │ 11        │ 2047     │ [x111 1111 1111]         │
+│ 10-bit   │ 10        │ 1023     │ [xx11 1111 1111]         │
+│  9-bit   │  9        │  511     │ [xxx1 1111 1111]         │
+└──────────┴───────────┴──────────┴───────────────────────────┘
+
+x = unused bits (always 0)
+```
+
+#### Resolution Step Comparison by Bit Setting (at 3.3V)
+
+| Setting | Bits ($n$) | Max Digital Count ($2^n - 1$) | Smallest Detectable Step ($\Delta V$) | When to Use |
+| :--- | :---: | :---: | :---: | :--- |
+| **12-bit** | 12 | **4095** | $\frac{3.3\text{V}}{4095} = \mathbf{0.806\text{ mV}}$ | **Default:** High-precision sensors (temperature, pressure, battery level) |
+| **11-bit** | 11 | **2047** | $\frac{3.3\text{V}}{2047} = \mathbf{1.612\text{ mV}}$ | High-speed sampling with reduced noise |
+| **10-bit** | 10 | **1023** | $\frac{3.3\text{V}}{1023} = \mathbf{3.226\text{ mV}}$ | Emulating legacy 10-bit Arduino sensors & libraries |
+| **9-bit** | 9 | **511** | $\frac{3.3\text{V}}{511} = \mathbf{6.458\text{ mV}}$ | Fast, coarse threshold triggers (e.g. simple light/dark detection) |
 
 ---
 
@@ -742,35 +805,43 @@ Every single tick of the ADC represents a tiny $0.8\text{ mV}$ change!
 
 | Board / Chip | ADC Resolution | Total Steps | Max Value ($2^n - 1$) | Voltage Step at 3.3V |
 | :--- | :---: | :---: | :---: | :--- |
-| **Arduino Uno** | 10-bit | 1024 | **1023** | $3.22\text{ mV}$ |
+| **Arduino Uno** | 10-bit | 1024 | **1023** | $3.22\text{ mV}$ (at 5V: $4.88\text{ mV}$) |
 | **ESP32 / ESP32-S3** | **12-bit** | **4096** | **4095** | **$0.806\text{ mV}$ (4x finer!)** |
 | **External ADS1115** | 16-bit | 65536 | **65535** | $0.050\text{ mV}$ ($50\,\mu\text{V}$) |
 
 ---
 
-### Tested C Code Example (ESP-IDF / Arduino Core)
+### Tested C Code Example: Dynamic Universal ADC Conversion
 
 ```c
-// Reading an analog pin and converting raw counts to true voltage
+// Dynamic Universal ADC Conversion for Any Configured Bit Width
 const int ANALOG_PIN = 34; // GPIO 34 (ADC1 Channel 6)
+const int ADC_BITS   = 12; // Configurable: 9, 10, 11, or 12
 
 void setup() {
     Serial.begin(115200);
-    analogReadResolution(12);       // Ensure 12-bit mode (0 - 4095)
-    analogSetAttenuation(ADC_11db);  // Allow 0V - 3.3V full dynamic range
+    
+    // Configure bit resolution dynamically
+    analogReadResolution(ADC_BITS);
+    analogSetAttenuation(ADC_11db); // Full 0V - 3.3V range
+    
+    Serial.printf("\n--- ESP32 ADC Configured for %d-bit Resolution ---\n", ADC_BITS);
 }
 
 void loop() {
-    int rawValue = analogRead(ANALOG_PIN); // 0 to 4095
+    int rawValue = analogRead(ANALOG_PIN);
     
-    // Convert to actual voltage
-    float voltage = (rawValue / 4095.0f) * 3.3f;
+    // Universal Formula Implementation:
+    // Max count = 2^n - 1, which in bitwise C is: (1 << ADC_BITS) - 1
+    const int maxCount = (1 << ADC_BITS) - 1; // 4095 for 12-bit, 1023 for 10-bit, etc.
+    const float vRef = 3.3f;
     
-    // Convert to percentage (0% to 100%)
-    float percentage = (rawValue / 4095.0f) * 100.0f;
+    // Measured Voltage = (RAW / MaxCount) * Vref
+    float voltage = (rawValue / (float)maxCount) * vRef;
+    float percentage = (rawValue / (float)maxCount) * 100.0f;
     
-    Serial.printf("Raw ADC: %4d | Voltage: %.3f V | Level: %5.1f%%\n",
-                  rawValue, voltage, percentage);
+    Serial.printf("Raw ADC: %4d / %4d | Voltage: %.3f V | Level: %5.1f%%\n",
+                  rawValue, maxCount, voltage, percentage);
                   
     delay(500);
 }
