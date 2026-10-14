@@ -1,8 +1,5 @@
-# ESP-IDF & PlatformIO Build Artifacts
+# ESP-IDF Build Artifacts
 build/
-.pio/
-.pioenvs/
-.piolibdeps/
 sdkconfig.old
 sdkconfig
 

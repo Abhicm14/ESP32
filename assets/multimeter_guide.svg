@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 470" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; stroke: #30363d; stroke-width: 1.5; rx: 12px; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 18px; font-weight: 700; fill: #58a6ff; }
+      .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; fill: #8b949e; }
+      .card { fill: #161b22; stroke: #30363d; stroke-width: 1.2; rx: 8px; }
+      .meter-body { fill: #21262d; stroke: #f0883e; stroke-width: 3.5; rx: 16px; }
+      .lcd { fill: #0d1117; stroke: #30363d; stroke-width: 2; rx: 6px; }
+      .lcd-text { font-family: ui-monospace, SFMono-Regular, "Courier New", monospace; font-size: 26px; font-weight: 700; fill: #3fb950; letter-spacing: 2px; }
+      .lcd-sub { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 11px; fill: #8b949e; }
+      .dial { fill: #161b22; stroke: #484f58; stroke-width: 2; }
+      .dial-pointer { stroke: #f0883e; stroke-width: 3.5; stroke-linecap: round; }
+      .jack { fill: #0d1117; stroke: #484f58; stroke-width: 2; }
+      .probe-red { stroke: #f85149; stroke-width: 3; fill: none; }
+      .probe-black { stroke: #58a6ff; stroke-width: 3; fill: none; }
+      
+      @keyframes beep-wave {
+        0% { opacity: 0; transform: scale(0.8); }
+        50% { opacity: 1; }
+        100% { opacity: 0; transform: scale(1.3); }
+      }
+      .sound-wave { transform-origin: 395px 125px; animation: beep-wave 1.5s infinite ease-out; }
+      
+      @keyframes glow-beep {
+        0%, 100% { fill: #3fb950; filter: drop-shadow(0 0 2px #2ea043); }
+        50% { fill: #7ee787; filter: drop-shadow(0 0 8px #3fb950); }
+      }
+      .anim-lcd { animation: glow-beep 2s infinite ease-in-out; }
+    </style>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect x="15" y="15" width="890" height="440" class="bg" />
+  <text x="35" y="44" class="header">📟 THE MULTIMETER: YOUR EYES INTO THE INVISIBLE CIRCUIT</text>
+  <text x="35" y="63" class="sub">Verify voltages, check resistor values, and run the life-saving continuity test before turning power on</text>
+
+  <!-- Left: The Digital Multimeter Graphic -->
+  <g transform="translate(40, 85)">
+    <!-- Outer Shockproof Body -->
+    <rect x="0" y="0" width="220" height="340" class="meter-body" />
+
+    <!-- LCD Display -->
+    <rect x="20" y="20" width="180" height="68" class="lcd" />
+    <text x="35" y="62" class="lcd-text anim-lcd">3.30 V</text>
+    <text x="145" y="42" class="lcd-sub">DC AUTO</text>
+    <text x="150" y="75" font-size="14">⚡</text>
+
+    <!-- Rotary Function Dial -->
+    <circle cx="110" cy="165" r="50" class="dial" />
+    <circle cx="110" cy="165" r="42" fill="#21262d" />
+    <!-- Indicator Notch pointing to Continuity / V -->
+    <line x1="110" y1="165" x2="80" y2="132" class="dial-pointer" />
+    <circle cx="110" cy="165" r="10" fill="#f0883e" />
+
+    <!-- Dial Labels -->
+    <text x="50" y="125" font-family="sans-serif" font-size="12" font-weight="700" fill="#58a6ff">V⎓</text>
+    <text x="145" y="125" font-family="sans-serif" font-size="12" font-weight="700" fill="#3fb950">Ω</text>
+    <text x="60" y="195" font-family="sans-serif" font-size="13" font-weight="700" fill="#d29922">•)))</text>
+    <text x="145" y="195" font-family="sans-serif" font-size="11" font-weight="700" fill="#f85149">mA/A</text>
+    <text x="100" y="228" font-family="sans-serif" font-size="11" font-weight="700" fill="#8b949e">OFF</text>
+
+    <!-- Banana Input Jacks -->
+    <!-- 10A Jack -->
+    <circle cx="45" cy="285" r="14" class="jack" />
+    <circle cx="45" cy="285" r="8" fill="#f85149" />
+    <text x="34" y="312" font-family="sans-serif" font-size="9" fill="#8b949e">10A Max</text>
+
+    <!-- COM Jack (Black Probe) -->
+    <circle cx="110" cy="285" r="14" class="jack" />
+    <circle cx="110" cy="285" r="8" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+    <text x="96" y="312" font-family="sans-serif" font-size="10" font-weight="700" fill="#58a6ff">COM (−)</text>
+
+    <!-- V-Ω-mA Jack (Red Probe) -->
+    <circle cx="175" cy="285" r="14" class="jack" />
+    <circle cx="175" cy="285" r="8" fill="#f85149" />
+    <text x="156" y="312" font-family="sans-serif" font-size="9" font-weight="700" fill="#f85149">V·Ω·mA (+)</text>
+
+    <!-- Probe Leads Emanating -->
+    <!-- Black Probe Wire -->
+    <path d="M 110 293 C 110 370 235 340 270 340" class="probe-black" />
+    <!-- Red Probe Wire -->
+    <path d="M 175 293 C 175 390 240 370 270 370" class="probe-red" />
+  </g>
+
+  <!-- Middle & Right: The Life-Saving Continuity Test Protocol -->
+  <g transform="translate(325, 85)">
+    <!-- Main Safety Banner -->
+    <rect x="0" y="0" width="560" height="150" class="card" stroke="#d29922" stroke-width="1.5"/>
+    <text x="20" y="28" font-family="sans-serif" font-size="14" font-weight="700" fill="#d29922">⚡ THE GOLDEN RULE: BEEP-TEST BEFORE USB PLUG-IN</text>
+    
+    <!-- Test Diagram: Probes on 3.3V and GND -->
+    <g transform="translate(20, 45)">
+      <!-- Breadboard Rails Snippet -->
+      <rect x="0" y="0" width="170" height="20" fill="rgba(248, 81, 73, 0.2)" stroke="#f85149" rx="4"/>
+      <text x="10" y="14" font-family="ui-monospace, monospace" font-size="11" fill="#f85149" font-weight="bold">3.3V Rail (+)</text>
+      
+      <rect x="0" y="35" width="170" height="20" fill="rgba(88, 166, 255, 0.2)" stroke="#58a6ff" rx="4"/>
+      <text x="10" y="49" font-family="ui-monospace, monospace" font-size="11" fill="#58a6ff" font-weight="bold">GND Rail (−)</text>
+
+      <!-- Red Probe Touching 3.3V -->
+      <circle cx="140" cy="10" r="4" fill="#f85149"/>
+      <line x1="140" y1="10" x2="160" y2="10" stroke="#f85149" stroke-width="2"/>
+      
+      <!-- Black Probe Touching GND -->
+      <circle cx="140" cy="45" r="4" fill="#58a6ff"/>
+      <line x1="140" y1="45" x2="160" y2="45" stroke="#58a6ff" stroke-width="2"/>
+
+      <text x="10" y="78" font-family="sans-serif" font-size="11" fill="#8b949e">Power is OFF during test!</text>
+    </g>
+
+    <!-- Outcome Branches -->
+    <g transform="translate(210, 45)">
+      <!-- Case A: Silent (Safe) -->
+      <rect x="0" y="0" width="155" height="85" fill="#1c2128" stroke="#3fb950" rx="6"/>
+      <text x="12" y="22" font-family="sans-serif" font-size="12" font-weight="bold" fill="#3fb950">✅ SILENT (NO BEEP)</text>
+      <text x="12" y="42" class="sub" font-size="10">No short circuit detected.</text>
+      <text x="12" y="58" class="sub" font-size="10">Resistance is high.</text>
+      <text x="12" y="74" font-family="sans-serif" font-size="11" font-weight="bold" fill="#3fb950">SAFE TO PLUG IN USB 🚀</text>
+
+      <!-- Case B: Beep (Deadly Short) -->
+      <rect x="170" y="0" width="165" height="85" fill="#1c2128" stroke="#f85149" rx="6"/>
+      <text x="12" y="22" font-family="sans-serif" font-size="12" font-weight="bold" fill="#f85149">💥 LOUD BEEP (0 Ω)</text>
+      <text x="12" y="42" class="sub" font-size="10">Direct short 3V3 to GND!</text>
+      <text x="12" y="58" class="sub" font-size="10">Wire or component reversed.</text>
+      <text x="12" y="74" font-family="sans-serif" font-size="11" font-weight="bold" fill="#f85149">DO NOT POWER UP! 🛑</text>
+    </g>
+
+    <!-- 4 Measurement Modes Quick Reference Cards -->
+    <g transform="translate(0, 165)">
+      <!-- 1. Continuity -->
+      <rect x="0" y="0" width="132" height="155" class="card" stroke="#d29922"/>
+      <text x="12" y="24" font-family="sans-serif" font-size="12" font-weight="bold" fill="#d29922">•))) Continuity</text>
+      <text x="12" y="44" class="sub" font-size="10">Beeps if 0 Ω</text>
+      <text x="12" y="64" class="sub" font-size="10">Checks wires,</text>
+      <text x="12" y="80" class="sub" font-size="10">solder joints, and</text>
+      <text x="12" y="96" class="sub" font-size="10">shorts.</text>
+      <text x="12" y="130" font-family="sans-serif" font-size="10" font-weight="bold" fill="#d29922">Power OFF ⚠️</text>
+
+      <!-- 2. DC Voltage -->
+      <rect x="142" y="0" width="132" height="155" class="card" stroke="#58a6ff"/>
+      <text x="12" y="24" font-family="sans-serif" font-size="12" font-weight="bold" fill="#58a6ff">V⎓ DC Voltage</text>
+      <text x="12" y="44" class="sub" font-size="10">Measures volts</text>
+      <text x="12" y="64" class="sub" font-size="10">Black on GND,</text>
+      <text x="12" y="80" class="sub" font-size="10">Red probe on test</text>
+      <text x="12" y="96" class="sub" font-size="10">point (3.3V, 5V).</text>
+      <text x="12" y="130" font-family="sans-serif" font-size="10" font-weight="bold" fill="#58a6ff">Power ON ✅</text>
+
+      <!-- 3. Resistance -->
+      <rect x="284" y="0" width="132" height="155" class="card" stroke="#3fb950"/>
+      <text x="12" y="24" font-family="sans-serif" font-size="12" font-weight="bold" fill="#3fb950">Ω Resistance</text>
+      <text x="12" y="44" class="sub" font-size="10">Measures ohms</text>
+      <text x="12" y="64" class="sub" font-size="10">Identifies resistor</text>
+      <text x="12" y="80" class="sub" font-size="10">values (220Ω vs</text>
+      <text x="12" y="96" class="sub" font-size="10">10kΩ colors).</text>
+      <text x="12" y="130" font-family="sans-serif" font-size="10" font-weight="bold" fill="#3fb950">Power OFF ⚠️</text>
+
+      <!-- 4. Current -->
+      <rect x="426" y="0" width="134" height="155" class="card" stroke="#f85149"/>
+      <text x="12" y="24" font-family="sans-serif" font-size="12" font-weight="bold" fill="#f85149">mA / A Current</text>
+      <text x="12" y="44" class="sub" font-size="10">Flow in series</text>
+      <text x="12" y="64" class="sub" font-size="10">⚠️ Break circuit!</text>
+      <text x="12" y="80" class="sub" font-size="10">Meter acts as a</text>
+      <text x="12" y="96" class="sub" font-size="10">wire bridge.</text>
+      <text x="12" y="130" font-family="sans-serif" font-size="10" font-weight="bold" fill="#f85149">NEVER across 3V3!</text>
+    </g>
+  </g>
+</svg>

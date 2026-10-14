@@ -44,14 +44,9 @@ Everything around you — a wire, a glass of water, your hand — is made of tin
 
 Each atom has a centre and tiny particles flying around it. The important ones are **electrons** (they carry a negative charge, written as **−**).
 
-```
-        (−) electron  ← this is what "flows"
-             ⤹
-        ( + + + )        ← atom centre (heavy, stays put)
-        ( + + + )
-             ⤴
-        (−) electron
-```
+<p align="center">
+  <img src="assets/atom_electron.svg" alt="The Atom and Free Orbiting Electrons" width="100%" />
+</p>
 
 ### A2. Some materials let electrons move, some don't
 
@@ -152,10 +147,7 @@ Every circuit in the world, from a phone to a satellite, is described by just th
 - **Water version:** a narrow pipe, a kink in the hose, a half-closed tap.
 - A thick copper wire ≈ 0 Ω (nothing). A rubber block ≈ millions of Ω (nothing passes).
 - A **resistor** is a component built to have an exact, known resistance — so you can control current on purpose.
-
-```
-Standard resistor symbol:        ───/\/\/\/\───      or     ───[ 1 kΩ ]───
-```
+- **Schematic symbol:** Drawn on schematics as a zigzag line (US convention) or a simple rectangle (IEC standard).
 
 > **In one sentence: Voltage pushes, current flows, resistance holds back.**
 
@@ -249,33 +241,20 @@ There are only two ways to connect things. Learn these two rules and you underst
   <img src="assets/series_parallel.svg" alt="Series vs Parallel Circuits Comparison" width="100%" />
 </p>
 
-```
-╔══════════════════════════════════════════════════════════════╗
-║  SERIES — one single track (things connected in a line)      ║
-║    ✅ Current is the SAME everywhere                         ║
-║    ✅ Voltage SPLITS between the parts (they add up)         ║
-║    ✅ Resistances ADD UP:  R = R1 + R2 + R3                  ║
-║                                                              ║
-║  PARALLEL — separate branches (things side by side)          ║
-║    ✅ Voltage is the SAME across all branches                ║
-║    ✅ Current SPLITS between the branches (they add up)      ║
-║    ✅ Total resistance gets SMALLER than the smallest one    ║
-╚══════════════════════════════════════════════════════════════╝
-```
+> [!IMPORTANT]
+> **Series Rules (Single Track):**
+> - Current ($I$) is the **same** through all components.
+> - Voltage ($V$) **splits** across components ($V_{\text{total}} = V_1 + V_2 + \dots$).
+> - Resistances **add up** ($R_{\text{total}} = R_1 + R_2 + \dots$).
+>
+> **Parallel Rules (Branching Paths):**
+> - Voltage ($V$) is the **same** across all branches.
+> - Current ($I$) **splits** across branches ($I_{\text{total}} = I_1 + I_2 + \dots$).
+> - Total resistance **decreases** (always smaller than the smallest branch resistor).
 
 ### Series, with real numbers
 
-```
-   3.3 V
-     │
-  [R1 = 1 kΩ]
-     │
-     ├──── Point A
-     │
-  [R2 = 2 kΩ]
-     │
-   GND (0 V)
-```
+Consider a 3.3 V supply feeding $R_1 = 1\text{ k}\Omega$ in series with $R_2 = 2\text{ k}\Omega$ down to Ground (as shown in the Series diagram above):
 
 1. **Total resistance:** 1000 + 2000 = **3000 Ω**
 2. **Total current:** 3.3 ÷ 3000 = 0.0011 A = **1.1 mA** (the *same* current flows through both resistors)
@@ -289,13 +268,7 @@ That little calculation is called a **voltage divider** — and you will use it 
 
 ### Parallel, with real numbers
 
-```
-   3.3 V ──┬────────┬────────┐
-           │        │        │
-        [1 kΩ]   [2 kΩ]   [3 kΩ]
-           │        │        │
-   GND ────┴────────┴────────┘
-```
+Consider a 3.3 V supply connected across three parallel branches of 1 kΩ, 2 kΩ, and 3 kΩ to GND (as shown in the Parallel diagram above):
 
 1. **Voltage across each:** 3.3 V (all the same — they all touch the same two rails)
 2. **Currents:** 3.3 mA, 1.65 mA, 1.10 mA
@@ -474,12 +447,9 @@ float voltage = (raw / 4095.0) * 3.3;   // the universal formula, in code
 - Old microcontrollers: **5 V** logic.
 - ESP32, ESP32-S3, STM32, Raspberry Pi Pico: **3.3 V** logic.
 
-```
-   5 V sensor output ──────[ plain wire ]──────► ESP32 GPIO
-                                                      │
-                                                💥 DEAD PIN
-                                  (the tiny insulation inside burns through)
-```
+<p align="center">
+  <img src="assets/logic_levels.svg" alt="Logic Levels: 3.3V vs 5V and Level Shifting Protection" width="100%" />
+</p>
 
 ### Why 5 V kills it
 
@@ -487,17 +457,9 @@ Inside the chip, transistors are microscopic — the insulating layers are only 
 
 ### Two Safe Ways to Connect a 5 V Sensor
 
-**Way 1 — Resistor divider (sensor → ESP32 only, one direction):**
-
-```
-   5 V pin ────[ 1 kΩ ]────┬────► ESP32 GPIO  (now ≤ 3.3 V)
-                            │
-                        [ 2 kΩ ]
-                            │
-                           GND
-
-   Check: 5 × (2 ÷ (1 + 2)) = 3.33 V ✅
-```
+**Way 1 — Resistor divider (sensor → ESP32 only, one direction):**  
+Use a 1 kΩ and 2 kΩ resistor divider:
+$$\mathbf{V_{\text{pin}} = 5\text{ V} \times \left(\frac{2\text{ k}\Omega}{1\text{ k}\Omega + 2\text{ k}\Omega}\right) = 3.33\text{ V}} \qquad \text{✅ Safe for the ESP32}$$
 
 **Way 2 — Logic level shifter module (both directions, e.g. I²C):**  
 A tiny cheap module (built around BSS138 MOSFETs). Connect 5 V to `HV`, 3.3 V to `LV`, and it converts both ways automatically.
@@ -528,30 +490,12 @@ Your code is fine. **Your pin is floating.**
 
 ### Why it happens
 
-When the button is not pressed, the pin is connected to *nothing* — just a piece of wire hanging in the air.
-
-```
-   ESP32 pin ────── [ dangling wire / open air ]
-                            ▲
-                            ├── Wi-Fi radio waves
-                            ├── static from your hand
-                            └── mains hum from lights
-                        → the pin reads random 0s and 1s
-```
-
-An open pin has almost infinite resistance, so it behaves like a **radio antenna** and picks up noise. The chip reads that noise as random presses.
+When the button is not pressed, the pin is connected to *nothing* — just a piece of wire hanging in the air. An open pin has near-infinite resistance, behaving like a **radio antenna** that picks up Wi-Fi radio waves, static electricity, and electromagnetic hum. The chip reads that noise as random rapid presses.
 
 ### The Fix: A "Leash" Resistor
 
-**Pull-up (the most common setup):**
-
-```
-         3.3 V
-           │
-        [10 kΩ]     ← pull-up resistor
-           │
-   GPIO ───┼────────[ push button ]──────── GND
-```
+**Pull-up (the most common setup):**  
+Connect a 10 kΩ resistor between **3.3 V and the GPIO pin**, while the push button connects from the **GPIO pin to GND**:
 
 - Button **not** pressed → the 10 kΩ gently holds the pin at **3.3 V (HIGH)**.
 - Button **pressed** → the pin is pulled firmly to **0 V (LOW)**.
@@ -617,14 +561,7 @@ $$\mathbf{V_{\text{battery}} = V_{\text{measured}} \times \left(\frac{R_1 + R_2}
 
 ### What an LED is
 
-**LED = Light Emitting Diode.** It is greedy: once it starts conducting, it has almost no resistance of its own.
-
-```
-   3.3 V ──► [ LED ] ──► GND
-
-   💥 Without a resistor: current spikes past 100 mA.
-      POP! Smoke. Dead LED (and possibly a dead pin).
-```
+**LED = Light Emitting Diode.** It is greedy: once it starts conducting, it has almost no resistance of its own. Connected directly across power and ground without a resistor, current surges past 100 mA — resulting in smoke, a destroyed LED, and a dead microcontroller pin.
 
 <p align="center">
   <img src="assets/led_resistor.svg" alt="LED and Current-Limiting Resistor Circuit" width="100%" />
@@ -642,11 +579,7 @@ Every LED steals a fixed amount of voltage just to switch on:
 
 ### Calculating the Resistor, Step by Step
 
-Goal: light a **red LED** from a 3.3 V pin at **10 mA**.
-
-```
-   ESP32 pin (3.3 V) ──[ R = ? ]──►| [ red LED, takes 2.0 V ] ── GND
-```
+Goal: safely light a **red LED** from an ESP32 3.3 V GPIO pin at a steady **10 mA** using an inline resistor:
 
 **Step 1 — How much voltage is left for the resistor?**
 ```
@@ -711,20 +644,13 @@ Put two capacitors right next to the ESP32, across the power rails:
 
 ### What your finger feels vs. what the chip sees
 
-To you, a button press is one clean click. To an ESP32 running **240 million cycles per second**, it's a violent mechanical event: the metal contacts bounce against each other 30–50 times in about 10 milliseconds.
+To you, a button press is one clean click. To an ESP32 running **240 million cycles per second**, it's a violent mechanical event: the metal contacts bounce against each other 30–50 times over 10 to 20 milliseconds.
 
-```
-   What you think happens:
-   HIGH ────────────┐
-                    └───────────── LOW
+<p align="center">
+  <img src="assets/button_debounce.svg" alt="Mechanical Switch Contact Bounce vs Debounced Waveform" width="100%" />
+</p>
 
-   What actually happens:
-   HIGH ─┐ ┌┐ ┌┐ ┌──────────────────
-         └─┘└─┘└─┘└───────────────── LOW
-         ▲▲▲▲▲▲▲▲▲ bounce!
-
-   Result: you press once, your counter says 34.
-```
+Without debounce protection, pressing the button once makes your software register dozens of phantom button clicks!
 
 ### Fix 1 — Software debounce (free)
 
@@ -760,17 +686,11 @@ Connect any of those directly and the pin **vaporises**.
 
 ### The Solution: An Electronic Switch
 
-A transistor is a valve. A **tiny** signal from the ESP32 controls a **huge** flow of power from a separate supply.
+A transistor is an electrically controlled switch or valve. A **tiny 3.3 V signal** (drawing less than 5 mA) from the ESP32 controls a **huge 12 V flow of power** from a separate power supply.
 
-```
-                  +12 V (separate power supply)
-                        │
-                   [ 12 V motor ]
-                        │
-   ESP32 GPIO ──[1 kΩ]──┤  MOSFET / transistor
-   (tiny 3.3 V)         │
-                       GND  ← (must be shared with the ESP32's GND!)
-```
+<p align="center">
+  <img src="assets/transistor_switch.svg" alt="Transistor and MOSFET Electronic Switch Circuit" width="100%" />
+</p>
 
 - GPIO **LOW (0 V)** → switch OFF → motor stops.
 - GPIO **HIGH (3.3 V)** → switch ON → 12 V flows through the motor.
@@ -792,43 +712,24 @@ A transistor is a valve. A **tiny** signal from the ESP32 controls a **huge** fl
 
 ### What a diode is
 
-A **one-way valve**. Current flows from the anode (+) to the cathode (−), and is blocked in the other direction.
+A **one-way valve**. Current flows freely from the anode (+) to the cathode (−), but is completely blocked in the reverse direction.
 
-```
-   ───►|───   current flows this way ✅
-
-   ───|◄───   blocked ❌
-```
+<p align="center">
+  <img src="assets/flyback_diode.svg" alt="Diode Valve and Flyback Kickback Protection Circuit" width="100%" />
+</p>
 
 ### The danger: inductive kickback
 
-Motors, relays and solenoids contain **coils of wire**. When electricity flows, they store magnetic energy. When you suddenly switch the power off, that magnetic field collapses — and generates a **huge reverse voltage spike of 50 V to 200 V**. That spike races backwards and destroys your transistor.
-
-```
-   Coil ON  →  magnetic field builds
-   Coil OFF →  field collapses →   💥 100 V spike backwards!
-```
+Motors, relays and solenoids contain **coils of wire** (inductors). When electricity flows, they store magnetic energy. When you suddenly switch the power off, that magnetic field collapses — generating a **huge reverse voltage spike of 50 V to 200 V**. That spike races backwards and punches straight through your switching transistor.
 
 ### The fix: a flyback diode
 
-Put a diode **(1N4007)** backwards across the coil:
+Place a diode (such as a standard **1N4007**) in reverse across the coil terminals:
 
-```
-                +12 V
-                  │
-          ┌───────┴───────┐
-          │               │
-     ▲ ───┤   motor/coil   ├───►
-   diode  │               │
-          └───────┬───────┘
-                  │
-                MOSFET ── GND
-```
+- **Running normally:** The diode is reverse-biased (blocks current) and does nothing.
+- **Switching off:** The collapsing magnetic energy loops harmlessly through the diode and dissipates as heat, protecting the transistor.
 
-- **Running normally:** the diode blocks and does nothing.
-- **Switching off:** the spike loops safely through the diode and dies as heat instead of killing your transistor.
-
-> 💡 It costs about 2 cents and it saves your circuit. **Always add a flyback diode for any coil.**
+> 💡 It costs about 2 cents and saves your entire project. **Always add a flyback diode for any inductive load (motors, relays, solenoids).**
 
 > **In one sentence: Coils throw a high-voltage punch when switched off — a reversed diode absorbs it.**
 
@@ -844,16 +745,13 @@ Ground is **not** a magical drain that eats electricity. Voltage is always a **d
 
 ### ⚠️ The most common wiring mistake of all time
 
-```
-   ESP32 (powered by USB)          Sensor (powered by its own battery)
-   ─────────────────────           ──────────────────────────────────
-   GPIO 21 ─────────────────────── Sensor SDA
+<p align="center">
+  <img src="assets/common_ground.svg" alt="Common Ground Rule: Why GND must be shared across all supplies" width="100%" />
+</p>
 
-   ❌ NO GROUND WIRE BETWEEN THEM!
-   → The sensor sends a clean signal, the ESP32 reads complete gibberish.
-```
+If you power an ESP32 via USB and connect a sensor running on its own battery with only a data wire (and **no ground wire**), the sensor sends clean pulses, but the ESP32 reads complete gibberish.
 
-**Why?** The battery's 0 V and the computer's 0 V are floating at different levels. Without a shared reference, neither chip agrees on what "3.3 V" means.
+**Why?** The battery's 0 V and your computer's 0 V are floating at completely different potentials. Without a shared reference, neither chip agrees on what "3.3 V" or "0 V" means.
 
 > ⚠️ **THE COMMON GROUND RULE:**  
 > **Every power supply, sensor, and board in your project must have their GND pins connected together.**
@@ -864,30 +762,17 @@ Ground is **not** a magical drain that eats electricity. Voltage is always a **d
 
 # PART Q — Reading a Schematic
 
-Schematics are just drawings with standard symbols. Here are the ones you'll actually use:
+Schematics are standardized circuit blueprints. Here is the visual catalog of core components and wiring rules you will encounter in microcontroller engineering:
 
-```
-  Resistor             Capacitor            Polarised capacitor
-  ──/\/\/\/\──         ────||────                 ────|(────
-  (or ──[  ]──)                                   (+     −)
+<p align="center">
+  <img src="assets/schematic_symbols.svg" alt="Essential Schematic Symbols and Wiring Rules" width="100%" />
+</p>
 
-  Diode                LED                  Pushbutton
-  ────►|────           ────►|────                ──/  ──
-                       ▲ ▲ (light)
+### Three Rules to Read Any Schematic:
 
-  Ground (GND)         Power (VCC)          N-channel MOSFET
-      │                    ▲                    ──┬── Drain
-     ─┴─                   │ +3.3 V               │
-     ───                   │        Gate ────┤
-      ─                                          │
-                                              ──┴── Source
-```
-
-Three rules to read any schematic:
-
-1. **Lines are wires** (zero resistance).
-2. **A dot (•) where lines cross = they are connected.**
-3. **No dot = the lines cross over without touching.**
+1. **Lines are ideal wires** (zero resistance copper traces).
+2. **A junction dot (•) where lines cross means CONNECTED.**
+3. **No dot means the wires cross over without touching.**
 
 > **In one sentence: Symbols are pictures of parts; lines are wires; a dot means connected.**
 
@@ -895,24 +780,11 @@ Three rules to read any schematic:
 
 # PART R — Breadboard Basics
 
-A breadboard lets you build circuits with no soldering. Inside the plastic are hidden metal clips.
+A breadboard lets you prototype circuits rapidly with zero soldering. Inside the plastic casing are hidden rows of spring-loaded phosphor bronze metal clips.
 
-```
-   POWER RAILS — connected horizontally across the whole board
-   ──────────────────────────────────────────────────────────
-(+)  • • • • •   • • • • •   • • • • •   • • • • •   ← RED rail
-(−)  • • • • •   • • • • •   • • • • •   • • • • •   ← BLUE rail
-   ──────────────────────────────────────────────────────────
-   TERMINAL COLUMNS — each vertical group of 5 IS connected
-
-     A   B   C   D   E   ││   F   G   H   I   J
- 1   •   •   •   •   •   ││   •   •   •   •   •   1
- 2   •   •   •   •   •   ││   •   •   •   •   •   2
- 3   •   •   •   •   •   ││   •   •   •   •   •   3
-   ──────────────────────────────────────────────────────────
-                        ▲
-              centre trough (the two sides are NOT joined)
-```
+<p align="center">
+  <img src="assets/breadboard_layout.svg" alt="Breadboard Architecture and Internal Spring Clip Connections" width="100%" />
+</p>
 
 **Three golden rules:**
 
@@ -924,18 +796,11 @@ A breadboard lets you build circuits with no soldering. Inside the plastic are h
 
 # PART S — Using a Multimeter
 
-A multimeter is your **eyes** into an invisible world. It saves hundreds of hours of guessing.
+A multimeter is your **eyes** into the invisible world of electronics. It saves hundreds of hours of guesswork and prevents board burnouts.
 
-```
-              ┌──────────────────┐
-              │    [ 3.30 V ]    │  ← display
-              ├──────────────────┤
-              │      ( • )       │  ← dial
-              │   V⎓   Ω   •)))   │
-              ├──────────────────┤
-              │   [A] [COM] [VΩ] │  ← probe sockets
-              └────┬────┬────┬───┘
-```
+<p align="center">
+  <img src="assets/multimeter_guide.svg" alt="Digital Multimeter Anatomy, Modes, and Continuity Beep Test" width="100%" />
+</p>
 
 | Mode | Symbol | What it does | How to use it |
 |---|---|---|---|
@@ -1005,12 +870,7 @@ Some sensors are so simple they just need one pin.
 
 ### T4. UART — the two-wire serial link
 
-```
-   ESP32                            Sensor / Module
-   TX  ────────────────────────────► RX
-   RX  ◄──────────────────────────── TX
-   GND ───────────────────────────── GND   (always!)
-```
+UART uses two dedicated communication lines (**TX** and **RX**) plus a shared **GND** (as shown in the Sensor Protocols diagram above):
 
 | Feature | Details |
 |---|---|
@@ -1030,17 +890,7 @@ Some sensors are so simple they just need one pin.
 
 ### T5. I²C — the two-wire bus (most popular for sensors)
 
-```
-   3.3 V
-     │
-   [4.7 kΩ]   [4.7 kΩ]      ← pull-up resistors (required!)
-     │           │
-   SDA ──────────┼───────────┬──────────┬─────────
-   SCL ──────────┼───────────┼──────────┼─────────
-                 │           │          │
-              Sensor 1    Sensor 2   Sensor 3
-              addr 0x76   addr 0x68  addr 0x3C
-```
+I²C uses two open-drain bus lines (**SDA** and **SCL**) held high with **4.7 kΩ pull-up resistors** to 3.3 V (as illustrated in the Sensor Protocols diagram above):
 
 | Feature | Details |
 |---|---|
@@ -1063,14 +913,7 @@ Some sensors are so simple they just need one pin.
 
 ### T6. SPI — the four-wire fast bus
 
-```
-   ESP32                            Device
-   MOSI ───────► (Master Out, Slave In) ──►
-   MISO ◄─────── (Master In, Slave Out) ◄──
-   SCK  ───────► clock ───────────────────►
-   CS   ───────► chip select ─────────────► (one CS per device)
-   GND  ────────────────────────────────── (shared)
-```
+SPI uses four high-speed synchronous lines (**MOSI, MISO, SCK, CS**) plus GND (as illustrated in the Sensor Protocols diagram above):
 
 | Feature | Details |
 |---|---|
@@ -1114,17 +957,13 @@ Some sensors are so simple they just need one pin.
 
 ### T9. Which protocol should I pick?
 
-```
-   Is it just a variable voltage?          → ADC pin (analog)
-   Is it just on/off?                      → GPIO pin (digital)
-
-   Otherwise, look at what the sensor supports:
-
-      Offers I²C?  → use I²C   (easiest for sensors)
-      Offers SPI?  → use SPI   (when you need speed)
-      Only UART?   → use UART
-      Only 1-Wire? → use 1-Wire
-```
+- **Is it just a variable voltage?** $\to$ Use an **ADC pin** (analog input).
+- **Is it just on / off?** $\to$ Use a standard **GPIO pin** (digital input).
+- **Otherwise, check what the sensor supports:**
+  - **Offers I²C?** $\to$ Use **I²C** (easiest for multi-sensor setups, only 2 shared pins).
+  - **Offers SPI?** $\to$ Use **SPI** (ideal when high transmission speed is needed: screens, SD cards).
+  - **Only UART?** $\to$ Use **UART** (for GPS, Bluetooth modules, serial modems).
+  - **Only 1-Wire?** $\to$ Use **1-Wire** (for daisy-chaining DS18B20 temperature probes).
 
 > 🌟 **Golden rule of buying sensors: check which protocol it uses BEFORE you buy it, and make sure it works at 3.3 V.**
 
@@ -1134,14 +973,14 @@ Some sensors are so simple they just need one pin.
 
 Do these in order. Each one uses only what you learned above.
 
+<p align="center">
+  <img src="assets/mini_projects.svg" alt="Mini-Projects Hookup Schematics for Blink, Potentiometer ADC, and Button Debounce" width="100%" />
+</p>
+
 ### Project 1 — Blink an LED (GPIO output)
 
 **Teaches:** Ohm's law, resistor sizing, digital output.
-
-```
-   ESP32 GPIO 2 ──[ 220 Ω ]──►|── LED ── GND
-                              (long leg toward resistor)
-```
+- **Wiring:** Connect **ESP32 GPIO 2** to a **220 Ω** resistor $\to$ LED Anode (long leg) $\to$ LED Cathode (short leg) $\to$ **GND**.
 
 ```cpp
 void setup()  { pinMode(2, OUTPUT); }
@@ -1156,12 +995,7 @@ void loop()   { digitalWrite(2, HIGH); delay(500);
 ### Project 2 — Read a potentiometer (ADC input)
 
 **Teaches:** the ADC, the universal formula, thresholds.
-
-```
-   3V3 ──► potentiometer pin 1
-   GPIO 34 ──► potentiometer pin 2  (the middle wiper)
-   GND ──► potentiometer pin 3
-```
+- **Wiring:** Potentiometer Terminal 1 to **3V3**, Terminal 2 (middle wiper) to **GPIO 34 (ADC1)**, and Terminal 3 to **GND**.
 
 ```cpp
 void setup() {
@@ -1184,11 +1018,7 @@ void loop() {
 ### Project 3 — A button that lights the LED (pull-up + debounce)
 
 **Teaches:** floating pins, pull-ups, active-low, debounce.
-
-```
-   GPIO 4 ──┬── push button ── GND
-            └── (use INPUT_PULLUP — no resistor needed)
-```
+- **Wiring:** Momentary tactile button connected directly between **GPIO 4** and **GND** (leveraging internal `INPUT_PULLUP`), with the indicator LED on **GPIO 2**.
 
 ```cpp
 void setup() {
@@ -1256,12 +1086,10 @@ If everything is ticked, you're ready. 🚀
 
 ---
 
-## 🎯 The five rules to never forget
-
-```
-1.  Electricity needs a COMPLETE LOOP.
-2.  V = I × R — always.
-3.  3.3 V board + 5 V signal = dead pin.
-4.  Every LED needs a resistor. Every coil needs a flyback diode.
-5.  Connect every GND together, and beep-test before you power up.
-```
+> [!TIP]
+> ### 🎯 The Five Golden Rules to Never Forget
+> 1. **Electricity needs a complete loop** — unbroken path from power source through your circuit and back to Ground.
+> 2. **Ohm's Law is universal ($V = I \times R$)** — if you know two, you always know the third.
+> 3. **3.3 V board + 5 V signal = dead pin** — always level-shift or divide 5 V signals down to $\le 3.3\text{ V}$.
+> 4. **Protect vulnerable components** — every LED needs an inline resistor; every inductive coil needs a flyback diode.
+> 5. **Common Ground & Beep-Test** — tie every single Ground (GND) pin together, and continuity beep-test 3V3-to-GND before plugging in USB!

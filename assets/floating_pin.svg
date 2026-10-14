@@ -93,3 +93,4 @@
   <text x="480" y="292" class="mono" fill="#3fb950">Not Pressed: HIGH (3.3V) | Pressed: LOW (0V)</text>
   <text x="480" y="312" class="sub">100% stable reading • Built-in: pinMode(pin, INPUT_PULLUP)</text>
 </svg>
+

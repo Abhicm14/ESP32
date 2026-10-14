@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 350" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; stroke: #30363d; stroke-width: 1.5; rx: 12px; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 17px; font-weight: 700; fill: #58a6ff; }
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; font-weight: 600; fill: #e6edf3; }
+      .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 12px; }
+      .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #8b949e; }
+      .card { fill: #161b22; stroke: #30363d; stroke-width: 1.5; rx: 8px; }
+      .wire-gate { stroke: #58a6ff; stroke-width: 3; fill: none; stroke-dasharray: 6 4; animation: flow 1.5s linear infinite; }
+      .wire-motor { stroke: #3fb950; stroke-width: 4.5; fill: none; stroke-dasharray: 8 6; animation: flow 0.8s linear infinite; }
+      @keyframes flow { to { stroke-dashoffset: -28; } }
+      .spin { transform-origin: 520px 145px; animation: rotating 2s linear infinite; }
+      @keyframes rotating { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    </style>
+  </defs>
+
+  <rect x="15" y="15" width="820" height="320" class="bg" />
+  <text x="35" y="45" class="header">💪 TRANSISTORS &amp; MOSFETs: GIVING YOUR BOARD MUSCLES</text>
+  <text x="35" y="65" class="sub">A tiny 3.3V / 20mA signal from the ESP32 switches ON a heavy 12V / 2A motor!</text>
+
+  <!-- Left: The Microcontroller Trigger Side -->
+  <g transform="translate(45, 100)">
+    <!-- ESP32 Box -->
+    <rect x="0" y="40" width="110" height="90" rx="8" class="card" stroke="#58a6ff"/>
+    <text x="25" y="70" class="title" fill="#58a6ff">ESP32</text>
+    <text x="15" y="95" class="mono" fill="#e6edf3">GPIO 4</text>
+    <text x="15" y="115" class="sub">Tiny 3.3V (20mA)</text>
+
+    <!-- Base / Gate Resistor (1k) -->
+    <line x1="110" y1="90" x2="160" y2="90" class="wire-gate"/>
+    <rect x="160" y="77" width="50" height="26" rx="4" fill="#21262d" stroke="#d29922" stroke-width="2"/>
+    <text x="172" y="94" class="mono" fill="#d29922">1 kΩ</text>
+    <line x1="210" y1="90" x2="270" y2="90" class="wire-gate"/>
+  </g>
+
+  <!-- Middle: The MOSFET / Transistor Switch -->
+  <g transform="translate(320, 150)">
+    <!-- Transistor symbol -->
+    <circle cx="40" cy="40" r="35" fill="#161b22" stroke="#3fb950" stroke-width="2"/>
+    <!-- Gate line -->
+    <line x1="0" y1="40" x2="25" y2="40" stroke="#58a6ff" stroke-width="3"/>
+    <line x1="25" y1="20" x2="25" y2="60" stroke="#58a6ff" stroke-width="3"/>
+    <!-- Channel bars -->
+    <line x1="33" y1="20" x2="33" y2="60" stroke="#3fb950" stroke-width="3"/>
+    <!-- Drain & Source -->
+    <line x1="33" y1="25" x2="55" y2="25" stroke="#3fb950" stroke-width="3"/>
+    <line x1="55" y1="25" x2="55" y2="-30" class="wire-motor"/>
+    <line x1="33" y1="55" x2="55" y2="55" stroke="#3fb950" stroke-width="3"/>
+    <line x1="55" y1="55" x2="55" y2="90" class="wire-motor"/>
+
+    <text x="80" y="30" class="title" fill="#3fb950">MOSFET</text>
+    <text x="80" y="48" class="mono" fill="#7ee787">IRLZ44N</text>
+    <text x="80" y="64" class="sub">Logic-Level N-Ch</text>
+  </g>
+
+  <!-- Right: 12V High-Power Load (Motor) -->
+  <g transform="translate(470, 75)">
+    <!-- 12V Supply Rail -->
+    <circle cx="50" cy="10" r="8" fill="#f85149"/>
+    <text x="65" y="15" class="mono" fill="#f85149" font-weight="bold">+12V Power Supply</text>
+    <line x1="50" y1="18" x2="50" y2="45" class="wire-motor"/>
+
+    <!-- 12V DC Motor with Spinning Fan Blade -->
+    <circle cx="50" cy="70" r="26" fill="#21262d" stroke="#3fb950" stroke-width="2.5"/>
+    <text x="40" y="75" font-size="20">⚙️</text>
+    <text x="85" y="65" class="title" fill="#e6edf3">12V DC Motor</text>
+    <text x="85" y="82" class="sub">Draws 2.0 Amperes!</text>
+
+    <!-- Down to Drain -->
+    <line x1="50" y1="96" x2="50" y2="120" class="wire-motor"/>
+  </g>
+
+  <!-- Bottom: Shared Common Ground -->
+  <g transform="translate(375, 275)">
+    <line x1="0" y1="0" x2="0" y2="20" stroke="#8b949e" stroke-width="3"/>
+    <line x1="-20" y1="20" x2="20" y2="20" stroke="#8b949e" stroke-width="3"/>
+    <line x1="-12" y1="26" x2="12" y2="26" stroke="#8b949e" stroke-width="2.5"/>
+    <line x1="-6" y1="32" x2="6" y2="32" stroke="#8b949e" stroke-width="2"/>
+    <text x="30" y="24" class="sub" font-weight="bold">SHARED COMMON GROUND (0V)</text>
+  </g>
+</svg>

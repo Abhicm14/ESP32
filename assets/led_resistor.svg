@@ -81,3 +81,4 @@
     <text x="25" y="44" class="sub">Safe for ESP32 pin (limit is 20 mA) • LED glows brightly without heating up!</text>
   </g>
 </svg>
+

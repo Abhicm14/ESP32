@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 490" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; stroke: #30363d; stroke-width: 1.5; rx: 12px; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 18px; font-weight: 700; fill: #58a6ff; }
+      .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; fill: #8b949e; }
+      .card { fill: #161b22; stroke: #30363d; stroke-width: 1.2; rx: 8px; }
+      .proj-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; font-weight: 700; fill: #e6edf3; }
+      .proj-tag { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 10px; font-weight: 600; }
+      .chip { fill: #21262d; stroke: #58a6ff; stroke-width: 1.5; rx: 6px; }
+      .chip-pin { fill: #58a6ff; font-family: ui-monospace, SFMono-Regular, monospace; font-size: 10px; font-weight: 700; }
+      .wire-green { stroke: #3fb950; stroke-width: 2.2; fill: none; stroke-linecap: round; }
+      .wire-red { stroke: #f85149; stroke-width: 2.2; fill: none; stroke-linecap: round; }
+      .wire-blue { stroke: #58a6ff; stroke-width: 2.2; fill: none; stroke-linecap: round; }
+      .wire-amber { stroke: #d29922; stroke-width: 2.2; fill: none; stroke-linecap: round; }
+      .resistor { fill: #21262d; stroke: #d29922; stroke-width: 1.5; rx: 3px; }
+      .comp-label { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 10px; fill: #e6edf3; }
+      .sub-info { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10.5px; fill: #8b949e; }
+      
+      @keyframes blink-led {
+        0%, 100% { fill: #3fb950; filter: drop-shadow(0 0 10px #2ea043); opacity: 1; }
+        50% { fill: #1e4620; filter: none; opacity: 0.3; }
+      }
+      .anim-blink { animation: blink-led 1.2s infinite ease-in-out; }
+      
+      @keyframes pot-sweep {
+        0%, 100% { transform: rotate(-45deg); }
+        50% { transform: rotate(45deg); }
+      }
+      .anim-wiper { transform-origin: 140px 175px; animation: pot-sweep 3s infinite ease-in-out; }
+
+      @keyframes btn-press {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(6px); }
+      }
+      .anim-btn { animation: btn-press 2s infinite ease-in-out; }
+    </style>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect x="15" y="15" width="930" height="460" class="bg" />
+  <text x="35" y="44" class="header">🛠️ YOUR FIRST THREE EMBEDDED MINI-PROJECTS</text>
+  <text x="35" y="63" class="sub">Complete step-by-step schematics: Digital Output (LED), Analog Input (Potentiometer), and Digital Input (Button)</text>
+
+  <!-- Card 1: Project 1 — Blink an LED -->
+  <g transform="translate(35, 85)">
+    <rect x="0" y="0" width="285" height="370" class="card" stroke="#3fb950" stroke-width="1.2"/>
+    <text x="16" y="26" class="proj-title">Project 1: Blink an LED</text>
+    <rect x="16" y="36" width="100" height="18" rx="4" fill="#238636"/>
+    <text x="22" y="49" class="proj-tag" fill="#ffffff">GPIO OUTPUT</text>
+
+    <!-- ESP32 Chip Pin Block -->
+    <rect x="16" y="70" width="70" height="90" class="chip" />
+    <text x="25" y="90" class="chip-pin" fill="#8b949e">ESP32</text>
+    <circle cx="86" cy="110" r="4" fill="#3fb950"/>
+    <text x="32" y="114" class="chip-pin">GPIO 2</text>
+    <circle cx="86" cy="140" r="4" fill="#58a6ff"/>
+    <text x="42" y="144" class="chip-pin">GND</text>
+
+    <!-- Wires and Components -->
+    <!-- GPIO 2 to Resistor -->
+    <path d="M 86 110 L 120 110" class="wire-green" />
+    <rect x="120" y="103" width="36" height="14" class="resistor" />
+    <text x="124" y="114" font-family="ui-monospace, monospace" font-size="9" fill="#d29922">220Ω</text>
+    
+    <!-- Resistor to LED -->
+    <path d="M 156 110 L 195 110" class="wire-green" />
+    <!-- LED Symbol & Bulb -->
+    <polygon points="195,98 195,122 215,110" fill="#238636"/>
+    <line x1="215" y1="98" x2="215" y2="122" stroke="#3fb950" stroke-width="2"/>
+    <circle cx="205" cy="80" r="12" class="anim-blink" />
+    <text x="195" y="62" class="comp-label" fill="#3fb950">LED</text>
+    <text x="175" y="136" class="sub-info" font-size="9">Anode (+)</text>
+
+    <!-- LED to GND -->
+    <path d="M 215 110 L 255 110 L 255 140 L 86 140" class="wire-blue" />
+    <text x="230" y="156" class="comp-label" fill="#58a6ff">GND</text>
+
+    <!-- Explanatory Bullets -->
+    <g transform="translate(16, 175)">
+      <rect x="0" y="0" width="253" height="180" fill="#1c2128" rx="6"/>
+      <text x="12" y="22" font-family="sans-serif" font-size="11" font-weight="bold" fill="#3fb950">💡 What You Learn:</text>
+      <text x="12" y="42" class="sub-info">• Ohm's Law in action: 3.3V pin</text>
+      <text x="12" y="58" class="sub-info">• 220Ω limits current to safe 6mA</text>
+      <text x="12" y="74" class="sub-info">• Anode (long leg) to resistor</text>
+      <text x="12" y="90" class="sub-info">• Cathode (short leg) to GND</text>
+      <line x1="12" y1="102" x2="240" y2="102" stroke="#30363d" stroke-width="1"/>
+      <text x="12" y="122" font-family="sans-serif" font-size="11" font-weight="bold" fill="#d29922">⚠️ Safety Check:</text>
+      <text x="12" y="140" class="sub-info">Beep-test 3V3 to GND before</text>
+      <text x="12" y="156" class="sub-info">plugging USB cable in!</text>
+    </g>
+  </g>
+
+  <!-- Card 2: Project 2 — Read a Potentiometer -->
+  <g transform="translate(335, 85)">
+    <rect x="0" y="0" width="285" height="370" class="card" stroke="#58a6ff" stroke-width="1.2"/>
+    <text x="16" y="26" class="proj-title">Project 2: Potentiometer</text>
+    <rect x="16" y="36" width="95" height="18" rx="4" fill="#1f6feb"/>
+    <text x="22" y="49" class="proj-tag" fill="#ffffff">ADC1 INPUT</text>
+
+    <!-- ESP32 Chip Pin Block -->
+    <rect x="16" y="70" width="75" height="90" class="chip" />
+    <circle cx="91" cy="85" r="4" fill="#f85149"/>
+    <text x="50" y="89" class="chip-pin">3V3</text>
+    <circle cx="91" cy="115" r="4" fill="#d29922"/>
+    <text x="28" y="119" class="chip-pin">GPIO 34</text>
+    <circle cx="91" cy="145" r="4" fill="#58a6ff"/>
+    <text x="50" y="149" class="chip-pin">GND</text>
+
+    <!-- Potentiometer Graphic -->
+    <g transform="translate(130, 75)">
+      <!-- 3.3V top wire to Terminal 1 -->
+      <path d="M -39 10 L 40 10" class="wire-red" />
+      <!-- Pot Body -->
+      <circle cx="45" cy="40" r="28" fill="#21262d" stroke="#58a6ff" stroke-width="1.8"/>
+      <!-- Wiper Needle -->
+      <line x1="45" y1="40" x2="45" y2="18" stroke="#d29922" stroke-width="3" stroke-linecap="round" class="anim-wiper"/>
+      <circle cx="45" cy="40" r="5" fill="#d29922"/>
+      
+      <!-- Middle Terminal Wiper to GPIO 34 -->
+      <path d="M 45 40 L 45 40 L -39 40" class="wire-amber" />
+      <!-- GND bottom wire from Terminal 3 -->
+      <path d="M 45 68 L 45 70 L -39 70" class="wire-blue" />
+      
+      <text x="80" y="15" class="comp-label" fill="#f85149">Pin 1 (3V3)</text>
+      <text x="80" y="44" class="comp-label" fill="#d29922">Pin 2 (Wiper)</text>
+      <text x="80" y="74" class="comp-label" fill="#58a6ff">Pin 3 (GND)</text>
+    </g>
+
+    <!-- Explanatory Bullets -->
+    <g transform="translate(16, 175)">
+      <rect x="0" y="0" width="253" height="180" fill="#1c2128" rx="6"/>
+      <text x="12" y="22" font-family="sans-serif" font-size="11" font-weight="bold" fill="#58a6ff">💡 What You Learn:</text>
+      <text x="12" y="42" class="sub-info">• Voltage divider principle</text>
+      <text x="12" y="58" class="sub-info">• Turning knob produces 0V to 3.3V</text>
+      <text x="12" y="74" class="sub-info">• 12-bit ADC converts to 0 – 4095</text>
+      <text x="12" y="90" class="sub-info">• Formula: V = (raw / 4095) * 3.3</text>
+      <line x1="12" y1="102" x2="240" y2="102" stroke="#30363d" stroke-width="1"/>
+      <text x="12" y="122" font-family="sans-serif" font-size="11" font-weight="bold" fill="#d29922">⚠️ Golden Rule:</text>
+      <text x="12" y="140" class="sub-info">Use ADC1 (Pins 32-39). ADC2</text>
+      <text x="12" y="156" class="sub-info">fails when Wi-Fi is active!</text>
+    </g>
+  </g>
+
+  <!-- Card 3: Project 3 — Button Input + Debounce -->
+  <g transform="translate(635, 85)">
+    <rect x="0" y="0" width="290" height="370" class="card" stroke="#d29922" stroke-width="1.2"/>
+    <text x="16" y="26" class="proj-title">Project 3: Button + Pull-Up</text>
+    <rect x="16" y="36" width="115" height="18" rx="4" fill="#9e6a03"/>
+    <text x="22" y="49" class="proj-tag" fill="#ffffff">INPUT_PULLUP</text>
+
+    <!-- ESP32 Chip Pin Block -->
+    <rect x="16" y="70" width="75" height="90" class="chip" />
+    <circle cx="91" cy="85" r="4" fill="#3fb950"/>
+    <text x="32" y="89" class="chip-pin">GPIO 2</text>
+    <circle cx="91" cy="115" r="4" fill="#d29922"/>
+    <text x="32" y="119" class="chip-pin">GPIO 4</text>
+    <circle cx="91" cy="145" r="4" fill="#58a6ff"/>
+    <text x="50" y="149" class="chip-pin">GND</text>
+
+    <!-- Button & LED Mini Circuit -->
+    <!-- GPIO 4 to Button -->
+    <path d="M 91 115 L 140 115" class="wire-amber" />
+    <g transform="translate(140, 95)">
+      <!-- Button Base -->
+      <rect x="0" y="10" width="30" height="20" fill="#21262d" stroke="#d29922" rx="3"/>
+      <!-- Button Cap (Animated Press) -->
+      <circle cx="15" cy="20" r="7" fill="#f0883e" class="anim-btn" />
+      <!-- Wire to GND -->
+      <path d="M 30 20 L 70 20 L 70 50 L -49 50" class="wire-blue" />
+    </g>
+    <text x="180" y="112" class="comp-label" fill="#d29922">Tactile Button</text>
+
+    <!-- GPIO 2 to Indicator LED -->
+    <path d="M 91 85 L 160 85" class="wire-green" />
+    <circle cx="170" cy="85" r="6" fill="#3fb950"/>
+    <text x="185" y="89" class="comp-label" fill="#3fb950">LED Out</text>
+
+    <!-- Explanatory Bullets -->
+    <g transform="translate(16, 175)">
+      <rect x="0" y="0" width="258" height="180" fill="#1c2128" rx="6"/>
+      <text x="12" y="22" font-family="sans-serif" font-size="11" font-weight="bold" fill="#d29922">💡 What You Learn:</text>
+      <text x="12" y="42" class="sub-info">• INPUT_PULLUP prevents floating</text>
+      <text x="12" y="58" class="sub-info">• Pressed = LOW (active-low)</text>
+      <text x="12" y="74" class="sub-info">• Released = HIGH (pulled to 3.3V)</text>
+      <text x="12" y="90" class="sub-info">• 20ms delay fixes switch bounce</text>
+      <line x1="12" y1="102" x2="245" y2="102" stroke="#30363d" stroke-width="1"/>
+      <text x="12" y="122" font-family="sans-serif" font-size="11" font-weight="bold" fill="#3fb950">🚀 Milestone:</text>
+      <text x="12" y="140" class="sub-info">When these 3 work, you've mastered</text>
+      <text x="12" y="156" class="sub-info">core embedded inputs &amp; outputs!</text>
+    </g>
+  </g>
+</svg>

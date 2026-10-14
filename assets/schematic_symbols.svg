@@ -1,0 +1,235 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 500" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; stroke: #30363d; stroke-width: 1.5; rx: 12px; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 18px; font-weight: 700; fill: #58a6ff; }
+      .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; fill: #8b949e; }
+      .card { fill: #161b22; stroke: #30363d; stroke-width: 1.2; rx: 8px; }
+      .sym-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; font-weight: 600; fill: #e6edf3; }
+      .sym-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #8b949e; }
+      .wire { stroke: #e6edf3; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .wire-blue { stroke: #58a6ff; stroke-width: 2; fill: none; stroke-linecap: round; }
+      .wire-green { stroke: #3fb950; stroke-width: 2; fill: none; stroke-linecap: round; }
+      .wire-red { stroke: #f85149; stroke-width: 2; fill: none; stroke-linecap: round; }
+      .pin-label { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 10px; fill: #58a6ff; font-weight: 600; }
+      .dot { fill: #58a6ff; }
+      @keyframes photon {
+        0% { opacity: 0.2; transform: translate(0, 0); }
+        50% { opacity: 1; transform: translate(4px, -4px); }
+        100% { opacity: 0.2; transform: translate(0, 0); }
+      }
+      .photon-ray { animation: photon 1.8s infinite ease-in-out; }
+    </style>
+  </defs>
+
+  <!-- Background Panel -->
+  <rect x="15" y="15" width="920" height="470" class="bg" />
+  <text x="35" y="44" class="header">📐 ESSENTIAL SCHEMATIC SYMBOLS</text>
+  <text x="35" y="63" class="sub">Standard electrical shorthand every embedded developer reads on schematics and sensor datasheets</text>
+
+  <!-- Row 1: Passive Components -->
+  <!-- 1. Resistor -->
+  <g transform="translate(35, 80)">
+    <rect x="0" y="0" width="168" height="115" class="card"/>
+    <text x="12" y="22" class="sym-title">Resistor (R)</text>
+    <text x="12" y="36" class="sym-desc">Limits flow (zigzag / box)</text>
+    <!-- Zigzag US -->
+    <path d="M 15 65 L 30 65 L 36 55 L 48 75 L 60 55 L 72 75 L 84 55 L 90 65 L 105 65" class="wire-blue"/>
+    <text x="38" y="98" class="sym-desc">US (Zigzag)</text>
+    <!-- IEC Box -->
+    <path d="M 115 65 L 125 65" class="wire"/>
+    <rect x="125" y="58" width="28" height="14" fill="#21262d" stroke="#e6edf3" stroke-width="1.5"/>
+    <path d="M 153 65 L 160 65" class="wire"/>
+    <text x="123" y="98" class="sym-desc">IEC</text>
+  </g>
+
+  <!-- 2. Ceramic Capacitor -->
+  <g transform="translate(218, 80)">
+    <rect x="0" y="0" width="168" height="115" class="card"/>
+    <text x="12" y="22" class="sym-title">Capacitor (C)</text>
+    <text x="12" y="36" class="sym-desc">Non-polarized (100nF ceramic)</text>
+    <path d="M 25 65 L 75 65" class="wire"/>
+    <line x1="75" y1="48" x2="75" y2="82" stroke="#58a6ff" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="87" y1="48" x2="87" y2="82" stroke="#58a6ff" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M 87 65 L 140 65" class="wire"/>
+    <text x="42" y="98" class="sym-desc">Parallel storage plates</text>
+  </g>
+
+  <!-- 3. Polarized Capacitor -->
+  <g transform="translate(401, 80)">
+    <rect x="0" y="0" width="168" height="115" class="card"/>
+    <text x="12" y="22" class="sym-title">Polarized Cap (C)</text>
+    <text x="12" y="36" class="sym-desc">Electrolytic (10µF - 100µF)</text>
+    <path d="M 20 65 L 70 65" class="wire-red"/>
+    <line x1="70" y1="48" x2="70" y2="82" stroke="#f85149" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Curved negative plate -->
+    <path d="M 86 48 Q 80 65 86 82" stroke="#58a6ff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M 83 65 L 140 65" class="wire-blue"/>
+    <text x="56" y="55" font-family="sans-serif" font-size="12" fill="#f85149" font-weight="bold">+</text>
+    <text x="96" y="55" font-family="sans-serif" font-size="12" fill="#58a6ff" font-weight="bold">−</text>
+    <text x="44" y="98" class="sym-desc">⚠️ Polarity matters!</text>
+  </g>
+
+  <!-- 4. Diode -->
+  <g transform="translate(584, 80)">
+    <rect x="0" y="0" width="168" height="115" class="card"/>
+    <text x="12" y="22" class="sym-title">Diode (D)</text>
+    <text x="12" y="36" class="sym-desc">One-way current valve</text>
+    <path d="M 25 65 L 65 65" class="wire"/>
+    <polygon points="65,50 65,80 95,65" fill="#58a6ff"/>
+    <line x1="95" y1="48" x2="95" y2="82" stroke="#58a6ff" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M 95 65 L 145 65" class="wire"/>
+    <text x="35" y="98" class="pin-label">Anode (+)</text>
+    <text x="98" y="98" class="pin-label" fill="#f85149">Cathode (−)</text>
+  </g>
+
+  <!-- 5. LED -->
+  <g transform="translate(767, 80)">
+    <rect x="0" y="0" width="168" height="115" class="card"/>
+    <text x="12" y="22" class="sym-title">LED</text>
+    <text x="12" y="36" class="sym-desc">Light Emitting Diode</text>
+    <path d="M 25 65 L 65 65" class="wire"/>
+    <polygon points="65,50 65,80 95,65" fill="#3fb950"/>
+    <line x1="95" y1="48" x2="95" y2="82" stroke="#3fb950" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M 95 65 L 145 65" class="wire"/>
+    <!-- Light Rays -->
+    <g class="photon-ray">
+      <line x1="85" y1="45" x2="100" y2="30" stroke="#d29922" stroke-width="1.8" stroke-linecap="round"/>
+      <polygon points="102,28 96,31 99,34" fill="#d29922"/>
+      <line x1="95" y1="48" x2="110" y2="33" stroke="#d29922" stroke-width="1.8" stroke-linecap="round"/>
+      <polygon points="112,31 106,34 109,37" fill="#d29922"/>
+    </g>
+    <text x="35" y="98" class="pin-label">Anode</text>
+    <text x="98" y="98" class="pin-label" fill="#f85149">Cathode</text>
+  </g>
+
+  <!-- Row 2: Switches, Power & Actuators -->
+  <!-- 6. Pushbutton / Switch -->
+  <g transform="translate(35, 210)">
+    <rect x="0" y="0" width="168" height="125" class="card"/>
+    <text x="12" y="22" class="sym-title">Pushbutton / Switch</text>
+    <text x="12" y="36" class="sym-desc">Momentary tactile contact</text>
+    <path d="M 25 75 L 55 75" class="wire"/>
+    <circle cx="58" cy="75" r="3.5" fill="none" stroke="#e6edf3" stroke-width="1.5"/>
+    <!-- Angled Switch bar -->
+    <line x1="60" y1="72" x2="105" y2="52" stroke="#58a6ff" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="110" cy="75" r="3.5" fill="none" stroke="#e6edf3" stroke-width="1.5"/>
+    <path d="M 113 75 L 145 75" class="wire"/>
+    <text x="36" y="105" class="sym-desc">Normally Open (NO)</text>
+  </g>
+
+  <!-- 7. Power Supply (VCC / 3.3V) -->
+  <g transform="translate(218, 210)">
+    <rect x="0" y="0" width="168" height="125" class="card"/>
+    <text x="12" y="22" class="sym-title">Power (VCC / 3V3)</text>
+    <text x="12" y="36" class="sym-desc">Positive power rail connection</text>
+    <!-- Arrow Power -->
+    <path d="M 50 85 L 50 55" class="wire-red"/>
+    <polygon points="44,55 56,55 50,45" fill="#f85149"/>
+    <text x="36" y="38" class="pin-label" fill="#f85149">+3.3V</text>
+    <!-- Circle Rail -->
+    <path d="M 120 85 L 120 58" class="wire-red"/>
+    <circle cx="120" cy="52" r="6" fill="#21262d" stroke="#f85149" stroke-width="1.8"/>
+    <text x="108" y="38" class="pin-label" fill="#f85149">VCC</text>
+    <text x="35" y="105" class="sym-desc">Top / positive voltage rail</text>
+  </g>
+
+  <!-- 8. Ground (GND) -->
+  <g transform="translate(401, 210)">
+    <rect x="0" y="0" width="168" height="125" class="card"/>
+    <text x="12" y="22" class="sym-title">Ground (GND)</text>
+    <text x="12" y="36" class="sym-desc">Zero reference (0V)</text>
+    <!-- Standard Signal GND -->
+    <path d="M 55 45 L 55 65" class="wire-blue"/>
+    <line x1="38" y1="65" x2="72" y2="65" stroke="#58a6ff" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="44" y1="71" x2="66" y2="71" stroke="#58a6ff" stroke-width="2" stroke-linecap="round"/>
+    <line x1="50" y1="77" x2="60" y2="77" stroke="#58a6ff" stroke-width="1.5" stroke-linecap="round"/>
+    <text x="43" y="93" class="pin-label">GND</text>
+    <!-- Earth GND Triangle -->
+    <path d="M 125 45 L 125 65" class="wire-blue"/>
+    <polygon points="112,65 138,65 125,78" fill="none" stroke="#58a6ff" stroke-width="1.8"/>
+    <text x="111" y="93" class="pin-label">Chassis</text>
+    <text x="38" y="108" class="sym-desc">All GNDs must be joined!</text>
+  </g>
+
+  <!-- 9. N-Channel MOSFET -->
+  <g transform="translate(584, 210)">
+    <rect x="0" y="0" width="168" height="125" class="card"/>
+    <text x="12" y="22" class="sym-title">N-MOSFET (Q)</text>
+    <text x="12" y="36" class="sym-desc">High-power switch (IRLZ44N)</text>
+    <!-- Gate -->
+    <path d="M 25 72 L 55 72" class="wire"/>
+    <line x1="55" y1="52" x2="55" y2="92" stroke="#58a6ff" stroke-width="2" stroke-linecap="round"/>
+    <!-- Channel bars -->
+    <line x1="62" y1="50" x2="62" y2="62" stroke="#e6edf3" stroke-width="2.2"/>
+    <line x1="62" y1="66" x2="62" y2="78" stroke="#e6edf3" stroke-width="2.2"/>
+    <line x1="62" y1="82" x2="62" y2="94" stroke="#e6edf3" stroke-width="2.2"/>
+    <!-- Drain -->
+    <path d="M 62 56 L 90 56 L 90 42" class="wire"/>
+    <!-- Source & Body Arrow -->
+    <path d="M 62 88 L 90 88 L 90 102" class="wire"/>
+    <polygon points="63,72 73,67 73,77" fill="#58a6ff"/>
+    <path d="M 73 72 L 90 72 L 90 88" class="wire"/>
+    <text x="15" y="76" class="pin-label">G</text>
+    <text x="96" y="47" class="pin-label">D</text>
+    <text x="96" y="103" class="pin-label">S</text>
+    <text x="110" y="75" class="sym-desc">V_GS controls</text>
+  </g>
+
+  <!-- 10. NPN BJT Transistor -->
+  <g transform="translate(767, 210)">
+    <rect x="0" y="0" width="168" height="125" class="card"/>
+    <text x="12" y="22" class="sym-title">NPN Transistor (Q)</text>
+    <text x="12" y="36" class="sym-desc">Low-power switch (2N2222)</text>
+    <circle cx="85" cy="72" r="28" fill="#21262d" stroke="#30363d" stroke-width="1.2"/>
+    <!-- Base -->
+    <path d="M 25 72 L 67 72" class="wire"/>
+    <line x1="67" y1="54" x2="67" y2="90" stroke="#58a6ff" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Collector -->
+    <line x1="67" y1="62" x2="98" y2="46" class="wire"/>
+    <path d="M 98 46 L 98 40" class="wire"/>
+    <!-- Emitter with Arrow -->
+    <line x1="67" y1="82" x2="98" y2="98" class="wire"/>
+    <polygon points="98,98 86,92 92,86" fill="#3fb950"/>
+    <path d="M 98 98 L 98 104" class="wire"/>
+    <text x="15" y="76" class="pin-label">B</text>
+    <text x="105" y="46" class="pin-label">C</text>
+    <text x="105" y="104" class="pin-label">E</text>
+    <text x="118" y="75" class="sym-desc">Current in B</text>
+  </g>
+
+  <!-- Row 3: Golden Wiring Schematic Rules -->
+  <g transform="translate(35, 350)">
+    <rect x="0" y="0" width="900" height="115" class="card" stroke="#58a6ff" stroke-width="1.2"/>
+    <text x="20" y="25" class="header" font-size="14">⚡ THE GOLDEN SCHEMATIC WIRING RULES</text>
+    
+    <!-- Rule 1: Straight lines are zero-ohm wires -->
+    <g transform="translate(20, 42)">
+      <text x="0" y="15" class="sym-title" fill="#58a6ff">1. Lines = Ideal Wires</text>
+      <text x="0" y="30" class="sym-desc">Zero resistance copper paths</text>
+      <line x1="0" y1="48" x2="160" y2="48" stroke="#3fb950" stroke-width="2.5"/>
+      <circle cx="8" cy="48" r="3" fill="#3fb950"/>
+      <circle cx="152" cy="48" r="3" fill="#3fb950"/>
+    </g>
+
+    <!-- Rule 2: Crossing with Dot = CONNECTED -->
+    <g transform="translate(260, 42)">
+      <text x="0" y="15" class="sym-title" fill="#3fb950">2. Junction Dot = CONNECTED</text>
+      <text x="0" y="30" class="sym-desc">Wires are soldered / joined together</text>
+      <line x1="40" y1="48" x2="160" y2="48" stroke="#3fb950" stroke-width="2"/>
+      <line x1="100" y1="35" x2="100" y2="62" stroke="#3fb950" stroke-width="2"/>
+      <circle cx="100" cy="48" r="5" class="dot" fill="#3fb950"/>
+      <text x="175" y="52" class="pin-label" fill="#3fb950">CONNECTED ✅</text>
+    </g>
+
+    <!-- Rule 3: Crossing without Dot = NO CONNECTION -->
+    <g transform="translate(600, 42)">
+      <text x="0" y="15" class="sym-title" fill="#f85149">3. No Dot = CROSSING (NO CONTACT)</text>
+      <text x="0" y="30" class="sym-desc">Wires pass over each other with zero touch</text>
+      <line x1="40" y1="48" x2="160" y2="48" stroke="#8b949e" stroke-width="2"/>
+      <line x1="100" y1="35" x2="100" y2="62" stroke="#8b949e" stroke-width="2"/>
+      <circle cx="100" cy="48" r="5" fill="none" stroke="#f85149" stroke-width="1.8"/>
+      <text x="175" y="52" class="pin-label" fill="#f85149">NO CONTACT ❌</text>
+    </g>
+  </g>
+</svg>
