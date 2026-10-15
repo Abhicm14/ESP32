@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 540" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; stroke: #30363d; stroke-width: 1.5; rx: 12px; }
+      .card { fill: #161b22; stroke: #30363d; stroke-width: 1.2; rx: 8px; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 16px; font-weight: 700; }
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; font-weight: 600; fill: #e6edf3; }
+      .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; }
+      .mono-sm { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 10px; }
+      .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #8b949e; }
+      .badge { font-family: ui-monospace, SFMono-Regular, "SF Mono", monospace; font-size: 9.5px; font-weight: 700; }
+
+      /* Pulsing indicator dots */
+      .glow-green { fill: #3fb950; filter: drop-shadow(0 0 5px #3fb950); animation: pulse-dot 2s infinite alternate; }
+      .glow-amber { fill: #d29922; filter: drop-shadow(0 0 5px #d29922); animation: pulse-dot 1.8s infinite alternate; }
+      .glow-blue { fill: #58a6ff; filter: drop-shadow(0 0 5px #58a6ff); animation: pulse-dot 2.2s infinite alternate; }
+      .glow-red { fill: #f85149; filter: drop-shadow(0 0 6px #f85149); animation: pulse-dot 1.2s infinite alternate; }
+
+      @keyframes pulse-dot {
+        from { opacity: 0.6; }
+        to { opacity: 1.0; }
+      }
+    </style>
+  </defs>
+
+  <!-- Outer Canvas -->
+  <rect x="10" y="10" width="900" height="520" class="bg" />
+
+  <!-- Title & Subtitle -->
+  <text x="35" y="38" class="header" fill="#58a6ff">🚦 ESP32 GPIO PIN SAFETY &amp; HARDWARE RULES</text>
+  <text x="35" y="56" class="sub">Which pins to use freely, which pins need caution at boot, which are input-only, and which pins will crash your chip</text>
+
+  <!-- ================= CARD 1: SAFE GPIOS (GREEN) ================= -->
+  <g transform="translate(35, 75)">
+    <rect x="0" y="0" width="415" height="185" class="card" stroke="#3fb950" stroke-width="1.5" />
+    <circle cx="22" cy="22" r="6" class="glow-green" />
+    <text x="36" y="26" class="title" fill="#3fb950">1. SAFE TO USE FREELY (14 PINS)</text>
+    <rect x="290" y="12" width="110" height="20" rx="4" fill="#14331b" />
+    <text x="298" y="26" class="badge" fill="#7ee787">RECOMMENDED</text>
+    
+    <text x="15" y="52" class="mono" fill="#7ee787">GPIO: 4, 5, 16, 17, 18, 19, 21, 22, 23, 25, 26, 27, 32, 33</text>
+    
+    <text x="15" y="74" class="sub">• Full Digital I/O (Input, Output, High-Z, Open Drain)</text>
+    <text x="15" y="90" class="sub">• Configurable Internal Pull-Up (~45 kΩ) &amp; Pull-Down (~45 kΩ)</text>
+    <text x="15" y="106" class="sub">• Default I2C: <tspan fill="#e6edf3">GPIO 21 (SDA), GPIO 22 (SCL)</tspan></text>
+    <text x="15" y="122" class="sub">• Default VSPI: <tspan fill="#e6edf3">18 (SCK), 19 (MISO), 23 (MOSI), 5 (SS)</tspan></text>
+    <text x="15" y="138" class="sub">• True Analog DAC: <tspan fill="#e6edf3">GPIO 25 (DAC1), GPIO 26 (DAC2)</tspan></text>
+    <text x="15" y="154" class="sub">• ADC1 (Analog in): <tspan fill="#e6edf3">GPIO 32, 33</tspan> (safe during Wi-Fi)</text>
+    <text x="15" y="170" class="mono-sm" fill="#3fb950">✓ Best choices for sensors, LEDs, buttons, displays &amp; relays.</text>
+  </g>
+
+  <!-- ================= CARD 2: STRAPPING PINS (AMBER) ================= -->
+  <g transform="translate(470, 75)">
+    <rect x="0" y="0" width="425" height="185" class="card" stroke="#d29922" stroke-width="1.5" />
+    <circle cx="22" cy="22" r="6" class="glow-amber" />
+    <text x="36" y="26" class="title" fill="#ffd33d">2. STRAPPING PINS (USE WITH CAUTION)</text>
+    <rect x="330" y="12" width="80" height="20" rx="4" fill="#3b2b11" />
+    <text x="338" y="26" class="badge" fill="#ffd33d">SAMPLED @ BOOT</text>
+    
+    <text x="15" y="52" class="mono" fill="#ffd33d">GPIO: 0, 2, 12 (MTDI), 15 (MTDO)</text>
+    
+    <text x="15" y="74" class="sub">• <tspan fill="#ffd33d" font-family="monospace">GPIO 0:</tspan> BOOT button. Must be HIGH to run code. Pulled LOW to flash.</text>
+    <text x="15" y="90" class="sub">• <tspan fill="#ffd33d" font-family="monospace">GPIO 2:</tspan> Onboard blue LED. Must be floating or LOW during flash.</text>
+    <text x="15" y="106" class="sub">• <tspan fill="#f85149" font-family="monospace">GPIO 12:</tspan> Flash voltage select (0 = 3.3V, 1 = 1.8V). If pulled HIGH</text>
+    <text x="15" y="122" class="sub">  at power-on, flash power drops to 1.8V and chip crashes instantly!</text>
+    <text x="15" y="138" class="sub">• <tspan fill="#ffd33d" font-family="monospace">GPIO 15:</tspan> Controls UART log silence. Pulled HIGH internally.</text>
+    <text x="15" y="156" class="sub">⚠️ After boot completes, these can be used as outputs, but external</text>
+    <text x="15" y="172" class="sub">circuits must NOT pull GPIO 0 or 12 to the wrong level at power-up.</text>
+  </g>
+
+  <!-- ================= CARD 3: INPUT ONLY (BLUE) ================= -->
+  <g transform="translate(35, 275)">
+    <rect x="0" y="0" width="415" height="150" class="card" stroke="#58a6ff" stroke-width="1.5" />
+    <circle cx="22" cy="22" r="6" class="glow-blue" />
+    <text x="36" y="26" class="title" fill="#58a6ff">3. INPUT-ONLY PINS (GPI - NO OUTPUT DRIVER)</text>
+    
+    <text x="15" y="52" class="mono" fill="#79c0ff">GPIO: 34, 35, 36 (VP / SENSOR_VP), 39 (VN / SENSOR_VN)</text>
+    
+    <text x="15" y="74" class="sub">• <tspan fill="#f85149">CANNOT be outputs!</tspan> pinMode(34, OUTPUT) does nothing.</text>
+    <text x="15" y="90" class="sub">• <tspan fill="#f85149">NO internal pull-up or pull-down resistors!</tspan></text>
+    <text x="15" y="106" class="sub">• If connecting a button, you MUST add an external 10 kΩ resistor.</text>
+    <text x="15" y="122" class="sub">• Part of ADC1: Perfect for analog sensors (potentiometers, LDRs).</text>
+    <text x="15" y="138" class="mono-sm" fill="#58a6ff">✓ Best uses: Analog voltage measurements &amp; external sensor inputs.</text>
+  </g>
+
+  <!-- ================= CARD 4: FORBIDDEN SPI FLASH (RED) ================= -->
+  <g transform="translate(470, 275)">
+    <rect x="0" y="0" width="425" height="150" class="card" stroke="#f85149" stroke-width="1.5" />
+    <circle cx="22" cy="22" r="6" class="glow-red" />
+    <text x="36" y="26" class="title" fill="#f85149">4. FORBIDDEN FLASH PINS (DO NOT TOUCH!)</text>
+    <rect x="315" y="12" width="95" height="20" rx="4" fill="#3d1417" />
+    <text x="323" y="26" class="badge" fill="#f85149">FATAL CRASH</text>
+    
+    <text x="15" y="52" class="mono" fill="#f85149">GPIO: 6, 7, 8, 9, 10, 11 (CLK, SD0, SD1, SD2, SD3, CMD)</text>
+    
+    <text x="15" y="74" class="sub">• Hardwired internally directly to the 4 MB SPI Flash Memory chip.</text>
+    <text x="15" y="90" class="sub">• Connecting anything here corrupts firmware instruction fetching.</text>
+    <text x="15" y="106" class="sub">• Causes immediate reboot: <tspan fill="#f85149" font-family="monospace">Guru Meditation Error (IllegalInstruction)</tspan>.</text>
+    <text x="15" y="124" class="mono-sm" fill="#f85149">🚫 NEVER connect LEDs, buttons, or wires to GPIO 6 through 11.</text>
+    <text x="15" y="140" class="sub">Some DevKit boards omit these pins from the header to protect you.</text>
+  </g>
+
+  <!-- ================= BOTTOM: ADC2 VS WI-FI RULE ================= -->
+  <g transform="translate(35, 440)">
+    <rect x="0" y="0" width="850" height="70" class="card" fill="#1b1d28" stroke="#bc8cff" stroke-width="1.2" />
+    <text x="18" y="22" class="title" fill="#bc8cff">⚡ CRITICAL GOTCHA: ADC2 &amp; WI-FI CONFLICT</text>
+    
+    <text x="18" y="42" class="sub">
+      The ESP32 has two ADC units: <tspan fill="#3fb950" font-weight="600">ADC1 (GPIO 32–39)</tspan> and <tspan fill="#f85149" font-weight="600">ADC2 (GPIO 0, 2, 4, 12–15, 25–27)</tspan>.
+    </text>
+    <text x="18" y="58" class="mono-sm" fill="#e6edf3">
+      The Wi-Fi radio shares hardware SAR controllers with <tspan fill="#f85149">ADC2</tspan>. When Wi-Fi is active, <tspan fill="#f85149">ADC2 readings fail or return -1</tspan>! Always use <tspan fill="#3fb950">ADC1</tspan> for analog sensors.
+    </text>
+  </g>
+
+</svg>

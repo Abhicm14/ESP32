@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 540" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; stroke: #30363d; stroke-width: 1.5; rx: 12px; }
+      .card { fill: #161b22; stroke: #30363d; stroke-width: 1.2; rx: 8px; }
+      .card-accent-blue { fill: #161b22; stroke: #58a6ff; stroke-width: 1.5; rx: 8px; }
+      .card-accent-green { fill: #161b22; stroke: #3fb950; stroke-width: 1.5; rx: 8px; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 16px; font-weight: 700; }
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; font-weight: 600; fill: #e6edf3; }
+      .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; }
+      .mono-sm { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 10px; }
+      .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #8b949e; }
+      
+      /* Bus Matrix and Packet Flow Animations */
+      .bus-wire { stroke: #30363d; stroke-width: 2.5; fill: none; stroke-linecap: round; }
+      .bus-active-blue { stroke: #58a6ff; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-dasharray: 8 6; animation: flow-blue 1.8s linear infinite; }
+      .bus-active-green { stroke: #3fb950; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-dasharray: 8 6; animation: flow-green 1.8s linear infinite; }
+      .bus-active-amber { stroke: #d29922; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-dasharray: 8 6; animation: flow-amber 2s linear infinite; }
+      
+      @keyframes flow-blue { to { stroke-dashoffset: -28; } }
+      @keyframes flow-green { to { stroke-dashoffset: -28; } }
+      @keyframes flow-amber { to { stroke-dashoffset: -28; } }
+
+      .pulse-dot-blue { fill: #79c0ff; filter: drop-shadow(0 0 5px #58a6ff); }
+      .pulse-dot-green { fill: #7ee787; filter: drop-shadow(0 0 5px #3fb950); }
+      .pulse-dot-amber { fill: #ffd33d; filter: drop-shadow(0 0 5px #d29922); }
+    </style>
+  </defs>
+
+  <!-- Canvas Outer Background -->
+  <rect x="10" y="10" width="900" height="520" class="bg" />
+
+  <!-- Main Title & Subtitle -->
+  <text x="35" y="40" class="header" fill="#58a6ff">⚡ ESP32-WROOM-32 DUAL-CORE HARDWARE ARCHITECTURE</text>
+  <text x="35" y="58" class="sub">Two 32-bit Xtensa LX6 CPUs • Internal Crossbar Interconnect • 520 KB SRAM • External 4 MB Flash • RF Subsystem</text>
+
+  <!-- ================= TOP: DUAL PROCESSORS ================= -->
+  
+  <!-- CORE 0 (PRO_CPU) Card -->
+  <g transform="translate(35, 75)">
+    <rect x="0" y="0" width="400" height="115" class="card-accent-blue" />
+    <rect x="12" y="12" width="10" height="10" rx="2" fill="#58a6ff" />
+    <text x="30" y="22" class="title" fill="#58a6ff">CORE 0: PRO_CPU (Protocol Processor)</text>
+    <text x="30" y="38" class="mono-sm" fill="#8b949e">Xtensa 32-bit LX6 @ up to 240 MHz • 600 DMIPS</text>
+    
+    <text x="15" y="62" class="sub">• Dedicated to Wi-Fi 802.11 b/g/n, Bluetooth 4.2 / BLE stack</text>
+    <text x="15" y="78" class="sub">• Handles TCP/IP network protocol processing (LwIP engine)</text>
+    <text x="15" y="94" class="sub">• Executes internal FreeRTOS background &amp; timing tasks</text>
+    <text x="15" y="108" class="mono-sm" fill="#39c5bb">Default: WiFi / BT Background Radio Core</text>
+  </g>
+
+  <!-- CORE 1 (APP_CPU) Card -->
+  <g transform="translate(485, 75)">
+    <rect x="0" y="0" width="400" height="115" class="card-accent-green" />
+    <rect x="12" y="12" width="10" height="10" rx="2" fill="#3fb950" />
+    <text x="30" y="22" class="title" fill="#3fb950">CORE 1: APP_CPU (Application Processor)</text>
+    <text x="30" y="38" class="mono-sm" fill="#8b949e">Xtensa 32-bit LX6 @ up to 240 MHz • 600 DMIPS</text>
+    
+    <text x="15" y="62" class="sub">• Runs YOUR custom firmware: app_main() or setup() / loop()</text>
+    <text x="15" y="78" class="sub">• Sensor sampling, algorithmic calculations &amp; UI rendering</text>
+    <text x="15" y="94" class="sub">• Never blocked by Wi-Fi packet retransmissions or handshakes</text>
+    <text x="15" y="108" class="mono-sm" fill="#7ee787">Default: User Code &amp; Peripherals Core</text>
+  </g>
+
+  <!-- ================= MIDDLE: CROSSBAR BUS MATRIX ================= -->
+  
+  <!-- Bus Junction Lines from Cores to Matrix -->
+  <path d="M 235 190 L 235 220" class="bus-active-blue" />
+  <path d="M 685 190 L 685 220" class="bus-active-green" />
+
+  <circle r="4" class="pulse-dot-blue">
+    <animateMotion path="M 235 190 L 235 220" dur="1.2s" repeatCount="indefinite" />
+  </circle>
+  <circle r="4" class="pulse-dot-green">
+    <animateMotion path="M 685 190 L 685 220" dur="1.2s" repeatCount="indefinite" />
+  </circle>
+
+  <!-- Crossbar Interconnect Card -->
+  <g transform="translate(35, 220)">
+    <rect x="0" y="0" width="850" height="42" class="card" fill="#1b212c" stroke="#38444d" />
+    <text x="25" y="26" class="title" fill="#e6edf3">INTERNAL HIGH-SPEED CROSSBAR BUS MATRIX</text>
+    <text x="380" y="26" class="mono-sm" fill="#8b949e">I-Bus (Instructions) • D-Bus (Data) • DMA Interconnect • MMU Flash Cache</text>
+    
+    <!-- Flow dots across the bus -->
+    <line x1="20" y1="36" x2="830" y2="36" class="bus-active-amber" />
+  </g>
+
+  <!-- Bus Distribution Lines down to subsystems -->
+  <path d="M 140 262 L 140 295" class="bus-active-blue" />
+  <path d="M 370 262 L 370 295" class="bus-active-amber" />
+  <path d="M 590 262 L 590 295" class="bus-active-green" />
+  <path d="M 780 262 L 780 295" class="bus-active-blue" />
+
+  <!-- ================= LOWER SECTION: MEMORY, STORAGE, RF, RTC ================= -->
+  
+  <!-- Internal Memory Card -->
+  <g transform="translate(35, 295)">
+    <rect x="0" y="0" width="260" height="135" class="card" />
+    <text x="15" y="22" class="title" fill="#58a6ff">INTERNAL MEMORY</text>
+    <text x="15" y="38" class="mono-sm" fill="#8b949e">520 KB Total On-Chip SRAM</text>
+    
+    <text x="15" y="58" class="mono" fill="#e6edf3">• DRAM: <tspan fill="#79c0ff">~320 KB</tspan> (Data/Heap)</text>
+    <text x="15" y="74" class="mono" fill="#e6edf3">• IRAM: <tspan fill="#79c0ff">~128 KB</tspan> (Fast ISRs)</text>
+    <text x="15" y="90" class="mono" fill="#e6edf3">• ROM:  <tspan fill="#8b949e">448 KB</tspan> (1st Bootloader)</text>
+    <text x="15" y="106" class="mono" fill="#e6edf3">• RTC:  <tspan fill="#ffd33d">16 KB</tspan> (Sleep retention)</text>
+    <text x="15" y="122" class="sub">Zero-wait-state single cycle access</text>
+  </g>
+
+  <!-- Flash Storage & MMU Card -->
+  <g transform="translate(315, 295)">
+    <rect x="0" y="0" width="230" height="135" class="card" />
+    <text x="15" y="22" class="title" fill="#d29922">EXTERNAL SPI FLASH</text>
+    <text x="15" y="38" class="mono-sm" fill="#8b949e">Mounted on WROOM Module</text>
+    
+    <text x="15" y="58" class="mono" fill="#ffd33d">• 4 MB (32 Mbit) Flash</text>
+    <text x="15" y="74" class="mono" fill="#e6edf3">• Quad SPI (QIO) @ 80 MHz</text>
+    <text x="15" y="90" class="mono" fill="#e6edf3">• 64 KB Cache MMU window</text>
+    <text x="15" y="106" class="mono" fill="#e6edf3">• Stores App, OTA &amp; NVS</text>
+    <text x="15" y="122" class="sub">Uses GPIO 6–11 (Reserved!)</text>
+  </g>
+
+  <!-- Wireless Radio Subsystem -->
+  <g transform="translate(565, 295)">
+    <rect x="0" y="0" width="320" height="135" class="card" />
+    <text x="15" y="22" class="title" fill="#3fb950">WIRELESS RF SUBSYSTEM</text>
+    <text x="15" y="38" class="mono-sm" fill="#8b949e">2.4 GHz Transceiver &amp; Baseband</text>
+    
+    <text x="15" y="58" class="mono" fill="#7ee787">• Wi-Fi 802.11 b/g/n (150 Mbps)</text>
+    <text x="15" y="74" class="mono" fill="#7ee787">• Bluetooth v4.2 BR/EDR + BLE</text>
+    <text x="15" y="90" class="mono" fill="#e6edf3">• Hardware AES / SHA / RSA crypto</text>
+    <text x="15" y="106" class="mono" fill="#e6edf3">• Shared RF balun &amp; PCB antenna</text>
+    <text x="15" y="122" class="sub">Coexists with onboard Power Amplifier</text>
+  </g>
+
+  <!-- ================= BOTTOM: PERIPHERAL MATRIX ================= -->
+  <g transform="translate(35, 445)">
+    <rect x="0" y="0" width="850" height="70" class="card" fill="#13171f" stroke="#30363d" />
+    <text x="18" y="22" class="title" fill="#bc8cff">IO &amp; PERIPHERAL MATRIX (34 PHYSICAL GPIOs)</text>
+    
+    <text x="18" y="42" class="mono-sm" fill="#e6edf3">
+      <tspan fill="#58a6ff">18x ADC (12-bit)</tspan>  |  
+      <tspan fill="#3fb950">2x DAC (8-bit)</tspan>  |  
+      <tspan fill="#d29922">3x UART</tspan>  |  
+      <tspan fill="#bc8cff">3x SPI</tspan>  |  
+      <tspan fill="#58a6ff">2x I2C</tspan>  |  
+      <tspan fill="#3fb950">2x I2S</tspan>  |  
+      <tspan fill="#ffd33d">16x LEDC PWM</tspan>  |  
+      <tspan fill="#e6edf3">Motor PWM (MCPWM)</tspan>
+    </text>
+    <text x="18" y="58" class="mono-sm" fill="#8b949e">
+      10x Capacitive Touch  •  8-ch Pulse Counter (PCNT)  •  4x 64-bit Hardware Timers  •  3x Watchdog Timers  •  ULP Coprocessor
+    </text>
+  </g>
+
+</svg>

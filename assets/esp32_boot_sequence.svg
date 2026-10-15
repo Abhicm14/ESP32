@@ -1,0 +1,198 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 540" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; stroke: #30363d; stroke-width: 1.5; rx: 12px; }
+      .card { fill: #161b22; stroke: #30363d; stroke-width: 1.2; rx: 8px; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 16px; font-weight: 700; }
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12.5px; font-weight: 600; fill: #e6edf3; }
+      .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; }
+      .mono-sm { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 10px; }
+      .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #8b949e; }
+      .badge { font-family: ui-monospace, SFMono-Regular, "SF Mono", monospace; font-size: 9.5px; font-weight: 700; }
+
+      /* Animated timeline runner */
+      .track-line { stroke: #21262d; stroke-width: 4; stroke-linecap: round; }
+      .flow-line { stroke: #58a6ff; stroke-width: 4; stroke-linecap: round; stroke-dasharray: 8 8; animation: runner 2s linear infinite; }
+      @keyframes runner { to { stroke-dashoffset: -32; } }
+
+      .boot-marker { fill: #58a6ff; filter: drop-shadow(0 0 6px #58a6ff); }
+      .glow-green { fill: #3fb950; filter: drop-shadow(0 0 6px #3fb950); }
+    </style>
+  </defs>
+
+  <!-- Outer Canvas -->
+  <rect x="10" y="10" width="900" height="520" class="bg" />
+
+  <!-- Title & Subtitle -->
+  <text x="35" y="38" class="header" fill="#58a6ff">⏱️ ESP32 BOOT PROCESS TIMELINE &amp; RESET FLOW</text>
+  <text x="35" y="56" class="sub">From Power-On Reset (0 ms) to ROM Bootloader, Partition Parsing, FreeRTOS Scheduler, and Application Execution</text>
+
+  <!-- Timeline Flow Track -->
+  <line x1="60" y1="85" x2="860" y2="85" class="track-line" />
+  <line x1="60" y1="85" x2="860" y2="85" class="flow-line" />
+
+  <!-- Animated Traveling Particle across the timeline -->
+  <circle r="6" class="boot-marker">
+    <animateMotion path="M 60 85 L 860 85" dur="3.5s" repeatCount="indefinite" />
+  </circle>
+
+  <!-- ================= STAGE 1 ================= -->
+  <g transform="translate(35, 105)">
+    <rect x="0" y="0" width="160" height="280" class="card" stroke="#58a6ff" stroke-width="1.2" />
+    <circle cx="80" cy="-20" r="12" fill="#161b22" stroke="#58a6ff" stroke-width="2" />
+    <text x="76" y="-16" class="badge" fill="#58a6ff">1</text>
+    
+    <text x="12" y="24" class="title" fill="#58a6ff">POWER-ON &amp; RESET</text>
+    <text x="12" y="40" class="badge" fill="#8b949e">0 ms — 1 ms</text>
+    
+    <text x="12" y="65" class="sub">• EN Pin goes HIGH</text>
+    <text x="12" y="82" class="sub">• Internal 3.3V LDO rails</text>
+    <text x="12" y="99" class="sub">  stabilize in ~100 µs</text>
+    
+    <text x="12" y="125" class="mono-sm" fill="#ffd33d">STRAPPING PINS:</text>
+    <text x="12" y="142" class="mono-sm" fill="#e6edf3">• GPIO 0: HIGH (Run)</text>
+    <text x="12" y="157" class="mono-sm" fill="#8b949e">  (LOW = Flash Mode)</text>
+    <text x="12" y="174" class="mono-sm" fill="#e6edf3">• GPIO 2: LOW</text>
+    <text x="12" y="191" class="mono-sm" fill="#e6edf3">• GPIO 12: Flash 3.3V</text>
+    <text x="12" y="206" class="mono-sm" fill="#8b949e">  (Never pull HIGH!)</text>
+    <text x="12" y="223" class="mono-sm" fill="#e6edf3">• GPIO 15: UART quiet</text>
+
+    <text x="12" y="252" class="sub">Hardware registers read</text>
+    <text x="12" y="268" class="sub">eFuses for chip config</text>
+  </g>
+
+  <!-- ================= STAGE 2 ================= -->
+  <g transform="translate(205, 105)">
+    <rect x="0" y="0" width="165" height="280" class="card" stroke="#39c5bb" stroke-width="1.2" />
+    <circle cx="82" cy="-20" r="12" fill="#161b22" stroke="#39c5bb" stroke-width="2" />
+    <text x="78" y="-16" class="badge" fill="#39c5bb">2</text>
+    
+    <text x="12" y="24" class="title" fill="#39c5bb">1st STAGE (ROM)</text>
+    <text x="12" y="40" class="badge" fill="#8b949e">1 ms — 5 ms</text>
+    
+    <text x="12" y="65" class="sub">• Silicon ROM code</text>
+    <text x="12" y="82" class="sub">  (448 KB, factory baked)</text>
+    <text x="12" y="99" class="sub">• Starts Core 0 (PRO_CPU)</text>
+    <text x="12" y="116" class="sub">• Core 1 held in RESET</text>
+    
+    <text x="12" y="142" class="mono-sm" fill="#39c5bb">BOOT MODE CHECK:</text>
+    <text x="12" y="160" class="sub">If GPIO 0 == LOW:</text>
+    <text x="12" y="176" class="mono-sm" fill="#ffd33d">  Enters UART Flasher</text>
+    <text x="12" y="192" class="sub">  waits for esptool.py</text>
+    
+    <text x="12" y="215" class="sub">If GPIO 0 == HIGH:</text>
+    <text x="12" y="231" class="mono-sm" fill="#7ee787">  Mounts SPI Flash</text>
+    <text x="12" y="247" class="sub">  Reads offset 0x1000</text>
+    <text x="12" y="263" class="sub">  Loads 2nd Bootloader</text>
+  </g>
+
+  <!-- ================= STAGE 3 ================= -->
+  <g transform="translate(380, 105)">
+    <rect x="0" y="0" width="165" height="280" class="card" stroke="#d29922" stroke-width="1.2" />
+    <circle cx="82" cy="-20" r="12" fill="#161b22" stroke="#d29922" stroke-width="2" />
+    <text x="78" y="-16" class="badge" fill="#ffd33d">3</text>
+    
+    <text x="12" y="24" class="title" fill="#ffd33d">2nd STAGE BOOT</text>
+    <text x="12" y="40" class="badge" fill="#8b949e">5 ms — 25 ms</text>
+    
+    <text x="12" y="65" class="sub">• Stored at Flash 0x1000</text>
+    <text x="12" y="82" class="sub">• Executes from IRAM</text>
+    <text x="12" y="99" class="sub">• Reads Partition Table</text>
+    <text x="12" y="116" class="mono-sm" fill="#ffd33d">  at Flash 0x8000</text>
+    
+    <text x="12" y="142" class="mono-sm" fill="#ffd33d">OTA SELECTION:</text>
+    <text x="12" y="160" class="sub">Checks otadata partition:</text>
+    <text x="12" y="176" class="mono-sm" fill="#e6edf3">• Boot Factory App, or</text>
+    <text x="12" y="192" class="mono-sm" fill="#7ee787">• Boot ota_0, or</text>
+    <text x="12" y="208" class="mono-sm" fill="#7ee787">• Boot ota_1</text>
+    
+    <text x="12" y="232" class="sub">• Maps code to MMU</text>
+    <text x="12" y="248" class="sub">• Copies IRAM routines</text>
+    <text x="12" y="264" class="sub">• Jumps to app entry</text>
+  </g>
+
+  <!-- ================= STAGE 4 ================= -->
+  <g transform="translate(555, 105)">
+    <rect x="0" y="0" width="165" height="280" class="card" stroke="#bc8cff" stroke-width="1.2" />
+    <circle cx="82" cy="-20" r="12" fill="#161b22" stroke="#bc8cff" stroke-width="2" />
+    <text x="78" y="-16" class="badge" fill="#bc8cff">4</text>
+    
+    <text x="12" y="24" class="title" fill="#bc8cff">ESP-IDF STARTUP</text>
+    <text x="12" y="40" class="badge" fill="#8b949e">25 ms — 80 ms</text>
+    
+    <text x="12" y="65" class="sub">• call_start_cpu0() runs</text>
+    <text x="12" y="82" class="sub">• Clears .bss memory</text>
+    <text x="12" y="99" class="sub">• Inits C runtime &amp; heap</text>
+    <text x="12" y="116" class="sub">• Configures CPU clock</text>
+    <text x="12" y="132" class="mono-sm" fill="#bc8cff">  (80 / 160 / 240 MHz)</text>
+    
+    <text x="12" y="158" class="mono-sm" fill="#bc8cff">RTOS INITIALIZATION:</text>
+    <text x="12" y="176" class="sub">• Inits FreeRTOS kernels</text>
+    <text x="12" y="192" class="sub">• Releases Core 1 RESET</text>
+    <text x="12" y="208" class="sub">• Starts dual-core tick</text>
+    <text x="12" y="224" class="sub">• Inits Serial @ 115200</text>
+    
+    <text x="12" y="250" class="sub">Logs chip revision &amp;</text>
+    <text x="12" y="266" class="sub">reset reason to UART</text>
+  </g>
+
+  <!-- ================= STAGE 5 ================= -->
+  <g transform="translate(730, 105)">
+    <rect x="0" y="0" width="155" height="280" class="card" stroke="#3fb950" stroke-width="1.5" />
+    <circle cx="77" cy="-20" r="12" fill="#161b22" stroke="#3fb950" stroke-width="2" />
+    <text x="73" y="-16" class="badge" fill="#3fb950">5</text>
+    
+    <text x="10" y="24" class="title" fill="#3fb950">YOUR CODE RUNS</text>
+    <text x="10" y="40" class="badge" fill="#7ee787">80 ms — 150 ms</text>
+    
+    <text x="10" y="65" class="sub">Main task spawned on</text>
+    <text x="10" y="82" class="mono-sm" fill="#3fb950">Core 0 or Core 1</text>
+    
+    <text x="10" y="110" class="mono-sm" fill="#79c0ff">ESP-IDF ENTRY:</text>
+    <rect x="8" y="118" width="138" height="34" rx="4" fill="#0d1117" stroke="#30363d" />
+    <text x="14" y="132" class="mono-sm" fill="#7ee787">app_main()</text>
+    <text x="14" y="146" class="sub">FreeRTOS Task Stack</text>
+
+    <text x="10" y="174" class="mono-sm" fill="#79c0ff">ARDUINO ENTRY:</text>
+    <rect x="8" y="182" width="138" height="48" rx="4" fill="#0d1117" stroke="#30363d" />
+    <text x="14" y="196" class="mono-sm" fill="#7ee787">setup()</text>
+    <text x="14" y="210" class="sub">Runs once on Core 1</text>
+    <text x="14" y="224" class="mono-sm" fill="#7ee787">loop()</text>
+
+    <text x="10" y="250" class="sub">Full peripheral matrix</text>
+    <text x="10" y="266" class="sub">ready for operations!</text>
+  </g>
+
+  <!-- ================= BOTTOM: RESET REASONS REFERENCE ================= -->
+  <g transform="translate(35, 400)">
+    <rect x="0" y="0" width="850" height="110" class="card" fill="#13171f" stroke="#30363d" />
+    <text x="18" y="22" class="title" fill="#58a6ff">COMMON BOOT CODES &amp; RESET REASONS (esp_reset_reason_t)</text>
+    
+    <!-- Column 1 -->
+    <text x="18" y="44" class="mono-sm" fill="#3fb950">ESP_RST_POWERON (0x01):</text>
+    <text x="180" y="44" class="sub">Normal cold power plug-in or EN pin release.</text>
+    
+    <text x="18" y="62" class="mono-sm" fill="#58a6ff">ESP_RST_SW (0x03):</text>
+    <text x="180" y="62" class="sub">Software reset invoked via esp_restart().</text>
+
+    <text x="18" y="80" class="mono-sm" fill="#bc8cff">ESP_RST_DEEPSLEEP (0x05):</text>
+    <text x="180" y="80" class="sub">Wakeup from deep sleep (timer, touch pin, or external ext0/ext1 GPIO).</text>
+
+    <text x="18" y="98" class="mono-sm" fill="#f85149">ESP_RST_PANIC (0x04):</text>
+    <text x="180" y="98" class="sub">Software exception / Guru Meditation Error / null pointer dereference.</text>
+
+    <!-- Column 2 -->
+    <text x="510" y="44" class="mono-sm" fill="#ffd33d">ESP_RST_TASK_WDT (0x07):</text>
+    <text x="680" y="44" class="sub">Task watchdog starved (infinite loop).</text>
+
+    <text x="510" y="62" class="mono-sm" fill="#f85149">ESP_RST_BROWNOUT (0x0F):</text>
+    <text x="680" y="62" class="sub">Supply voltage dipped below 2.43V!</text>
+
+    <text x="510" y="80" class="mono-sm" fill="#8b949e">BOOTLOADER BAUD RATE:</text>
+    <text x="680" y="80" class="mono-sm" fill="#79c0ff">115200 baud (Standard Serial)</text>
+
+    <text x="510" y="98" class="mono-sm" fill="#8b949e">ROM INITIAL BAUD:</text>
+    <text x="680" y="98" class="mono-sm" fill="#8b949e">74880 baud (Crystal 40MHz default)</text>
+  </g>
+
+</svg>

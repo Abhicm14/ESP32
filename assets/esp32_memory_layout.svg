@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 530" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; stroke: #30363d; stroke-width: 1.5; rx: 12px; }
+      .card { fill: #161b22; stroke: #30363d; stroke-width: 1.2; rx: 8px; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 16px; font-weight: 700; }
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; font-weight: 600; fill: #e6edf3; }
+      .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; }
+      .mono-sm { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 10px; }
+      .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #8b949e; }
+      .badge { font-family: ui-monospace, SFMono-Regular, "SF Mono", monospace; font-size: 10px; font-weight: 700; }
+
+      /* Animation for bus read pulses */
+      .read-pulse-cyan { stroke: #39c5bb; stroke-width: 2; stroke-dasharray: 6 4; animation: stream 1.5s linear infinite; }
+      .read-pulse-blue { stroke: #58a6ff; stroke-width: 2; stroke-dasharray: 6 4; animation: stream 1.8s linear infinite; }
+      .read-pulse-amber { stroke: #d29922; stroke-width: 2; stroke-dasharray: 6 4; animation: stream 2.2s linear infinite; }
+      .read-pulse-purple { stroke: #bc8cff; stroke-width: 2; stroke-dasharray: 6 4; animation: stream 2.5s linear infinite; }
+
+      @keyframes stream { to { stroke-dashoffset: -20; } }
+
+      .glow-pulse { animation: pulse-opacity 2.5s ease-in-out infinite alternate; }
+      @keyframes pulse-opacity { from { opacity: 0.6; } to { opacity: 1.0; } }
+    </style>
+  </defs>
+
+  <!-- Canvas Outer Background -->
+  <rect x="10" y="10" width="900" height="510" class="bg" />
+
+  <!-- Main Title & Subtitle -->
+  <text x="35" y="40" class="header" fill="#58a6ff">🧠 ESP32 MEMORY ARCHITECTURE &amp; THE 4 REGIONS</text>
+  <text x="35" y="58" class="sub">IRAM (Instructions) • DRAM (Variables &amp; Heap) • External Flash (Storage) • RTC SRAM (Deep Sleep Data)</text>
+
+  <!-- ================= TIER 1: IRAM ================= -->
+  <g transform="translate(35, 75)">
+    <rect x="0" y="0" width="415" height="198" class="card" stroke="#39c5bb" stroke-width="1.5" />
+    
+    <!-- Badge & Title -->
+    <rect x="15" y="14" width="80" height="20" rx="4" fill="#1b3838" />
+    <text x="22" y="28" class="badge" fill="#39c5bb">IRAM ~128 KB</text>
+    <text x="105" y="28" class="title" fill="#39c5bb">Instruction RAM (On-Chip)</text>
+    
+    <text x="15" y="52" class="sub">⚡ Speed: <tspan fill="#e6edf3" font-weight="600">Zero wait-states (1 CPU cycle @ 240 MHz)</tspan></text>
+    <text x="15" y="68" class="sub">📐 Access: <tspan fill="#e6edf3">32-bit word aligned only</tspan> (unaligned reads cause crash)</text>
+    
+    <!-- Code Box -->
+    <rect x="15" y="78" width="385" height="54" rx="4" fill="#0d1117" stroke="#30363d" />
+    <text x="25" y="96" class="mono-sm" fill="#79c0ff">void IRAM_ATTR my_gpio_isr(void* arg) {</text>
+    <text x="35" y="112" class="mono-sm" fill="#8b949e">  // In IRAM: Zero cache-miss execution during Flash erase</text>
+    <text x="25" y="126" class="mono-sm" fill="#79c0ff">}</text>
+
+    <text x="15" y="148" class="sub">🎯 <tspan fill="#e6edf3" font-weight="600">Primary Purpose:</tspan> Critical Interrupt Service Routines (ISRs).</text>
+    <text x="15" y="164" class="sub">⚠️ When Flash is being written/erased, Flash Cache stalls. Code</text>
+    <text x="15" y="180" class="sub">marked with <tspan fill="#39c5bb" font-family="monospace">IRAM_ATTR</tspan> continues executing uninterrupted!</text>
+  </g>
+
+  <!-- ================= TIER 2: DRAM ================= -->
+  <g transform="translate(470, 75)">
+    <rect x="0" y="0" width="425" height="198" class="card" stroke="#58a6ff" stroke-width="1.5" />
+    
+    <!-- Badge & Title -->
+    <rect x="15" y="14" width="80" height="20" rx="4" fill="#162c46" />
+    <text x="22" y="28" class="badge" fill="#58a6ff">DRAM ~320 KB</text>
+    <text x="105" y="28" class="title" fill="#58a6ff">Data RAM (On-Chip)</text>
+    
+    <text x="15" y="52" class="sub">⚡ Speed: <tspan fill="#e6edf3" font-weight="600">Single CPU cycle (240 MHz)</tspan></text>
+    <text x="15" y="68" class="sub">📐 Access: <tspan fill="#e6edf3">Byte, 16-bit, 32-bit accessible</tspan> (standard C pointers)</text>
+    
+    <!-- Code Box -->
+    <rect x="15" y="78" width="395" height="54" rx="4" fill="#0d1117" stroke="#30363d" />
+    <text x="25" y="96" class="mono-sm" fill="#79c0ff">int sensor_val = 1024; // Static &amp; global data (.data/.bss)</text>
+    <text x="25" y="114" class="mono-sm" fill="#7ee787">char* buf = (char*) malloc(512); // FreeRTOS Task Heap</text>
+
+    <text x="15" y="148" class="sub">🎯 <tspan fill="#e6edf3" font-weight="600">Primary Purpose:</tspan> Variables, buffers, stacks &amp; heap allocations.</text>
+    <text x="15" y="164" class="sub">• Shared between Core 0 and Core 1 by the crossbar switch.</text>
+    <text x="15" y="180" class="sub">• Inspect free memory anytime with <tspan fill="#58a6ff" font-family="monospace">esp_get_free_heap_size()</tspan>.</text>
+  </g>
+
+  <!-- ================= TIER 3: EXTERNAL SPI FLASH ================= -->
+  <g transform="translate(35, 285)">
+    <rect x="0" y="0" width="415" height="198" class="card" stroke="#d29922" stroke-width="1.5" />
+    
+    <!-- Badge & Title -->
+    <rect x="15" y="14" width="90" height="20" rx="4" fill="#3b2b11" />
+    <text x="22" y="28" class="badge" fill="#ffd33d">FLASH 4 - 16 MB</text>
+    <text x="115" y="28" class="title" fill="#ffd33d">SPI Flash Memory (Off-Chip)</text>
+    
+    <text x="15" y="52" class="sub">⚡ Speed: <tspan fill="#e6edf3">40/80 MHz Quad SPI</tspan> (via 64 KB MMU cache window)</text>
+    <text x="15" y="68" class="sub">💾 Persistence: <tspan fill="#7ee787" font-weight="600">Non-Volatile</tspan> (retains code when power is disconnected)</text>
+    
+    <!-- Code Box -->
+    <rect x="15" y="78" width="385" height="54" rx="4" fill="#0d1117" stroke="#30363d" />
+    <text x="25" y="96" class="mono-sm" fill="#e6edf3">const char HTML_PAGE[] PROGMEM = "&lt;html&gt;...&lt;/html&gt;";</text>
+    <text x="25" y="114" class="mono-sm" fill="#8b949e">// Stored in Flash .rodata section, saving precious RAM!</text>
+
+    <text x="15" y="148" class="sub">🎯 <tspan fill="#e6edf3" font-weight="600">Primary Purpose:</tspan> Application code (.text), read-only strings (.rodata),</text>
+    <text x="15" y="164" class="sub">partition table, NVS keys (Wi-Fi passwords), and SPIFFS/LittleFS.</text>
+    <text x="15" y="180" class="sub">⚠️ Connected on GPIO 6–11; never use these pins for sensors!</text>
+  </g>
+
+  <!-- ================= TIER 4: RTC SRAM ================= -->
+  <g transform="translate(470, 285)">
+    <rect x="0" y="0" width="425" height="198" class="card" stroke="#bc8cff" stroke-width="1.5" />
+    
+    <!-- Badge & Title -->
+    <rect x="15" y="14" width="80" height="20" rx="4" fill="#301c4d" />
+    <text x="22" y="28" class="badge" fill="#bc8cff">RTC 16 KB</text>
+    <text x="105" y="28" class="title" fill="#bc8cff">RTC Fast &amp; Slow SRAM (Low-Power)</text>
+    
+    <text x="15" y="52" class="sub">⚡ Speed: <tspan fill="#e6edf3">Runs in RTC Clock Domain (~8 MHz / 150 kHz)</tspan></text>
+    <text x="15" y="68" class="sub">🔋 Deep Sleep: <tspan fill="#7ee787" font-weight="600">RETAINS DATA</tspan> while CPU cores draw only ~5 µA!</text>
+    
+    <!-- Code Box -->
+    <rect x="15" y="78" width="395" height="54" rx="4" fill="#0d1117" stroke="#30363d" />
+    <text x="25" y="96" class="mono-sm" fill="#ffd33d">RTC_DATA_ATTR int boot_count = 0; // Preserved across sleep!</text>
+    <text x="25" y="114" class="mono-sm" fill="#8b949e">esp_sleep_enable_timer_wakeup(10 * 1000000); // 10s Deep Sleep</text>
+
+    <text x="15" y="148" class="sub">🎯 <tspan fill="#e6edf3" font-weight="600">Primary Purpose:</tspan> Sensor logging across deep-sleep wake cycles.</text>
+    <text x="15" y="164" class="sub">• RTC Fast (8 KB): Executed by ULP coprocessor or boot CPU.</text>
+    <text x="15" y="180" class="sub">• RTC Slow (8 KB): Retains <tspan fill="#bc8cff" font-family="monospace">RTC_DATA_ATTR</tspan> variables between resets.</text>
+  </g>
+
+  <!-- Bottom Summary Strip -->
+  <g transform="translate(35, 492)">
+    <text x="0" y="15" class="mono-sm" fill="#8b949e">SUMMARY:</text>
+    <text x="75" y="15" class="mono-sm" fill="#39c5bb">IRAM (Fast ISRs)</text>
+    <text x="195" y="15" class="mono-sm" fill="#58a6ff">• DRAM (Heap &amp; Variables)</text>
+    <text x="365" y="15" class="mono-sm" fill="#ffd33d">• Flash (4MB Storage &amp; Code)</text>
+    <text x="560" y="15" class="mono-sm" fill="#bc8cff">• RTC (Deep Sleep Surviving State)</text>
+  </g>
+
+</svg>
