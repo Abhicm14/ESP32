@@ -15,6 +15,10 @@ This phase covers the core technical competencies of **Phase 14: Bluetooth Class
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **169–173** | Bluetooth Classic | Serial Port Profile (SPP), A2DP audio sink, HID keyboard/mouse emulation | — |
+| [ ] | **174–180** | BLE Core Architecture | GAP/GATT architectures, custom 128-bit UUID services, notifications, pairing security | — |
+| [ ] | **181–183** | Advanced BLE & NimBLE | Apple iBeacons, BLE HID devices, NimBLE memory-optimized stack configuration | — |
+| [ ] | **184–186** | Phase Project | BLE Health Sensor Hub: Real-time encrypted GATT telemetry server | — |
 
 ---
 

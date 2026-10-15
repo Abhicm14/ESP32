@@ -15,6 +15,14 @@ This phase covers the core technical competencies of **Phase 1: Architecture & F
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **1** | System Architecture | Dual-core Xtensa LX6 internals, memory bus architecture, peripheral interconnects | — |
+| [ ] | **2** | Environment Setup | Toolchain installation: ESP-IDF, VS Code integration, Arduino IDE environment | — |
+| [ ] | **3** | First Build & Flash | Toolchain compilation, serial flashing, bootloader inspection, monitor logs | — |
+| [ ] | **4** | Memory Organization | Memory map analysis: IRAM, DRAM, D/IRAM, RTC Fast & Slow memory regions | — |
+| [ ] | **5** | Partition Tables | Custom CSV partition tables, factory vs OTA dual-bank memory allocation | — |
+| [ ] | **6** | Build System Mastery | CMakeLists configuration, Kconfig menu options, modular component design | — |
+| [ ] | **7** | Logging Framework | `ESP_LOG` verbosity levels, runtime filtering, custom UART telemetry sinks | — |
+| [ ] | **8** | Phase Project | System Info Reporter: Firmware inspecting chip silicon revisions, MAC, and heap maps | — |
 
 ---
 

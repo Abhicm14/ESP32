@@ -15,6 +15,11 @@ This phase covers the core technical competencies of **Phase 10: Advanced Periph
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **111–114** | I2S Audio Subsystem | Digital MEMS microphone sampling (INMP441), audio DAC streaming (MAX98357A) | — |
+| [ ] | **115** | 1-Wire Devices | DS18B20 microsecond timing sequences, multi-drop sensor enumerations | — |
+| [ ] | **116–118** | CAN / TWAI Bus | ISO 11898-2 transceivers, bit timing, frame filtering, automotive CAN packets | — |
+| [ ] | **119–122** | RMT Peripheral | Infrared NEC pulse encoders, WS2812 addressable NeoPixel timing drivers | — |
+| [ ] | **123–124** | Phase Project | Smart Infrared & Optical Hub: Universal IR cloner and RGB notification engine | — |
 
 ---
 

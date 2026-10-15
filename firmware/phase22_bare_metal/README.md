@@ -15,6 +15,9 @@ This phase covers the core technical competencies of **Phase 22: Register-Level 
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **269–285** | Bare-Metal Drivers | Bypassing HALs to write direct register drivers for GPIO, Hardware Timers, UART, I2C, SPI | — |
+| [ ] | **286–295** | Network Bare-Metal | Custom HTTP, WebSockets, and MQTT packet generators constructed over raw BSD sockets | — |
+| [ ] | **296–300** | Phase Project | Custom-Built IoT Stack: Complete application built entirely without vendor HAL abstractions | — |
 
 ---
 

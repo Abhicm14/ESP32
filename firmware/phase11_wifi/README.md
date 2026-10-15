@@ -15,6 +15,11 @@ This phase covers the core technical competencies of **Phase 11: Wi-Fi Networkin
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **125–128** | Connectivity Core | 802.11 MAC/PHY, Station mode, event handling, reconnect state machines | — |
+| [ ] | **129–132** | Access Point & Mesh | SoftAP mode, AP+STA concurrent bridge, credentials storage in NVS | — |
+| [ ] | **133–136** | Provisioning & Services | Captive portals, mDNS, SNTP real-time clock synchronization | — |
+| [ ] | **137–140** | Socket Programming | Raw TCP/UDP socket servers, peer-to-peer connectionless ESP-NOW protocol | — |
+| [ ] | **141–142** | Phase Project | Wi-Fi Manager Framework: Captive portal configuration with automatic failover | — |
 
 ---
 

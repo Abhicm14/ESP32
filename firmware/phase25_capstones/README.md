@@ -15,6 +15,10 @@ This phase covers the core technical competencies of **Phase 25: Industrial Caps
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **Capstone** | 1. Industrial Modbus Gateway | RS-485 Modbus RTU interface transmitting encrypted telemetry to AWS IoT over MQTTS with captive-portal fallback | — |
+| [ ] | **Capstone** | 2. Smart Touch Panel Controller | LVGL interactive touch interface linked to Home Assistant via encrypted WebSockets | — |
+| [ ] | **Capstone** | 3. Distributed Mesh-LoRa Node | Multi-node ESP-NOW mesh cluster forwarding field telemetry via long-range LoRa SX1278 uplink | — |
+| [ ] | **Capstone** | 4. Commercial Secure Product Node | Fully hardened production device featuring Secure Boot V2, Flash Encryption, CI/CD automated test builds, and runtime field crash telemetry | — |
 
 ---
 

@@ -15,6 +15,9 @@ This phase covers the core technical competencies of **Phase 16: Cloud Platform 
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **207–211** | Cloud Enterprise | AWS IoT Core device shadows & X.509 certs, Firebase Realtime Database, Azure IoT Hub | — |
+| [ ] | **212–215** | Analytics Platforms | ThingsBoard dashboards, InfluxDB time-series logging, Grafana visualization | — |
+| [ ] | **216–220** | Phase Project | Multi-Cloud IoT Agent: Concurrent AWS IoT and InfluxDB telemetry transmitter | — |
 
 ---
 

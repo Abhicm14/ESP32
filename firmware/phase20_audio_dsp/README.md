@@ -15,6 +15,9 @@ This phase covers the core technical competencies of **Phase 20: Audio Processin
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **249–252** | Digital Audio | ES8388 codec drivers, MP3 software decoding, web radio streaming | — |
+| [ ] | **253–256** | ESP-DSP Engine | Xtensa assembly-optimized vector routines, FIR/IIR digital filters, FFT spectrums | — |
+| [ ] | **257–258** | Phase Project | Smart Audio Equalizer: Real-time FFT audio visualizer with Bluetooth A2DP audio | — |
 
 ---
 

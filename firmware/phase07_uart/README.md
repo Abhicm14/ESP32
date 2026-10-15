@@ -15,6 +15,10 @@ This phase covers the core technical competencies of **Phase 7: UART Serial Prot
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **83–84** | Protocol Setup | Baud rates, parity, framing, pin matrix remapping, ESP-IDF UART drivers | — |
+| [ ] | **85–86** | Asynchronous Parsing | Event-driven ring buffers, frame delimiter state machines, checksum verification | — |
+| [ ] | **87–88** | Industrial Protocols | NMEA GPS parsing, half-duplex RS-485 transceiver auto-direction, Modbus RTU | — |
+| [ ] | **89–90** | Phase Project | GPS Logging Node: Custom NMEA sentence parser and RS-485 telemetry bridge | — |
 
 ---
 

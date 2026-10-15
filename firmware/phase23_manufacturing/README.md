@@ -15,6 +15,8 @@ This phase covers the core technical competencies of **Phase 23: Hardware Design
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **301–304** | PCB & Manufacturing | KiCad schematic design, 2.4 GHz PCB antenna keep-out rules, mass flashing setups | — |
+| [ ] | **305–308** | Industrial Deployment | Self-test firmware suites, factory provisioning key workflows, ESP-Insights diagnostics | — |
 
 ---
 

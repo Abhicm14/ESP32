@@ -15,6 +15,16 @@ This phase covers the core technical competencies of **Phase 2: Digital I/O Oper
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **9** | GPIO Output Drive | Internal push-pull driver circuitry, drive strength modes, sink/source limits | — |
+| [ ] | **10** | GPIO Input Circuitry | Internal pull-up/pull-down configuration, input-only GPI pins (34–39) | — |
+| [ ] | **11** | High-Level GPIO API | Arduino-style abstraction implementation and timing overhead analysis | — |
+| [ ] | **12** | ESP-IDF Low-Level Driver | `gpio_config_t` structures, bitmasks, and direct register manipulation | — |
+| [ ] | **13** | Debouncing Logic | State machines, time-threshold noise filtering, mechanical bounce rejection | — |
+| [ ] | **14** | Non-blocking Timing | Asynchronous timing patterns using tick counters and non-blocking loops | — |
+| [ ] | **15** | Relays & Transducers | Driving inductive relay coils via transistors, active vs passive buzzer control | — |
+| [ ] | **16** | Output Shift Registers | Expanding output pins using 74HC595 over high-speed bit-banged SPI | — |
+| [ ] | **17** | Capacitive Touch | Touch pad threshold configuration and calibration (Pins T0–T9) | — |
+| [ ] | **18** | Phase Project | Touch-Controlled Relay System: Multi-channel isolated AC load controller with feedback | — |
 
 ---
 

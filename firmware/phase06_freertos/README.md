@@ -15,6 +15,16 @@ This phase covers the core technical competencies of **Phase 6: FreeRTOS Core & 
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **47–50** | Task Management | Task creation, SMP dual-core affinity (`xTaskCreatePinnedToCore`), context switches | — |
+| [ ] | **51–54** | Task Lifecycle | Priorities, preemptive time-slicing, stack sizing, water-mark tracking (`uxTaskGetStackHighWaterMark`) | — |
+| [ ] | **55–57** | Queue Processing | Thread-safe pass-by-value, structured data queues, queue sets | — |
+| [ ] | **58–62** | Synchronization | Binary/counting semaphores, recursive mutexes, priority inversion solutions | — |
+| [ ] | **63–66** | Advanced IPC | Event groups, direct-to-task notifications (lightweight IPC), stream buffers | — |
+| [ ] | **67–69** | Timers & Critical Sections | FreeRTOS software timers, port spinlocks, task critical enter/exit guards | — |
+| [ ] | **70–72** | Memory & Diagnostics | Heap capabilities (`MALLOC_CAP_8BIT`), memory leak audits, `vTaskList` telemetry | — |
+| [ ] | **73–77** | Architecture Patterns | Producer-consumer pipelines, Finite State Machines (FSM), command worker pools | — |
+| [ ] | **78–81** | ESP32 RTOS Extensions | System Event Loop (`esp_event`), inter-core messaging (IPC API) | — |
+| [ ] | **82** | Phase Project | Multi-Stage Sensor Pipeline: 5-Task FreeRTOS telemetry processing engine | — |
 
 ---
 

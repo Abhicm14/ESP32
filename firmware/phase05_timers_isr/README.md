@@ -15,6 +15,15 @@ This phase covers the core technical competencies of **Phase 5: Timers & Hardwar
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **37** | Hardware Timers | Prescalers, 64-bit counter groups, up/down counting, auto-reload mechanics | — |
+| [ ] | **38** | Periodic Scheduling | High-precision periodic ISR execution via hardware timer alarms | — |
+| [ ] | **39** | High-Resolution Timers | Microsecond-accurate software execution schedules via `esp_timer` APIs | — |
+| [ ] | **40** | Watchdog Systems | Task Watchdog Timer (TWDT) and Interrupt Watchdog (IWDT) stall prevention | — |
+| [ ] | **41** | Pulse Counter (PCNT) | Hardware edge accumulation, glitch filters, 8-channel counter modules | — |
+| [ ] | **42** | Quadrature Decoding | Dual-channel quadrature pulse decoding via PCNT for optical rotary encoders | — |
+| [ ] | **43** | ISR Best Practices | Reducing interrupt latency, IRAM allocation, deferring work to tasks | — |
+| [ ] | **44–45** | ISR Synchronization | Signalling tasks from ISRs using FreeRTOS Semaphores and Queues from ISR | — |
+| [ ] | **46** | Phase Project | Tachometer & Precision Frequency Meter: Zero-overhead high-speed frequency analyzer | — |
 
 ---
 

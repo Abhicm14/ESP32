@@ -15,6 +15,10 @@ This phase covers the core technical competencies of **Phase 24: Board-Specific 
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **24A: Days 309–316** | ESP32-CAM (~$5) | OV2640 camera initialization, frame-buffer capture, MJPEG HTTP video streaming | — |
+| [ ] | **24B: Days 317–328** | ESP32-S3 DevKit (~$9) | Native USB OTG (CDC serial, HID keyboards, MSC flash storage), BLE 5.0, ESP-SR speech | — |
+| [ ] | **24C: Days 329–336** | ESP32-C6 DevKit (~$7) | IEEE 802.15.4 MAC layer, Zigbee 3.0 clusters, OpenThread border routers, Matter | — |
+| [ ] | **24D: Days 337–342** | Edge AI Applications | Edge Impulse models, gesture recognition, acoustic anomaly vibration classification | — |
 
 ---
 

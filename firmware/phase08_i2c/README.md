@@ -15,6 +15,9 @@ This phase covers the core technical competencies of **Phase 8: I2C Bus Infrastr
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **91–93** | Bus Dynamics & Drivers | Clock stretching, pull-up sizing, master driver configuration, SSD1306 displays | — |
+| [ ] | **94–97** | Sensor Integration | BME280 (Climate), MPU6050 (IMU raw registers), DS3231 (RTC), AT24C256 (EEPROM) | — |
+| [ ] | **98–100** | Phase Project | Environment Monitor: Multi-device driver running concurrently across dual I2C buses | — |
 
 ---
 

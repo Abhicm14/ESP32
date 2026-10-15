@@ -15,6 +15,9 @@ This phase covers the core technical competencies of **Phase 18: Power Architect
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **231–234** | Sleep Modes | Power profiling, Modem-sleep, Light-sleep, Deep-sleep timer/touch/ext0 wake sources | — |
+| [ ] | **235–237** | ULP Co-Processing | RTC slow memory retention, Ultra-Low Power (ULP) FSM assembly routines | — |
+| [ ] | **238** | Phase Project | Ultra-Low Power Sensor Node: Multi-year battery sensor waking only on threshold events | — |
 
 ---
 

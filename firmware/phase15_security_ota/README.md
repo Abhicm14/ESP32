@@ -15,6 +15,10 @@ This phase covers the core technical competencies of **Phase 15: Storage, Securi
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **187–190** | Non-Volatile Storage | Wear leveling, encrypted NVS key-value partitions, LittleFS file systems | — |
+| [ ] | **191–195** | OTA Engineering | Dual-partition switching, rollback validation, signed binary verification | — |
+| [ ] | **196–202** | Hardened Security | Secure Boot V2, Flash Encryption, AES/SHA hardware engines, eFuse burning | — |
+| [ ] | **203–206** | Phase Project | Production Security Device: Tamper-resistant node with Secure Boot and signed OTA | — |
 
 ---
 

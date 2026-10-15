@@ -15,6 +15,9 @@ This phase covers the core technical competencies of **Phase 17: Displays & Grap
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **221–223** | Framebuffers & Touch | TFT_eSPI sprites, double-buffering, XPT2046 resistive touch SPI drivers | — |
+| [ ] | **224–228** | LVGL Graphics Engine | Screens, animated widgets, memory buffers, custom input device driver binding | — |
+| [ ] | **229–230** | Phase Project | Touch Smart Panel: Interactive multi-screen LVGL environmental dashboard | — |
 
 ---
 

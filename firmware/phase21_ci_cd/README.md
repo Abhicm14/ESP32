@@ -15,6 +15,8 @@ This phase covers the core technical competencies of **Phase 21: Testing, Diagno
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **259–263** | Advanced Diagnostics | JTAG via ESP-PROG, GDB hardware breakpoints, post-mortem core dump ELF analysis | — |
+| [ ] | **264–268** | Automated Testing & CI | Unity framework unit testing, automated build & test pipelines via GitHub Actions | — |
 
 ---
 

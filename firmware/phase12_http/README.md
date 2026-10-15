@@ -15,6 +15,9 @@ This phase covers the core technical competencies of **Phase 12: HTTP Applicatio
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **143–146** | HTTP Infrastructure | URI routers, REST APIs, serving gzip-compressed web assets from LittleFS | — |
+| [ ] | **147–151** | Data Streaming | cJSON serialization, real-time WebSockets, Server-Sent Events (SSE) | — |
+| [ ] | **152–156** | Phase Project | Real-Time Web Dashboard: WebSocket control panel with HTTP basic authentication | — |
 
 ---
 

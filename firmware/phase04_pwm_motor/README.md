@@ -15,6 +15,16 @@ This phase covers the core technical competencies of **Phase 4: PWM & Motion Con
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **27** | LEDC PWM Architecture | Channel routing, high-speed/low-speed timers, bit-resolution trade-offs | — |
+| [ ] | **28** | LED Dimming & Effects | Duty-cycle curves, logarithmic dimming, human eye gamma correction tables | — |
+| [ ] | **29** | RGB Color Mixing | HSV-to-RGB conversion routines and smooth color-space transitions | — |
+| [ ] | **30** | Servo Control | 50 Hz PWM timing, microsecond pulse-width angle mapping ($500\,\mu\text{s} \dots 2500\,\mu\text{s}$) | — |
+| [ ] | **31** | DC Motor H-Bridge | L298N/DRV8833 directional control logic and variable speed PWM regulation | — |
+| [ ] | **32** | Stepper Motor Drivers | A4988 step/dir control, acceleration/deceleration trapezoidal ramp profiles | — |
+| [ ] | **33** | Motor PWM (MCPWM) | Dedicated motor unit, complementary outputs, dead-band time insertion | — |
+| [ ] | **34** | PID Control Theory | Discrete PID algorithms, error calculations, proportional/integral/derivative tuning | — |
+| [ ] | **35** | Closed-Loop Motor Control | Quadrature optical encoder feedback handling with dynamic PID throttle tuning | — |
+| [ ] | **36** | Phase Project | Closed-Loop Speed Controller: Precision motor governor with PID velocity hold | — |
 
 ---
 

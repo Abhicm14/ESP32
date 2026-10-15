@@ -15,6 +15,9 @@ This phase covers the core technical competencies of **Phase 13: MQTT & Industri
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **157–161** | MQTT Standard | Pub/Sub architecture, QoS 0/1/2, Last Will and Testament (LWT), TLS encryption | — |
+| [ ] | **162–164** | Ecosystem Integration | Node-RED workflows, Home Assistant MQTT auto-discovery conventions | — |
+| [ ] | **165–168** | Phase Project | 3-Node IoT Network: Multi-node ESP-NOW sensor array routing to an MQTT cloud gateway | — |
 
 ---
 

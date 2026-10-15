@@ -15,6 +15,10 @@ This phase covers the core technical competencies of **Phase 9: SPI Protocol & H
 
 | Status | Day(s) | Topic | Engineering Implementation Focus | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
+| [ ] | **101–103** | Bus Drivers | Transaction configurations, SPI master modes (0–3), ILI9341 TFT display | — |
+| [ ] | **104–106** | Storage & Wireless | MicroSD card (SPI vs SDMMC 4-bit), LoRa SX1278 transceiver SPI setup | — |
+| [ ] | **107–109** | Advanced SPI & DMA | W25Q external NOR flash instructions, DMA buffer allocation and transfers | — |
+| [ ] | **110** | Phase Project | Data Acquisition Hub: High-speed DMA sensor logger saving data to SD Card | — |
 
 ---
 
