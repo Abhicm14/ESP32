@@ -1,167 +1,323 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 480" width="100%" height="100%">
   <defs>
     <style>
       .bg { fill: #0d1117; stroke: #30363d; stroke-width: 1.5; rx: 12px; }
       .header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 18px; font-weight: 700; fill: #58a6ff; }
       .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; fill: #8b949e; }
       .bb-body { fill: #161b22; stroke: #484f58; stroke-width: 2; rx: 10px; }
-      .rail-red { stroke: #f85149; stroke-width: 2; stroke-dasharray: 4 2; }
-      .rail-blue { stroke: #58a6ff; stroke-width: 2; stroke-dasharray: 4 2; }
       .hole { fill: #0d1117; stroke: #30363d; stroke-width: 1; rx: 2px; }
       .hole-active { fill: #238636; stroke: #3fb950; stroke-width: 1.5; rx: 2px; }
       .trough { fill: #090d12; stroke: #21262d; stroke-width: 1; }
-      .label-col { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 11px; fill: #8b949e; text-anchor: middle; }
-      .label-row { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 10px; fill: #8b949e; }
+      .label-col { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 10px; fill: #8b949e; text-anchor: middle; }
+      .label-row { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 11px; font-weight: bold; fill: #58a6ff; text-anchor: middle; }
       .clip-metal { fill: rgba(63, 185, 80, 0.15); stroke: #3fb950; stroke-width: 1.5; stroke-dasharray: 4 2; rx: 4px; }
       .clip-rail-red { fill: rgba(248, 81, 73, 0.15); stroke: #f85149; stroke-width: 1.5; rx: 4px; }
       .clip-rail-blue { fill: rgba(88, 166, 255, 0.15); stroke: #58a6ff; stroke-width: 1.5; rx: 4px; }
-      .card { fill: #1c2128; stroke: #30363d; stroke-width: 1.2; rx: 8px; }
+      .card { fill: #161b22; stroke: #30363d; stroke-width: 1.2; rx: 8px; }
       
       @keyframes flow-h {
         0% { stroke-dashoffset: 0; }
         100% { stroke-dashoffset: -24; }
       }
-      .anim-flow-h {
-        animation: flow-h 1.2s linear infinite;
-      }
+      .anim-flow-h { animation: flow-h 1.2s linear infinite; }
+      
       @keyframes pulse-clip {
         0%, 100% { opacity: 0.4; }
-        50% { opacity: 0.9; }
+        50% { opacity: 0.95; }
       }
       .anim-pulse { animation: pulse-clip 2s ease-in-out infinite; }
     </style>
   </defs>
 
   <!-- Background Canvas -->
-  <rect x="15" y="15" width="890" height="430" class="bg" />
+  <rect x="15" y="15" width="910" height="450" class="bg" />
   <text x="35" y="44" class="header">🔌 BREADBOARD ARCHITECTURE &amp; INTERNAL CONNECTIONS</text>
-  <text x="35" y="63" class="sub">Underneath the plastic holes are spring-loaded metal clips connecting rows vertically and power rails horizontally</text>
+  <text x="35" y="63" class="sub">Standard orientation: Power rails run horizontally on top &amp; bottom; 5-hole terminal clips run vertically (A–E, F–J)</text>
 
   <!-- Left Side: Interactive Breadboard Slice Graphic -->
-  <g transform="translate(35, 85)">
+  <g transform="translate(35, 80)">
     <!-- Main Breadboard Body -->
-    <rect x="0" y="0" width="520" height="340" class="bb-body" />
+    <rect x="0" y="0" width="530" height="375" class="bb-body" />
 
-    <!-- TOP POWER RAILS -->
+    <!-- TOP POWER RAILS (HORIZONTAL) -->
     <!-- Positive Rail (+) -->
-    <rect x="15" y="12" width="490" height="18" class="clip-rail-red" />
-    <line x1="20" y1="21" x2="500" y2="21" stroke="#f85149" stroke-width="2.5" stroke-dasharray="6 3" class="anim-flow-h"/>
-    <text x="6" y="25" font-family="sans-serif" font-size="14" fill="#f85149" font-weight="bold">+</text>
-    <!-- Negative Rail (-) -->
-    <rect x="15" y="34" width="490" height="18" class="clip-rail-blue" />
-    <line x1="20" y1="43" x2="500" y2="43" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="6 3" class="anim-flow-h"/>
-    <text x="7" y="47" font-family="sans-serif" font-size="14" fill="#58a6ff" font-weight="bold">−</text>
+    <rect x="25" y="12" width="480" height="15" class="clip-rail-red" />
+    <line x1="30" y1="19" x2="495" y2="19" stroke="#f85149" stroke-width="2.5" stroke-dasharray="6 3" class="anim-flow-h"/>
+    <text x="14" y="24" font-family="sans-serif" font-size="14" fill="#f85149" font-weight="bold">+</text>
+    <text x="515" y="24" font-family="sans-serif" font-size="14" fill="#f85149" font-weight="bold">+</text>
 
-    <!-- Column Letters Top: A B C D E -->
-    <text x="90" y="66" class="label-col">A</text>
-    <text x="120" y="66" class="label-col">B</text>
-    <text x="150" y="66" class="label-col">C</text>
-    <text x="180" y="66" class="label-col">D</text>
-    <text x="210" y="66" class="label-col">E</text>
+    <!-- Negative Rail (−) -->
+    <rect x="25" y="30" width="480" height="15" class="clip-rail-blue" />
+    <line x1="30" y1="37" x2="495" y2="37" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="6 3" class="anim-flow-h"/>
+    <text x="15" y="42" font-family="sans-serif" font-size="14" fill="#58a6ff" font-weight="bold">−</text>
+    <text x="516" y="42" font-family="sans-serif" font-size="14" fill="#58a6ff" font-weight="bold">−</text>
 
-    <!-- Center Trough Divider -->
-    <rect x="235" y="72" width="50" height="196" class="trough" rx="3"/>
-    <text x="260" y="155" font-family="sans-serif" font-size="11" fill="#8b949e" font-weight="bold" text-anchor="middle" transform="rotate(-90 260 155)">ISOLATION TROUGH</text>
+    <!-- Column Numbers Top (1 to 15) -->
+    <text x="82" y="58" class="label-col">1</text>
+    <text x="109" y="58" class="label-col">2</text>
+    <text x="136" y="58" class="label-col">3</text>
+    <text x="163" y="58" class="label-col">4</text>
+    <text x="190" y="58" class="label-col">5</text>
+    <text x="217" y="58" class="label-col">6</text>
+    <text x="244" y="58" class="label-col">7</text>
+    <text x="271" y="58" class="label-col">8</text>
+    <text x="298" y="58" class="label-col">9</text>
+    <text x="325" y="58" class="label-col">10</text>
+    <text x="352" y="58" class="label-col">11</text>
+    <text x="379" y="58" class="label-col">12</text>
+    <text x="406" y="58" class="label-col">13</text>
+    <text x="433" y="58" class="label-col">14</text>
+    <text x="460" y="58" class="label-col">15</text>
 
-    <!-- Column Letters Top: F G H I J -->
-    <text x="310" y="66" class="label-col">F</text>
-    <text x="340" y="66" class="label-col">G</text>
-    <text x="370" y="66" class="label-col">H</text>
-    <text x="400" y="66" class="label-col">I</text>
-    <text x="430" y="66" class="label-col">J</text>
+    <!-- Row Letters A to E & F to J (Left and Right) -->
+    <text x="58" y="78" class="label-row">A</text>
+    <text x="484" y="78" class="label-row">A</text>
+    <text x="58" y="98" class="label-row">B</text>
+    <text x="484" y="98" class="label-row">B</text>
+    <text x="58" y="118" class="label-row">C</text>
+    <text x="484" y="118" class="label-row">C</text>
+    <text x="58" y="138" class="label-row">D</text>
+    <text x="484" y="138" class="label-row">D</text>
+    <text x="58" y="158" class="label-row">E</text>
+    <text x="484" y="158" class="label-row">E</text>
+    <text x="58" y="228" class="label-row">F</text>
+    <text x="484" y="228" class="label-row">F</text>
+    <text x="58" y="248" class="label-row">G</text>
+    <text x="484" y="248" class="label-row">G</text>
+    <text x="58" y="268" class="label-row">H</text>
+    <text x="484" y="268" class="label-row">H</text>
+    <text x="58" y="288" class="label-row">I</text>
+    <text x="484" y="288" class="label-row">I</text>
+    <text x="58" y="308" class="label-row">J</text>
+    <text x="484" y="308" class="label-row">J</text>
 
-    <!-- Row Numbers 1 to 7 -->
-    <text x="60" y="92" class="label-row">1</text>
-    <text x="60" y="117" class="label-row">2</text>
-    <text x="60" y="142" class="label-row">3</text>
-    <text x="60" y="167" class="label-row">4</text>
-    <text x="60" y="192" class="label-row">5</text>
-    <text x="60" y="217" class="label-row">6</text>
-    <text x="60" y="242" class="label-row">7</text>
+    <!-- HIGHLIGHTED VERTICAL SPRING CLIP: Column 5 (Holes 5A to 5E) -->
+    <rect x="182" y="66" width="16" height="96" class="clip-metal anim-pulse" />
+    <line x1="190" y1="72" x2="190" y2="156" stroke="#3fb950" stroke-width="2" stroke-linecap="round"/>
 
-    <text x="455" y="92" class="label-row">1</text>
-    <text x="455" y="117" class="label-row">2</text>
-    <text x="455" y="142" class="label-row">3</text>
-    <text x="455" y="167" class="label-row">4</text>
-    <text x="455" y="192" class="label-row">5</text>
-    <text x="455" y="217" class="label-row">6</text>
-    <text x="455" y="242" class="label-row">7</text>
+    <!-- HIGHLIGHTED VERTICAL SPRING CLIP: Column 11 (Holes 11F to 11J) -->
+    <rect x="344" y="216" width="16" height="96" class="clip-metal anim-pulse" />
+    <line x1="352" y1="222" x2="352" y2="306" stroke="#3fb950" stroke-width="2" stroke-linecap="round"/>
 
-    <!-- Grid of Holes: Row 1 to 7 -->
-    <!-- Row 1 -->
-    <rect x="85" y="80" width="10" height="10" class="hole"/><rect x="115" y="80" width="10" height="10" class="hole"/><rect x="145" y="80" width="10" height="10" class="hole"/><rect x="175" y="80" width="10" height="10" class="hole"/><rect x="205" y="80" width="10" height="10" class="hole"/>
-    <rect x="305" y="80" width="10" height="10" class="hole"/><rect x="335" y="80" width="10" height="10" class="hole"/><rect x="365" y="80" width="10" height="10" class="hole"/><rect x="395" y="80" width="10" height="10" class="hole"/><rect x="425" y="80" width="10" height="10" class="hole"/>
+    <!-- Grid of Holes -->
+    <rect x="78" y="70" width="8" height="8" class="hole"/>
+    <rect x="105" y="70" width="8" height="8" class="hole"/>
+    <rect x="132" y="70" width="8" height="8" class="hole"/>
+    <rect x="159" y="70" width="8" height="8" class="hole"/>
+    <rect x="186" y="70" width="8" height="8" class="hole-active"/>
+    <rect x="213" y="70" width="8" height="8" class="hole"/>
+    <rect x="240" y="70" width="8" height="8" class="hole"/>
+    <rect x="267" y="70" width="8" height="8" class="hole"/>
+    <rect x="294" y="70" width="8" height="8" class="hole"/>
+    <rect x="321" y="70" width="8" height="8" class="hole"/>
+    <rect x="348" y="70" width="8" height="8" class="hole"/>
+    <rect x="375" y="70" width="8" height="8" class="hole"/>
+    <rect x="402" y="70" width="8" height="8" class="hole"/>
+    <rect x="429" y="70" width="8" height="8" class="hole"/>
+    <rect x="456" y="70" width="8" height="8" class="hole"/>
+    <rect x="78" y="90" width="8" height="8" class="hole"/>
+    <rect x="105" y="90" width="8" height="8" class="hole"/>
+    <rect x="132" y="90" width="8" height="8" class="hole"/>
+    <rect x="159" y="90" width="8" height="8" class="hole"/>
+    <rect x="186" y="90" width="8" height="8" class="hole-active"/>
+    <rect x="213" y="90" width="8" height="8" class="hole"/>
+    <rect x="240" y="90" width="8" height="8" class="hole"/>
+    <rect x="267" y="90" width="8" height="8" class="hole"/>
+    <rect x="294" y="90" width="8" height="8" class="hole"/>
+    <rect x="321" y="90" width="8" height="8" class="hole"/>
+    <rect x="348" y="90" width="8" height="8" class="hole"/>
+    <rect x="375" y="90" width="8" height="8" class="hole"/>
+    <rect x="402" y="90" width="8" height="8" class="hole"/>
+    <rect x="429" y="90" width="8" height="8" class="hole"/>
+    <rect x="456" y="90" width="8" height="8" class="hole"/>
+    <rect x="78" y="110" width="8" height="8" class="hole"/>
+    <rect x="105" y="110" width="8" height="8" class="hole"/>
+    <rect x="132" y="110" width="8" height="8" class="hole"/>
+    <rect x="159" y="110" width="8" height="8" class="hole"/>
+    <rect x="186" y="110" width="8" height="8" class="hole-active"/>
+    <rect x="213" y="110" width="8" height="8" class="hole"/>
+    <rect x="240" y="110" width="8" height="8" class="hole"/>
+    <rect x="267" y="110" width="8" height="8" class="hole"/>
+    <rect x="294" y="110" width="8" height="8" class="hole"/>
+    <rect x="321" y="110" width="8" height="8" class="hole"/>
+    <rect x="348" y="110" width="8" height="8" class="hole"/>
+    <rect x="375" y="110" width="8" height="8" class="hole"/>
+    <rect x="402" y="110" width="8" height="8" class="hole"/>
+    <rect x="429" y="110" width="8" height="8" class="hole"/>
+    <rect x="456" y="110" width="8" height="8" class="hole"/>
+    <rect x="78" y="130" width="8" height="8" class="hole"/>
+    <rect x="105" y="130" width="8" height="8" class="hole"/>
+    <rect x="132" y="130" width="8" height="8" class="hole"/>
+    <rect x="159" y="130" width="8" height="8" class="hole"/>
+    <rect x="186" y="130" width="8" height="8" class="hole-active"/>
+    <rect x="213" y="130" width="8" height="8" class="hole"/>
+    <rect x="240" y="130" width="8" height="8" class="hole"/>
+    <rect x="267" y="130" width="8" height="8" class="hole"/>
+    <rect x="294" y="130" width="8" height="8" class="hole"/>
+    <rect x="321" y="130" width="8" height="8" class="hole"/>
+    <rect x="348" y="130" width="8" height="8" class="hole"/>
+    <rect x="375" y="130" width="8" height="8" class="hole"/>
+    <rect x="402" y="130" width="8" height="8" class="hole"/>
+    <rect x="429" y="130" width="8" height="8" class="hole"/>
+    <rect x="456" y="130" width="8" height="8" class="hole"/>
+    <rect x="78" y="150" width="8" height="8" class="hole"/>
+    <rect x="105" y="150" width="8" height="8" class="hole"/>
+    <rect x="132" y="150" width="8" height="8" class="hole"/>
+    <rect x="159" y="150" width="8" height="8" class="hole"/>
+    <rect x="186" y="150" width="8" height="8" class="hole-active"/>
+    <rect x="213" y="150" width="8" height="8" class="hole"/>
+    <rect x="240" y="150" width="8" height="8" class="hole"/>
+    <rect x="267" y="150" width="8" height="8" class="hole"/>
+    <rect x="294" y="150" width="8" height="8" class="hole"/>
+    <rect x="321" y="150" width="8" height="8" class="hole"/>
+    <rect x="348" y="150" width="8" height="8" class="hole"/>
+    <rect x="375" y="150" width="8" height="8" class="hole"/>
+    <rect x="402" y="150" width="8" height="8" class="hole"/>
+    <rect x="429" y="150" width="8" height="8" class="hole"/>
+    <rect x="456" y="150" width="8" height="8" class="hole"/>
+    <rect x="78" y="220" width="8" height="8" class="hole"/>
+    <rect x="105" y="220" width="8" height="8" class="hole"/>
+    <rect x="132" y="220" width="8" height="8" class="hole"/>
+    <rect x="159" y="220" width="8" height="8" class="hole"/>
+    <rect x="186" y="220" width="8" height="8" class="hole"/>
+    <rect x="213" y="220" width="8" height="8" class="hole"/>
+    <rect x="240" y="220" width="8" height="8" class="hole"/>
+    <rect x="267" y="220" width="8" height="8" class="hole"/>
+    <rect x="294" y="220" width="8" height="8" class="hole"/>
+    <rect x="321" y="220" width="8" height="8" class="hole"/>
+    <rect x="348" y="220" width="8" height="8" class="hole-active"/>
+    <rect x="375" y="220" width="8" height="8" class="hole"/>
+    <rect x="402" y="220" width="8" height="8" class="hole"/>
+    <rect x="429" y="220" width="8" height="8" class="hole"/>
+    <rect x="456" y="220" width="8" height="8" class="hole"/>
+    <rect x="78" y="240" width="8" height="8" class="hole"/>
+    <rect x="105" y="240" width="8" height="8" class="hole"/>
+    <rect x="132" y="240" width="8" height="8" class="hole"/>
+    <rect x="159" y="240" width="8" height="8" class="hole"/>
+    <rect x="186" y="240" width="8" height="8" class="hole"/>
+    <rect x="213" y="240" width="8" height="8" class="hole"/>
+    <rect x="240" y="240" width="8" height="8" class="hole"/>
+    <rect x="267" y="240" width="8" height="8" class="hole"/>
+    <rect x="294" y="240" width="8" height="8" class="hole"/>
+    <rect x="321" y="240" width="8" height="8" class="hole"/>
+    <rect x="348" y="240" width="8" height="8" class="hole-active"/>
+    <rect x="375" y="240" width="8" height="8" class="hole"/>
+    <rect x="402" y="240" width="8" height="8" class="hole"/>
+    <rect x="429" y="240" width="8" height="8" class="hole"/>
+    <rect x="456" y="240" width="8" height="8" class="hole"/>
+    <rect x="78" y="260" width="8" height="8" class="hole"/>
+    <rect x="105" y="260" width="8" height="8" class="hole"/>
+    <rect x="132" y="260" width="8" height="8" class="hole"/>
+    <rect x="159" y="260" width="8" height="8" class="hole"/>
+    <rect x="186" y="260" width="8" height="8" class="hole"/>
+    <rect x="213" y="260" width="8" height="8" class="hole"/>
+    <rect x="240" y="260" width="8" height="8" class="hole"/>
+    <rect x="267" y="260" width="8" height="8" class="hole"/>
+    <rect x="294" y="260" width="8" height="8" class="hole"/>
+    <rect x="321" y="260" width="8" height="8" class="hole"/>
+    <rect x="348" y="260" width="8" height="8" class="hole-active"/>
+    <rect x="375" y="260" width="8" height="8" class="hole"/>
+    <rect x="402" y="260" width="8" height="8" class="hole"/>
+    <rect x="429" y="260" width="8" height="8" class="hole"/>
+    <rect x="456" y="260" width="8" height="8" class="hole"/>
+    <rect x="78" y="280" width="8" height="8" class="hole"/>
+    <rect x="105" y="280" width="8" height="8" class="hole"/>
+    <rect x="132" y="280" width="8" height="8" class="hole"/>
+    <rect x="159" y="280" width="8" height="8" class="hole"/>
+    <rect x="186" y="280" width="8" height="8" class="hole"/>
+    <rect x="213" y="280" width="8" height="8" class="hole"/>
+    <rect x="240" y="280" width="8" height="8" class="hole"/>
+    <rect x="267" y="280" width="8" height="8" class="hole"/>
+    <rect x="294" y="280" width="8" height="8" class="hole"/>
+    <rect x="321" y="280" width="8" height="8" class="hole"/>
+    <rect x="348" y="280" width="8" height="8" class="hole-active"/>
+    <rect x="375" y="280" width="8" height="8" class="hole"/>
+    <rect x="402" y="280" width="8" height="8" class="hole"/>
+    <rect x="429" y="280" width="8" height="8" class="hole"/>
+    <rect x="456" y="280" width="8" height="8" class="hole"/>
+    <rect x="78" y="300" width="8" height="8" class="hole"/>
+    <rect x="105" y="300" width="8" height="8" class="hole"/>
+    <rect x="132" y="300" width="8" height="8" class="hole"/>
+    <rect x="159" y="300" width="8" height="8" class="hole"/>
+    <rect x="186" y="300" width="8" height="8" class="hole"/>
+    <rect x="213" y="300" width="8" height="8" class="hole"/>
+    <rect x="240" y="300" width="8" height="8" class="hole"/>
+    <rect x="267" y="300" width="8" height="8" class="hole"/>
+    <rect x="294" y="300" width="8" height="8" class="hole"/>
+    <rect x="321" y="300" width="8" height="8" class="hole"/>
+    <rect x="348" y="300" width="8" height="8" class="hole-active"/>
+    <rect x="375" y="300" width="8" height="8" class="hole"/>
+    <rect x="402" y="300" width="8" height="8" class="hole"/>
+    <rect x="429" y="300" width="8" height="8" class="hole"/>
+    <rect x="456" y="300" width="8" height="8" class="hole"/>
 
-    <!-- Row 2 -->
-    <rect x="85" y="105" width="10" height="10" class="hole"/><rect x="115" y="105" width="10" height="10" class="hole"/><rect x="145" y="105" width="10" height="10" class="hole"/><rect x="175" y="105" width="10" height="10" class="hole"/><rect x="205" y="105" width="10" height="10" class="hole"/>
-    <rect x="305" y="105" width="10" height="10" class="hole"/><rect x="335" y="105" width="10" height="10" class="hole"/><rect x="365" y="105" width="10" height="10" class="hole"/><rect x="395" y="105" width="10" height="10" class="hole"/><rect x="425" y="105" width="10" height="10" class="hole"/>
+    <!-- Horizontal Center Isolation Trough -->
+    <rect x="25" y="178" width="480" height="24" class="trough" rx="3"/>
+    <text x="265" y="194" font-family="sans-serif" font-size="9.5" fill="#8b949e" font-weight="bold" text-anchor="middle">── CENTER ISOLATION TROUGH (0.3" DIP SPACING) ──</text>
 
-    <!-- Row 3: HIGHLIGHTED METAL CLIP (ACTIVE ROW 3 A-E) -->
-    <rect x="80" y="128" width="140" height="18" class="clip-metal anim-pulse" />
-    <line x1="85" y1="137" x2="215" y2="137" stroke="#3fb950" stroke-width="2" stroke-linecap="round"/>
-    <rect x="85" y="132" width="10" height="10" class="hole-active"/><rect x="115" y="132" width="10" height="10" class="hole-active"/><rect x="145" y="132" width="10" height="10" class="hole-active"/><rect x="175" y="132" width="10" height="10" class="hole-active"/><rect x="205" y="132" width="10" height="10" class="hole-active"/>
+    <!-- Column Numbers Bottom (1 to 15) -->
+    <text x="82" y="324" class="label-col">1</text>
+    <text x="109" y="324" class="label-col">2</text>
+    <text x="136" y="324" class="label-col">3</text>
+    <text x="163" y="324" class="label-col">4</text>
+    <text x="190" y="324" class="label-col">5</text>
+    <text x="217" y="324" class="label-col">6</text>
+    <text x="244" y="324" class="label-col">7</text>
+    <text x="271" y="324" class="label-col">8</text>
+    <text x="298" y="324" class="label-col">9</text>
+    <text x="325" y="324" class="label-col">10</text>
+    <text x="352" y="324" class="label-col">11</text>
+    <text x="379" y="324" class="label-col">12</text>
+    <text x="406" y="324" class="label-col">13</text>
+    <text x="433" y="324" class="label-col">14</text>
+    <text x="460" y="324" class="label-col">15</text>
 
-    <rect x="305" y="132" width="10" height="10" class="hole"/><rect x="335" y="132" width="10" height="10" class="hole"/><rect x="365" y="132" width="10" height="10" class="hole"/><rect x="395" y="132" width="10" height="10" class="hole"/><rect x="425" y="132" width="10" height="10" class="hole"/>
-
-    <!-- Row 4 -->
-    <rect x="85" y="157" width="10" height="10" class="hole"/><rect x="115" y="157" width="10" height="10" class="hole"/><rect x="145" y="157" width="10" height="10" class="hole"/><rect x="175" y="157" width="10" height="10" class="hole"/><rect x="205" y="157" width="10" height="10" class="hole"/>
-    <rect x="305" y="157" width="10" height="10" class="hole"/><rect x="335" y="157" width="10" height="10" class="hole"/><rect x="365" y="157" width="10" height="10" class="hole"/><rect x="395" y="157" width="10" height="10" class="hole"/><rect x="425" y="157" width="10" height="10" class="hole"/>
-
-    <!-- Row 5: HIGHLIGHTED METAL CLIP (ACTIVE ROW 5 F-J) -->
-    <rect x="85" y="182" width="10" height="10" class="hole"/><rect x="115" y="182" width="10" height="10" class="hole"/><rect x="145" y="182" width="10" height="10" class="hole"/><rect x="175" y="182" width="10" height="10" class="hole"/><rect x="205" y="182" width="10" height="10" class="hole"/>
-    <rect x="300" y="178" width="140" height="18" class="clip-metal anim-pulse" />
-    <line x1="305" y1="187" x2="435" y2="187" stroke="#3fb950" stroke-width="2" stroke-linecap="round"/>
-    <rect x="305" y="182" width="10" height="10" class="hole-active"/><rect x="335" y="182" width="10" height="10" class="hole-active"/><rect x="365" y="182" width="10" height="10" class="hole-active"/><rect x="395" y="182" width="10" height="10" class="hole-active"/><rect x="425" y="182" width="10" height="10" class="hole-active"/>
-
-    <!-- Row 6 -->
-    <rect x="85" y="207" width="10" height="10" class="hole"/><rect x="115" y="207" width="10" height="10" class="hole"/><rect x="145" y="207" width="10" height="10" class="hole"/><rect x="175" y="207" width="10" height="10" class="hole"/><rect x="205" y="207" width="10" height="10" class="hole"/>
-    <rect x="305" y="207" width="10" height="10" class="hole"/><rect x="335" y="207" width="10" height="10" class="hole"/><rect x="365" y="207" width="10" height="10" class="hole"/><rect x="395" y="207" width="10" height="10" class="hole"/><rect x="425" y="207" width="10" height="10" class="hole"/>
-
-    <!-- Row 7 -->
-    <rect x="85" y="232" width="10" height="10" class="hole"/><rect x="115" y="232" width="10" height="10" class="hole"/><rect x="145" y="232" width="10" height="10" class="hole"/><rect x="175" y="232" width="10" height="10" class="hole"/><rect x="205" y="232" width="10" height="10" class="hole"/>
-    <rect x="305" y="232" width="10" height="10" class="hole"/><rect x="335" y="232" width="10" height="10" class="hole"/><rect x="365" y="232" width="10" height="10" class="hole"/><rect x="395" y="232" width="10" height="10" class="hole"/><rect x="425" y="232" width="10" height="10" class="hole"/>
-
-    <!-- BOTTOM POWER RAILS -->
+    <!-- BOTTOM POWER RAILS (HORIZONTAL) -->
     <!-- Positive Rail (+) -->
-    <rect x="15" y="285" width="490" height="18" class="clip-rail-red" />
-    <line x1="20" y1="294" x2="500" y2="294" stroke="#f85149" stroke-width="2.5" stroke-dasharray="6 3" class="anim-flow-h"/>
-    <text x="6" y="298" font-family="sans-serif" font-size="14" fill="#f85149" font-weight="bold">+</text>
-    <!-- Negative Rail (-) -->
-    <rect x="15" y="307" width="490" height="18" class="clip-rail-blue" />
-    <line x1="20" y1="316" x2="500" y2="316" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="6 3" class="anim-flow-h"/>
-    <text x="7" y="320" font-family="sans-serif" font-size="14" fill="#58a6ff" font-weight="bold">−</text>
+    <rect x="25" y="336" width="480" height="15" class="clip-rail-red" />
+    <line x1="30" y1="343" x2="495" y2="343" stroke="#f85149" stroke-width="2.5" stroke-dasharray="6 3" class="anim-flow-h"/>
+    <text x="14" y="348" font-family="sans-serif" font-size="14" fill="#f85149" font-weight="bold">+</text>
+    <text x="515" y="348" font-family="sans-serif" font-size="14" fill="#f85149" font-weight="bold">+</text>
+
+    <!-- Negative Rail (−) -->
+    <rect x="25" y="354" width="480" height="15" class="clip-rail-blue" />
+    <line x1="30" y1="361" x2="495" y2="361" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="6 3" class="anim-flow-h"/>
+    <text x="15" y="366" font-family="sans-serif" font-size="14" fill="#58a6ff" font-weight="bold">−</text>
+    <text x="516" y="366" font-family="sans-serif" font-size="14" fill="#58a6ff" font-weight="bold">−</text>
   </g>
 
-  <!-- Right Side: Explanatory Callouts & Best Practices -->
-  <g transform="translate(580, 85)">
+  <!-- Right Side: Explanatory Callouts & Rules -->
+  <g transform="translate(595, 80)">
     <!-- Callout 1: Power Rails -->
     <g transform="translate(0, 0)">
-      <rect x="0" y="0" width="305" height="96" class="card" stroke="#f85149" stroke-width="1.2"/>
-      <text x="15" y="24" font-family="sans-serif" font-size="13" font-weight="700" fill="#f85149">1. Power Rails (Horizontal)</text>
-      <text x="15" y="44" class="sub" font-size="11">Runs horizontally across the entire board length.</text>
-      <text x="15" y="60" class="sub" font-size="11"><tspan fill="#f85149" font-weight="bold">RED (+)</tspan>: Connect your 3.3V or 5V power.</text>
-      <text x="15" y="76" class="sub" font-size="11"><tspan fill="#58a6ff" font-weight="bold">BLUE (−)</tspan>: Connect project Ground (GND).</text>
+      <rect x="0" y="0" width="310" height="105" class="card" stroke="#f85149" stroke-width="1.2"/>
+      <text x="16" y="24" font-family="sans-serif" font-size="13" font-weight="700" fill="#f85149">1. Power Rails (Horizontal)</text>
+      <text x="16" y="44" class="sub" font-size="11">Runs horizontally along the top &amp; bottom edges.</text>
+      <text x="16" y="62" class="sub" font-size="11"><tspan fill="#f85149" font-weight="bold">RED (+)</tspan>: Connect 3.3V or 5V power supply.</text>
+      <text x="16" y="78" class="sub" font-size="11"><tspan fill="#58a6ff" font-weight="bold">BLUE (−)</tspan>: Connect common Ground (GND).</text>
+      <text x="16" y="94" class="sub" font-size="10" fill="#8b949e">Power is available anywhere along the row!</text>
     </g>
 
     <!-- Callout 2: Terminal Columns -->
-    <g transform="translate(0, 112)">
-      <rect x="0" y="0" width="305" height="106" class="card" stroke="#3fb950" stroke-width="1.2"/>
-      <text x="15" y="24" font-family="sans-serif" font-size="13" font-weight="700" fill="#3fb950">2. Terminal Rows (5-Hole Clips)</text>
-      <text x="15" y="44" class="sub" font-size="11">Each group of 5 holes (e.g. 3A to 3E) is physically</text>
-      <text x="15" y="60" class="sub" font-size="11">connected by a hidden spring-metal clip underneath.</text>
-      <text x="15" y="78" class="sub" font-size="11" fill="#3fb950">✅ Plugging into 3A &amp; 3C joins them together!</text>
-      <text x="15" y="94" class="sub" font-size="11" fill="#8b949e">Row 3 does NOT touch Row 2 or Row 4.</text>
+    <g transform="translate(0, 120)">
+      <rect x="0" y="0" width="310" height="118" class="card" stroke="#3fb950" stroke-width="1.2"/>
+      <text x="16" y="24" font-family="sans-serif" font-size="13" font-weight="700" fill="#3fb950">2. Terminal Clips (Vertical 5-Holes)</text>
+      <text x="16" y="44" class="sub" font-size="11">Holes in each column (e.g. 5A, 5B, 5C, 5D, 5E)</text>
+      <text x="16" y="60" class="sub" font-size="11">are joined by a vertical spring clip underneath.</text>
+      <text x="16" y="78" class="sub" font-size="11" fill="#3fb950">✅ Plugging into 5A and 5C connects them!</text>
+      <text x="16" y="94" class="sub" font-size="11" fill="#8b949e">Column 5 does NOT connect to Column 6.</text>
+      <text x="16" y="108" class="sub" font-size="10" fill="#8b949e">Rows are separate from one another.</text>
     </g>
 
     <!-- Callout 3: Center Trough Divider -->
-    <g transform="translate(0, 232)">
-      <rect x="0" y="0" width="305" height="108" class="card" stroke="#58a6ff" stroke-width="1.2"/>
-      <text x="15" y="24" font-family="sans-serif" font-size="13" font-weight="700" fill="#58a6ff">3. Center Isolation Trough</text>
-      <text x="15" y="44" class="sub" font-size="11">The 0.3-inch ditch separates Column E from F.</text>
-      <text x="15" y="62" class="sub" font-size="11">Place your <tspan fill="#e6edf3" font-weight="bold">ESP32 or ICs across the trough</tspan></text>
-      <text x="15" y="78" class="sub" font-size="11">so left pins never short-circuit to right pins!</text>
-      <text x="15" y="96" class="sub" font-size="11" fill="#d29922">⚠️ Never put an IC flat on one side!</text>
+    <g transform="translate(0, 252)">
+      <rect x="0" y="0" width="310" height="122" class="card" stroke="#58a6ff" stroke-width="1.2"/>
+      <text x="16" y="24" font-family="sans-serif" font-size="13" font-weight="700" fill="#58a6ff">3. Center Isolation Trough (Horizontal)</text>
+      <text x="16" y="44" class="sub" font-size="11">The horizontal trench divides Row E from Row F.</text>
+      <text x="16" y="62" class="sub" font-size="11">Place your <tspan fill="#e6edf3" font-weight="bold">ESP32 or ICs across the trough</tspan>:</text>
+      <text x="16" y="80" class="sub" font-size="11">Left pins go into A–E, right pins into F–J.</text>
+      <text x="16" y="96" class="sub" font-size="11" fill="#3fb950">This prevents opposite chip pins from shorting!</text>
+      <text x="16" y="112" class="sub" font-size="10" fill="#d29922">⚠️ Never insert both chip pin rows on one side.</text>
     </g>
   </g>
 </svg>
-
