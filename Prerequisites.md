@@ -364,19 +364,36 @@ Highest number = (2 ^ number_of_bits) − 1
 
 This works on **every** chip, at **every** bit setting:
 
-$$\mathbf{V_{\text{measured}} = \left(\frac{\text{raw\_reading}}{\text{max\_reading}}\right) \times V_{\text{reference}}}$$
+$$V_{\text{measured}} = \left(\frac{\text{raw reading}}{\text{max reading}}\right) \times V_{\text{reference}}$$
 
-$$\text{For the ESP32 (default 12-bit): } \mathbf{V = \left(\frac{\text{raw}}{4095.0}\right) \times 3.3\text{ V}}$$
+**For the ESP32 (default 12-bit):**
+
+$$V = \left(\frac{\text{raw}}{4095.0}\right) \times 3.3\text{ V}$$
 
 Reverse it, if you know the voltage and want the raw number:
 
-$$\mathbf{\text{raw} = \left(\frac{\text{voltage}}{V_{\text{reference}}}\right) \times \text{max\_reading}}$$
+$$\text{raw} = \left(\frac{\text{voltage}}{V_{\text{reference}}}\right) \times \text{max reading}$$
+
+**For the ESP32 (default 12-bit):**
+
+$$\text{raw} = \left(\frac{\text{voltage}}{3.3\text{ V}}\right) \times 4095$$
+
+```text
+                     raw reading
+V_measured = ─────────────────────────── × V_reference
+                     max reading
+
+For ESP32 (12-bit default):
+              raw
+Voltage = ────────── × 3.3 V
+            4095.0
+```
 
 | Term | Meaning |
 |---|---|
-| `raw` | the number your code reads (0 – 4095) |
-| `max_reading` | 2ⁿ − 1 → 511, 1023, 2047, or 4095 |
-| `reference_voltage` | the full-scale voltage → 3.3 V on ESP32 (with 11dB attenuation) |
+| `raw` | the integer number your code reads (0 – 4095 on 12-bit) |
+| `max reading` | $2^n - 1$ → 511 (9-bit), 1023 (10-bit), 2047 (11-bit), or 4095 (12-bit) |
+| $V_{\text{reference}}$ | the full-scale reference voltage → 3.3 V on ESP32 (with 11dB attenuation) |
 
 ### G4. What happens if you change the bit width?
 
