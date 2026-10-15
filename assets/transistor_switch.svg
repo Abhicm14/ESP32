@@ -10,8 +10,6 @@
       .wire-gate { stroke: #58a6ff; stroke-width: 3; fill: none; stroke-dasharray: 6 4; animation: flow 1.5s linear infinite; }
       .wire-motor { stroke: #3fb950; stroke-width: 4.5; fill: none; stroke-dasharray: 8 6; animation: flow 0.8s linear infinite; }
       @keyframes flow { to { stroke-dashoffset: -28; } }
-      .spin { transform-origin: 520px 145px; animation: rotating 2s linear infinite; }
-      @keyframes rotating { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     </style>
   </defs>
 
@@ -80,3 +78,4 @@
     <text x="30" y="24" class="sub" font-weight="bold">SHARED COMMON GROUND (0V)</text>
   </g>
 </svg>
+

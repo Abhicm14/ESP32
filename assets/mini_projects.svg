@@ -22,18 +22,6 @@
         50% { fill: #1e4620; filter: none; opacity: 0.3; }
       }
       .anim-blink { animation: blink-led 1.2s infinite ease-in-out; }
-      
-      @keyframes pot-sweep {
-        0%, 100% { transform: rotate(-45deg); }
-        50% { transform: rotate(45deg); }
-      }
-      .anim-wiper { transform-origin: 140px 175px; animation: pot-sweep 3s infinite ease-in-out; }
-
-      @keyframes btn-press {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(6px); }
-      }
-      .anim-btn { animation: btn-press 2s infinite ease-in-out; }
     </style>
   </defs>
 
@@ -113,8 +101,10 @@
       <path d="M -39 10 L 40 10" class="wire-red" />
       <!-- Pot Body -->
       <circle cx="45" cy="40" r="28" fill="#21262d" stroke="#58a6ff" stroke-width="1.8"/>
-      <!-- Wiper Needle -->
-      <line x1="45" y1="40" x2="45" y2="18" stroke="#d29922" stroke-width="3" stroke-linecap="round" class="anim-wiper"/>
+      <!-- Wiper Needle (Rotates strictly around dial center 45, 40) -->
+      <line x1="45" y1="40" x2="45" y2="18" stroke="#d29922" stroke-width="3" stroke-linecap="round">
+        <animateTransform attributeName="transform" type="rotate" values="-45 45 40; 45 45 40; -45 45 40" dur="3s" repeatCount="indefinite"/>
+      </line>
       <circle cx="45" cy="40" r="5" fill="#d29922"/>
       
       <!-- Middle Terminal Wiper to GPIO 34 -->
@@ -165,7 +155,9 @@
       <!-- Button Base -->
       <rect x="0" y="10" width="30" height="20" fill="#21262d" stroke="#d29922" rx="3"/>
       <!-- Button Cap (Animated Press) -->
-      <circle cx="15" cy="20" r="7" fill="#f0883e" class="anim-btn" />
+      <circle cx="15" cy="20" r="7" fill="#f0883e">
+        <animateTransform attributeName="transform" type="translate" values="0 0; 0 2; 0 0" dur="2s" repeatCount="indefinite"/>
+      </circle>
       <!-- Wire to GND -->
       <path d="M 30 20 L 70 20 L 70 50 L -49 50" class="wire-blue" />
     </g>
@@ -191,3 +183,4 @@
     </g>
   </g>
 </svg>
+

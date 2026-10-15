@@ -11,16 +11,16 @@
       .i-glow { fill: #3fb950; filter: drop-shadow(0 0 8px #238636); animation: pulse-i 2.5s infinite; }
       .r-glow { fill: #d29922; filter: drop-shadow(0 0 8px #9e6a03); animation: pulse-r 2.5s infinite; }
       @keyframes pulse-v {
-        0%, 100% { opacity: 0.6; }
-        33% { opacity: 1; transform: scale(1.05); }
+        0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 4px #1f6feb); }
+        33% { opacity: 1; filter: drop-shadow(0 0 16px #58a6ff); }
       }
       @keyframes pulse-i {
-        0%, 100% { opacity: 0.6; }
-        66% { opacity: 1; transform: scale(1.05); }
+        0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 4px #238636); }
+        66% { opacity: 1; filter: drop-shadow(0 0 16px #3fb950); }
       }
       @keyframes pulse-r {
-        0%, 100% { opacity: 1; transform: scale(1.05); }
-        50% { opacity: 0.6; }
+        0%, 100% { opacity: 1; filter: drop-shadow(0 0 16px #d29922); }
+        50% { opacity: 0.6; filter: drop-shadow(0 0 4px #9e6a03); }
       }
     </style>
   </defs>

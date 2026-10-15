@@ -9,11 +9,12 @@
       .grid { stroke: #21262d; stroke-width: 1; stroke-dasharray: 4 4; }
       .digital-wave { stroke: #58a6ff; stroke-width: 3.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
       .analog-wave { stroke: #3fb950; stroke-width: 3.5; fill: none; stroke-linecap: round; }
-      .scanline { stroke: #d29922; stroke-width: 2; opacity: 0.8; animation: scan 3s linear infinite; }
+      .scan-sampler { animation: scan 3s linear infinite; }
+      .scanline { stroke: #d29922; stroke-width: 2; opacity: 0.8; }
       .point-sample { fill: #ffd33d; filter: drop-shadow(0 0 6px #ffd33d); }
       @keyframes scan {
         0% { transform: translateX(0); }
-        100% { transform: translateX(310px); }
+        100% { transform: translateX(300px); }
       }
     </style>
   </defs>
@@ -59,7 +60,7 @@
   <path d="M 480 175 Q 525 70, 565 175 T 650 175 T 735 175 T 800 175" class="analog-wave"/>
 
   <!-- Scanning Sampler Line -->
-  <g transform="translate(480, 0)">
+  <g transform="translate(480, 0)" class="scan-sampler">
     <line x1="0" y1="90" x2="0" y2="250" class="scanline"/>
     <circle cx="0" cy="175" r="5" class="point-sample"/>
   </g>

@@ -24,8 +24,8 @@
         to { fill: #ffd33d; filter: drop-shadow(0 0 16px #ffd33d); }
       }
       @keyframes blink {
-        from { opacity: 0.3; transform: scale(0.9); }
-        to { opacity: 1; transform: scale(1.1); }
+        from { opacity: 0.3; filter: drop-shadow(0 0 4px #ff7b72); }
+        to { opacity: 1; filter: drop-shadow(0 0 14px #f85149); }
       }
     </style>
   </defs>
