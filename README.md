@@ -5,6 +5,7 @@
 [![FreeRTOS](https://img.shields.io/badge/Kernel-FreeRTOS%20SMP-blue?style=for-the-badge)](https://www.freertos.org/)
 [![Curriculum](https://img.shields.io/badge/Roadmap-350%20Days%20Progressive-success?style=for-the-badge)](#-the-350-day-execution-roadmap)
 [![Prerequisites](https://img.shields.io/badge/Day%201-Electronics%20Foundations-orange?style=for-the-badge)](Prerequisites.md)
+[![Daily Tracker](https://img.shields.io/badge/Daily%20Tracker-350%20Days%20Log-purple?style=for-the-badge)](DAILY_TRACKER.md)
 
 > A rigorous, hands-on, 350-day engineering curriculum designed to take you from foundational circuit physics to bare-metal registers, hardened FreeRTOS multitasking, secure dual-partition OTA, and production industrial IoT gateways.
 
@@ -12,6 +13,7 @@
 
 ## 📘 Quick Navigation
 
+* 📅 **[Daily Progress Tracker (350-Day Log)](DAILY_TRACKER.md)** — Check off daily exercises, track percentage completion, and record notes.
 * 📖 **[Day 1 Electronics Prerequisites (Zero-to-Hero Guide)](Prerequisites.md)** — Master Voltage, Current, Resistance, Ohm's Law, Series vs. Parallel, 12-bit ADC 4095 calculation, 3.3V vs 5V logic levels, pull-ups, debouncing, and multimeter safety.
 * 🔧 **[Hardware Specifications & Pinout Matrix](#-hardware-specifications--chip-profile)** — Detailed silicon limits, strapping pins, and ADC channel allocations.
 * 📊 **[Capability Matrix (ESP32-WROOM-32)](#-topic-capability-breakdown)** — What is natively supported vs variant board requirements.
@@ -462,6 +464,7 @@ To complete the final 15% of advanced topics in Phase 24, small low-cost variant
 ```
 ESP32/
 ├── Prerequisites.md            # Zero-to-hero Day 1 Electronics Fundamentals
+├── DAILY_TRACKER.md            # 350-Day personal daily progress & checklist
 ├── README.md                   # 350-Day Curriculum & Technical Roadmap
 └── firmware/                   # Progressive phase source code repositories
     ├── phase01_foundations/    # System info, memory maps, partition tables
