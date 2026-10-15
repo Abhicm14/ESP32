@@ -52,15 +52,15 @@
     <text x="20" y="42" class="sub">Step down to ≤ 3.3V before reaching the ESP32 pin</text>
 
     <!-- Method 1: Resistor Divider (1-Way) -->
-    <g transform="translate(20, 60)">
-      <rect x="0" y="0" width="335" height="55" rx="6" fill="#0d1117" stroke="#30363d"/>
-      <text x="15" y="20" class="mono" fill="#58a6ff">1. Resistor Divider (Sensor → ESP32)</text>
-      <text x="15" y="38" class="mono" fill="#3fb950" font-size="11px">5V ──[ 1kΩ ]──┬──► 3.33V to ESP32 Pin</text>
-      <text x="110" y="48" class="sub" font-size="9px">│ [ 2kΩ ] ── GND</text>
+    <g transform="translate(20, 58)">
+      <rect x="0" y="0" width="335" height="58" rx="6" fill="#0d1117" stroke="#30363d"/>
+      <text x="15" y="18" class="mono" fill="#58a6ff">1. Resistor Divider (Sensor → ESP32)</text>
+      <text x="15" y="34" class="mono" fill="#3fb950" font-size="11px">5V ──[ 1kΩ ]──┬──► 3.33V to ESP32 Pin</text>
+      <text x="112" y="50" class="sub" font-size="10px">└──[ 2kΩ ]── GND</text>
     </g>
 
     <!-- Method 2: Logic Level Shifter (2-Way) -->
-    <g transform="translate(20, 130)">
+    <g transform="translate(20, 128)">
       <rect x="0" y="0" width="335" height="65" rx="6" fill="#0d1117" stroke="#3fb950"/>
       <text x="15" y="20" class="mono" fill="#3fb950">2. Bi-Directional Shifter (I²C / SPI)</text>
       <text x="15" y="38" class="sub">Connect 5V to HV, and 3.3V to LV</text>

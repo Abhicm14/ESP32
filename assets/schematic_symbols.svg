@@ -122,16 +122,16 @@
   <g transform="translate(218, 210)">
     <rect x="0" y="0" width="168" height="125" class="card"/>
     <text x="12" y="22" class="sym-title">Power (VCC / 3V3)</text>
-    <text x="12" y="36" class="sym-desc">Positive power rail connection</text>
+    <text x="12" y="34" class="sym-desc">Positive power rail connection</text>
     <!-- Arrow Power -->
-    <path d="M 50 85 L 50 55" class="wire-red"/>
-    <polygon points="44,55 56,55 50,45" fill="#f85149"/>
-    <text x="36" y="38" class="pin-label" fill="#f85149">+3.3V</text>
+    <path d="M 50 90 L 50 68" class="wire-red"/>
+    <polygon points="44,68 56,68 50,58" fill="#f85149"/>
+    <text x="36" y="52" class="pin-label" fill="#f85149">+3.3V</text>
     <!-- Circle Rail -->
-    <path d="M 120 85 L 120 58" class="wire-red"/>
-    <circle cx="120" cy="52" r="6" fill="#21262d" stroke="#f85149" stroke-width="1.8"/>
-    <text x="108" y="38" class="pin-label" fill="#f85149">VCC</text>
-    <text x="35" y="105" class="sym-desc">Top / positive voltage rail</text>
+    <path d="M 120 90 L 120 70" class="wire-red"/>
+    <circle cx="120" cy="64" r="6" fill="#21262d" stroke="#f85149" stroke-width="1.8"/>
+    <text x="108" y="52" class="pin-label" fill="#f85149">VCC</text>
+    <text x="25" y="108" class="sym-desc">Top / positive voltage rail</text>
   </g>
 
   <!-- 8. Ground (GND) -->
@@ -156,7 +156,7 @@
   <g transform="translate(584, 210)">
     <rect x="0" y="0" width="168" height="125" class="card"/>
     <text x="12" y="22" class="sym-title">N-MOSFET (Q)</text>
-    <text x="12" y="36" class="sym-desc">High-power switch (IRLZ44N)</text>
+    <text x="12" y="34" class="sym-desc">High-power switch (MOSFET)</text>
     <!-- Gate -->
     <path d="M 25 72 L 55 72" class="wire"/>
     <line x1="55" y1="52" x2="55" y2="92" stroke="#58a6ff" stroke-width="2" stroke-linecap="round"/>
@@ -180,22 +180,22 @@
   <g transform="translate(767, 210)">
     <rect x="0" y="0" width="168" height="125" class="card"/>
     <text x="12" y="22" class="sym-title">NPN Transistor (Q)</text>
-    <text x="12" y="36" class="sym-desc">Low-power switch (2N2222)</text>
+    <text x="12" y="34" class="sym-desc">Low-power switch (NPN)</text>
     <circle cx="85" cy="72" r="28" fill="#21262d" stroke="#30363d" stroke-width="1.2"/>
     <!-- Base -->
     <path d="M 25 72 L 67 72" class="wire"/>
     <line x1="67" y1="54" x2="67" y2="90" stroke="#58a6ff" stroke-width="2.5" stroke-linecap="round"/>
     <!-- Collector -->
-    <line x1="67" y1="62" x2="98" y2="46" class="wire"/>
-    <path d="M 98 46 L 98 40" class="wire"/>
+    <line x1="67" y1="64" x2="98" y2="48" class="wire"/>
+    <path d="M 98 48 L 98 42" class="wire"/>
     <!-- Emitter with Arrow -->
     <line x1="67" y1="82" x2="98" y2="98" class="wire"/>
     <polygon points="98,98 86,92 92,86" fill="#3fb950"/>
     <path d="M 98 98 L 98 104" class="wire"/>
     <text x="15" y="76" class="pin-label">B</text>
-    <text x="105" y="46" class="pin-label">C</text>
+    <text x="105" y="48" class="pin-label">C</text>
     <text x="105" y="104" class="pin-label">E</text>
-    <text x="118" y="75" class="sym-desc">Current in B</text>
+    <text x="118" y="75" class="sym-desc">e.g. 2N2222</text>
   </g>
 
   <!-- Row 3: Golden Wiring Schematic Rules -->

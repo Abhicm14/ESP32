@@ -135,27 +135,33 @@
   <!-- Right Side: Explanatory Callouts & Best Practices -->
   <g transform="translate(580, 85)">
     <!-- Callout 1: Power Rails -->
-    <rect x="0" y="0" width="305" height="98" class="card" stroke="#f85149" stroke-width="1.2"/>
-    <text x="15" y="24" font-family="sans-serif" font-size="13" font-weight="700" fill="#f85149">1. Power Rails (Horizontal)</text>
-    <text x="15" y="44" class="sub" font-size="11">Runs horizontally across the entire board length.</text>
-    <text x="15" y="60" class="sub" font-size="11"><tspan fill="#f85149" font-weight="bold">RED (+)</tspan>: Connect your 3.3V or 5V power.</text>
-    <text x="15" y="76" class="sub" font-size="11"><tspan fill="#58a6ff" font-weight="bold">BLUE (−)</tspan>: Connect project Ground (GND).</text>
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="305" height="96" class="card" stroke="#f85149" stroke-width="1.2"/>
+      <text x="15" y="24" font-family="sans-serif" font-size="13" font-weight="700" fill="#f85149">1. Power Rails (Horizontal)</text>
+      <text x="15" y="44" class="sub" font-size="11">Runs horizontally across the entire board length.</text>
+      <text x="15" y="60" class="sub" font-size="11"><tspan fill="#f85149" font-weight="bold">RED (+)</tspan>: Connect your 3.3V or 5V power.</text>
+      <text x="15" y="76" class="sub" font-size="11"><tspan fill="#58a6ff" font-weight="bold">BLUE (−)</tspan>: Connect project Ground (GND).</text>
+    </g>
 
     <!-- Callout 2: Terminal Columns -->
-    <rect x="0" y="112" width="305" height="106" class="card" stroke="#3fb950" stroke-width="1.2"/>
-    <text x="15" y="24" font-family="sans-serif" font-size="13" font-weight="700" fill="#3fb950">2. Terminal Rows (5-Hole Clips)</text>
-    <text x="15" y="44" class="sub" font-size="11">Each group of 5 holes (e.g. 3A to 3E) is physically</text>
-    <text x="15" y="60" class="sub" font-size="11">connected by a hidden spring-metal clip underneath.</text>
-    <text x="15" y="78" class="sub" font-size="11" fill="#3fb950">✅ Plugging into 3A &amp; 3C joins them together!</text>
-    <text x="15" y="94" class="sub" font-size="11" fill="#8b949e">Row 3 does NOT touch Row 2 or Row 4.</text>
+    <g transform="translate(0, 112)">
+      <rect x="0" y="0" width="305" height="106" class="card" stroke="#3fb950" stroke-width="1.2"/>
+      <text x="15" y="24" font-family="sans-serif" font-size="13" font-weight="700" fill="#3fb950">2. Terminal Rows (5-Hole Clips)</text>
+      <text x="15" y="44" class="sub" font-size="11">Each group of 5 holes (e.g. 3A to 3E) is physically</text>
+      <text x="15" y="60" class="sub" font-size="11">connected by a hidden spring-metal clip underneath.</text>
+      <text x="15" y="78" class="sub" font-size="11" fill="#3fb950">✅ Plugging into 3A &amp; 3C joins them together!</text>
+      <text x="15" y="94" class="sub" font-size="11" fill="#8b949e">Row 3 does NOT touch Row 2 or Row 4.</text>
+    </g>
 
     <!-- Callout 3: Center Trough Divider -->
-    <rect x="0" y="232" width="305" height="108" class="card" stroke="#58a6ff" stroke-width="1.2"/>
-    <text x="15" y="24" font-family="sans-serif" font-size="13" font-weight="700" fill="#58a6ff">3. Center Isolation Trough</text>
-    <text x="15" y="44" class="sub" font-size="11">The 0.3-inch ditch separates Column E from F.</text>
-    <text x="15" y="62" class="sub" font-size="11">Place your <tspan fill="#e6edf3" font-weight="bold">ESP32 or ICs across the trough</tspan></text>
-    <text x="15" y="78" class="sub" font-size="11">so left pins never short-circuit to right pins!</text>
-    <text x="15" y="96" class="sub" font-size="11" fill="#d29922">⚠️ Never put an IC flat on one side!</text>
+    <g transform="translate(0, 232)">
+      <rect x="0" y="0" width="305" height="108" class="card" stroke="#58a6ff" stroke-width="1.2"/>
+      <text x="15" y="24" font-family="sans-serif" font-size="13" font-weight="700" fill="#58a6ff">3. Center Isolation Trough</text>
+      <text x="15" y="44" class="sub" font-size="11">The 0.3-inch ditch separates Column E from F.</text>
+      <text x="15" y="62" class="sub" font-size="11">Place your <tspan fill="#e6edf3" font-weight="bold">ESP32 or ICs across the trough</tspan></text>
+      <text x="15" y="78" class="sub" font-size="11">so left pins never short-circuit to right pins!</text>
+      <text x="15" y="96" class="sub" font-size="11" fill="#d29922">⚠️ Never put an IC flat on one side!</text>
+    </g>
   </g>
 </svg>
 
