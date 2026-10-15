@@ -101,16 +101,12 @@
   </g>
 
   <!-- ================= BOTTOM: ADC2 VS WI-FI RULE ================= -->
-  <g transform="translate(35, 440)">
-    <rect x="0" y="0" width="850" height="70" class="card" fill="#1b1d28" stroke="#bc8cff" stroke-width="1.2" />
-    <text x="18" y="22" class="title" fill="#bc8cff">⚡ CRITICAL GOTCHA: ADC2 &amp; WI-FI CONFLICT</text>
+  <g transform="translate(35, 438)">
+    <rect x="0" y="0" width="850" height="74" class="card" fill="#1b1d28" stroke="#bc8cff" stroke-width="1.2" />
+    <text x="18" y="20" class="title" fill="#bc8cff">⚡ CRITICAL GOTCHA: ADC2 &amp; WI-FI CONFLICT</text>
     
-    <text x="18" y="42" class="sub">
-      The ESP32 has two ADC units: <tspan fill="#3fb950" font-weight="600">ADC1 (GPIO 32–39)</tspan> and <tspan fill="#f85149" font-weight="600">ADC2 (GPIO 0, 2, 4, 12–15, 25–27)</tspan>.
-    </text>
-    <text x="18" y="58" class="mono-sm" fill="#e6edf3">
-      The Wi-Fi radio shares hardware SAR controllers with <tspan fill="#f85149">ADC2</tspan>. When Wi-Fi is active, <tspan fill="#f85149">ADC2 readings fail or return -1</tspan>! Always use <tspan fill="#3fb950">ADC1</tspan> for analog sensors.
-    </text>
+    <text x="18" y="38" class="sub">The ESP32 has two ADC units: <tspan fill="#3fb950" font-weight="600">ADC1 (GPIO 32–39)</tspan> and <tspan fill="#f85149" font-weight="600">ADC2 (GPIO 0, 2, 4, 12–15, 25–27)</tspan>.</text>
+    <text x="18" y="56" class="mono-sm" fill="#e6edf3">Wi-Fi shares SAR logic with <tspan fill="#f85149">ADC2</tspan>. When Wi-Fi is active, <tspan fill="#f85149">ADC2 fails or returns -1</tspan>! Always use <tspan fill="#3fb950">ADC1</tspan> for analog sensors.</text>
   </g>
 
 </svg>

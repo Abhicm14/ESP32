@@ -133,23 +133,12 @@
   </g>
 
   <!-- ================= BOTTOM: PERIPHERAL MATRIX ================= -->
-  <g transform="translate(35, 445)">
-    <rect x="0" y="0" width="850" height="70" class="card" fill="#13171f" stroke="#30363d" />
-    <text x="18" y="22" class="title" fill="#bc8cff">IO &amp; PERIPHERAL MATRIX (34 PHYSICAL GPIOs)</text>
+  <g transform="translate(35, 442)">
+    <rect x="0" y="0" width="850" height="74" class="card" fill="#13171f" stroke="#30363d" />
+    <text x="18" y="20" class="title" fill="#bc8cff">IO &amp; PERIPHERAL MATRIX (34 PHYSICAL GPIOs)</text>
     
-    <text x="18" y="42" class="mono-sm" fill="#e6edf3">
-      <tspan fill="#58a6ff">18x ADC (12-bit)</tspan>  |  
-      <tspan fill="#3fb950">2x DAC (8-bit)</tspan>  |  
-      <tspan fill="#d29922">3x UART</tspan>  |  
-      <tspan fill="#bc8cff">3x SPI</tspan>  |  
-      <tspan fill="#58a6ff">2x I2C</tspan>  |  
-      <tspan fill="#3fb950">2x I2S</tspan>  |  
-      <tspan fill="#ffd33d">16x LEDC PWM</tspan>  |  
-      <tspan fill="#e6edf3">Motor PWM (MCPWM)</tspan>
-    </text>
-    <text x="18" y="58" class="mono-sm" fill="#8b949e">
-      10x Capacitive Touch  •  8-ch Pulse Counter (PCNT)  •  4x 64-bit Hardware Timers  •  3x Watchdog Timers  •  ULP Coprocessor
-    </text>
+    <text x="18" y="40" class="mono-sm" fill="#e6edf3">18x ADC (12-bit) • 2x DAC (8-bit) • 3x UART • 3x SPI • 2x I2C • 2x I2S • 16x PWM • Motor PWM (MCPWM)</text>
+    <text x="18" y="58" class="mono-sm" fill="#8b949e">10x Capacitive Touch • 8-ch Pulse Counter (PCNT) • 4x 64-bit Hardware Timers • Hardware Crypto (AES/SHA/RSA)</text>
   </g>
 
 </svg>

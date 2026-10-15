@@ -27,46 +27,51 @@
   <text x="35" y="56" class="sub">How Flash memory is partitioned into bootloader, partition table, NVS, Dual OTA app slots, and filesystem</text>
 
   <!-- ================= TOP: FLASH MEMORY BAR VISUALIZATION ================= -->
-  <g transform="translate(35, 75)">
-    <rect x="0" y="0" width="850" height="110" class="card" fill="#13171f" stroke="#30363d" />
-    <text x="15" y="24" class="title" fill="#e6edf3">4 MB (0x400000 BYTES) PHYSICAL FLASH MEMORY MAP</text>
+  <g transform="translate(35, 72)">
+    <rect x="0" y="0" width="850" height="118" class="card" fill="#13171f" stroke="#30363d" />
+    <text x="15" y="22" class="title" fill="#e6edf3">4 MB (0x400000 BYTES) PHYSICAL FLASH MEMORY MAP</text>
     
-    <!-- Visual Slices Bar -->
-    <g transform="translate(15, 38)">
-      <!-- Bootloader & System (0x0 - 0x10000): 64 KB -> ~35 px -->
-      <rect x="0" y="0" width="40" height="40" rx="3" fill="#1f3b4d" stroke="#58a6ff" stroke-width="1" />
-      <text x="5" y="24" class="mono-sm" fill="#58a6ff">Boot</text>
+    <!-- Visual Slices Bar (Total bar width: 820px, from x=15 to x=835) -->
+    <g transform="translate(15, 34)">
+      <!-- Bootloader & System (0x0 - 0x9000): ~36 KB -> 40 px -->
+      <rect x="0" y="0" width="40" height="36" rx="3" fill="#1f3b4d" stroke="#58a6ff" stroke-width="1" />
+      <text x="7" y="22" class="mono-sm" fill="#58a6ff">Boot</text>
 
-      <!-- NVS & OTA Data (0x9000 - 0x10000): 32 KB -> ~25 px -->
-      <rect x="44" y="0" width="30" height="40" rx="3" fill="#3b2b11" stroke="#d29922" stroke-width="1" />
-      <text x="48" y="24" class="mono-sm" fill="#ffd33d">NVS</text>
+      <!-- NVS & OTA Data (0x9000 - 0x10000): ~28 KB -> 40 px -->
+      <rect x="44" y="0" width="40" height="36" rx="3" fill="#3b2b11" stroke="#d29922" stroke-width="1" />
+      <text x="51" y="22" class="mono-sm" fill="#ffd33d">NVS</text>
 
-      <!-- ota_0 App (0x10000 - 0x1A0000): 1.6 MB -> ~360 px -->
-      <rect x="78" y="0" width="350" height="40" rx="3" fill="#14331b" stroke="#3fb950" stroke-width="1.5" />
-      <circle cx="95" cy="20" r="5" class="ping-active" />
-      <text x="108" y="24" class="title" fill="#7ee787">ota_0 (Active App Slot) • 1.6 MB</text>
-      <text x="340" y="24" class="mono-sm" fill="#8b949e">0x10000</text>
+      <!-- ota_0 App (0x10000 - 0x1A0000): 1.6 MB -> 340 px -->
+      <rect x="88" y="0" width="340" height="36" rx="3" fill="#14331b" stroke="#3fb950" stroke-width="1.5" />
+      <circle cx="106" cy="18" r="4.5" class="ping-active" />
+      <text x="118" y="22" class="title" fill="#7ee787">ota_0 (Active App) • 1.6 MB</text>
 
-      <!-- ota_1 App (0x1A0000 - 0x330000): 1.6 MB -> ~350 px -->
-      <rect x="432" y="0" width="350" height="40" rx="3" fill="#182538" stroke="#58a6ff" stroke-width="1" />
-      <text x="445" y="24" class="title" fill="#58a6ff">ota_1 (Passive / New Update Slot) • 1.6 MB</text>
-      <text x="700" y="24" class="mono-sm" fill="#8b949e">0x1A0000</text>
+      <!-- ota_1 App (0x1A0000 - 0x330000): 1.6 MB -> 300 px -->
+      <rect x="432" y="0" width="300" height="36" rx="3" fill="#182538" stroke="#58a6ff" stroke-width="1" />
+      <text x="444" y="22" class="title" fill="#58a6ff">ota_1 (Staging Slot) • 1.6 MB</text>
 
-      <!-- SPIFFS / LittleFS (0x330000 - 0x400000): 832 KB -> ~60 px -->
-      <rect x="786" y="0" width="34" height="40" rx="3" fill="#301c4d" stroke="#bc8cff" stroke-width="1" />
-      <text x="790" y="24" class="mono-sm" fill="#bc8cff">FS</text>
+      <!-- Storage (0x330000 - 0x400000): ~832 KB -> 84 px -->
+      <rect x="736" y="0" width="84" height="36" rx="3" fill="#301c4d" stroke="#bc8cff" stroke-width="1" />
+      <text x="746" y="22" class="mono-sm" fill="#bc8cff">SPIFFS (FS)</text>
     </g>
 
-    <!-- Address Labels Below Bar -->
-    <text x="15" y="96" class="mono-sm" fill="#8b949e">0x000000</text>
-    <text x="92" y="96" class="mono-sm" fill="#7ee787">0x010000 (ota_0)</text>
-    <text x="445" y="96" class="mono-sm" fill="#58a6ff">0x1A0000 (ota_1)</text>
-    <text x="798" y="96" class="mono-sm" fill="#bc8cff">0x330000 (Storage)</text>
-    <text x="825" y="96" class="mono-sm" fill="#8b949e">0x400000</text>
+    <!-- Address Labels Below Bar (Strictly Non-Overlapping Layout) -->
+    <!-- Row 1: Hex Offsets -->
+    <text x="15" y="90" class="mono-sm" fill="#8b949e">0x000000</text>
+    <text x="103" y="90" class="mono-sm" fill="#7ee787">0x010000 (ota_0)</text>
+    <text x="447" y="90" class="mono-sm" fill="#58a6ff">0x1A0000 (ota_1)</text>
+    <text x="735" y="90" class="mono-sm" fill="#bc8cff">0x330000</text>
+    <text x="795" y="90" class="mono-sm" fill="#8b949e">0x400000</text>
+
+    <!-- Row 2: Partition Descriptions -->
+    <text x="15" y="106" class="sub">Boot / NVS</text>
+    <text x="103" y="106" class="sub">Primary Firmware Slot</text>
+    <text x="447" y="106" class="sub">OTA Staging Firmware Slot</text>
+    <text x="715" y="106" class="sub">LittleFS Storage</text>
   </g>
 
   <!-- ================= MIDDLE LEFT: CSV PARTITION TABLE ================= -->
-  <g transform="translate(35, 200)">
+  <g transform="translate(35, 198)">
     <rect x="0" y="0" width="415" height="205" class="card" stroke="#58a6ff" stroke-width="1.2" />
     <text x="15" y="22" class="title" fill="#58a6ff">CUSTOM CSV DEFINITION (partitions.csv)</text>
     <text x="15" y="38" class="sub">Standard Dual-OTA with Rollback Partition Configuration</text>
@@ -83,7 +88,7 @@
   </g>
 
   <!-- ================= MIDDLE RIGHT: HOW OTA UPDATES WORK ================= -->
-  <g transform="translate(470, 200)">
+  <g transform="translate(470, 198)">
     <rect x="0" y="0" width="425" height="205" class="card" stroke="#3fb950" stroke-width="1.2" />
     <text x="15" y="22" class="title" fill="#3fb950">SEAMLESS OVER-THE-AIR (OTA) SAFETY</text>
     <text x="15" y="38" class="sub">Why ESP32 Devices Never Get Bricked During Remote Updates</text>
@@ -92,28 +97,28 @@
     <text x="15" y="80" class="sub">2️⃣ <tspan fill="#e6edf3" font-weight="600">Download:</tspan> New firmware binary downloads into <tspan fill="#58a6ff">ota_1</tspan>.</text>
     <text x="15" y="96" class="sub">   (The running app is never overwritten or interrupted!)</text>
     
-    <text x="15" y="118" class="sub">3️⃣ <tspan fill="#e6edf3" font-weight="600">Checksum &amp; Signature Validation:</tspan> SHA-256 hash verified.</text>
+    <text x="15" y="118" class="sub">3️⃣ <tspan fill="#e6edf3" font-weight="600">Verification:</tspan> SHA-256 hash &amp; signature validated.</text>
     
-    <text x="15" y="138" class="sub">4️⃣ <tspan fill="#e6edf3" font-weight="600">Boot Marker Flip:</tspan> <tspan fill="#ffd33d">otadata</tspan> partition points to <tspan fill="#58a6ff">ota_1</tspan> as next boot.</text>
+    <text x="15" y="138" class="sub">4️⃣ <tspan fill="#e6edf3" font-weight="600">Boot Marker Flip:</tspan> <tspan fill="#ffd33d">otadata</tspan> sets <tspan fill="#58a6ff">ota_1</tspan> as next boot target.</text>
     
     <text x="15" y="158" class="sub">5️⃣ <tspan fill="#e6edf3" font-weight="600">Automatic Anti-Brick Rollback:</tspan></text>
-    <text x="15" y="174" class="sub">   If the new firmware crashes or bootloops, the bootloader automatically</text>
+    <text x="15" y="174" class="sub">   If the new firmware crashes or panics on startup, bootloader</text>
     <text x="15" y="190" class="sub">   reverts back to <tspan fill="#7ee787">ota_0</tspan>! Your device remains 100% operational.</text>
   </g>
 
   <!-- ================= BOTTOM: PARTITION ROLES BREAKDOWN ================= -->
-  <g transform="translate(35, 420)">
-    <rect x="0" y="0" width="850" height="90" class="card" fill="#13171f" stroke="#30363d" />
-    <text x="18" y="22" class="title" fill="#e6edf3">PARTITION SUBTYPES &amp; ROLES</text>
+  <g transform="translate(35, 412)">
+    <rect x="0" y="0" width="850" height="98" class="card" fill="#13171f" stroke="#30363d" />
+    <text x="18" y="20" class="title" fill="#e6edf3">PARTITION SUBTYPES &amp; ROLES</text>
     
-    <text x="18" y="44" class="mono-sm" fill="#ffd33d">NVS (Non-Volatile Storage):</text>
-    <text x="210" y="44" class="sub">Key-value database for Wi-Fi credentials, BLE bonds, calibration values.</text>
+    <text x="18" y="40" class="mono-sm" fill="#ffd33d">NVS (Non-Volatile Storage):</text>
+    <text x="220" y="40" class="sub">Key-value database for Wi-Fi credentials, BLE bonds, calibration values.</text>
 
-    <text x="18" y="62" class="mono-sm" fill="#58a6ff">OTA Data (otadata):</text>
-    <text x="210" y="62" class="sub">Two 4 KB sectors tracking active app sequence number and rollback state.</text>
+    <text x="18" y="60" class="mono-sm" fill="#58a6ff">OTA Data (otadata):</text>
+    <text x="220" y="60" class="sub">Two 4 KB sectors tracking active app sequence number and rollback state.</text>
 
-    <text x="18" y="80" class="mono-sm" fill="#bc8cff">File System (SPIFFS/LittleFS):</text>
-    <text x="210" y="80" class="sub">Flat or hierarchical storage for web server HTML/CSS/JS assets, TLS certs, logs.</text>
+    <text x="18" y="80" class="mono-sm" fill="#bc8cff">File System (LittleFS/SPIFFS):</text>
+    <text x="220" y="80" class="sub">Storage for web server HTML/CSS/JS assets, TLS certificates, and logs.</text>
   </g>
 
 </svg>

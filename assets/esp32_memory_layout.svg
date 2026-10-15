@@ -40,7 +40,7 @@
     <text x="105" y="28" class="title" fill="#39c5bb">Instruction RAM (On-Chip)</text>
     
     <text x="15" y="52" class="sub">⚡ Speed: <tspan fill="#e6edf3" font-weight="600">Zero wait-states (1 CPU cycle @ 240 MHz)</tspan></text>
-    <text x="15" y="68" class="sub">📐 Access: <tspan fill="#e6edf3">32-bit word aligned only</tspan> (unaligned reads cause crash)</text>
+    <text x="15" y="68" class="sub">📐 Access: <tspan fill="#e6edf3">32-bit word aligned only</tspan> (unaligned reads crash)</text>
     
     <!-- Code Box -->
     <rect x="15" y="78" width="385" height="54" rx="4" fill="#0d1117" stroke="#30363d" />
@@ -63,7 +63,7 @@
     <text x="105" y="28" class="title" fill="#58a6ff">Data RAM (On-Chip)</text>
     
     <text x="15" y="52" class="sub">⚡ Speed: <tspan fill="#e6edf3" font-weight="600">Single CPU cycle (240 MHz)</tspan></text>
-    <text x="15" y="68" class="sub">📐 Access: <tspan fill="#e6edf3">Byte, 16-bit, 32-bit accessible</tspan> (standard C pointers)</text>
+    <text x="15" y="68" class="sub">📐 Access: <tspan fill="#e6edf3">Byte, 16-bit, 32-bit accessible</tspan> (standard pointers)</text>
     
     <!-- Code Box -->
     <rect x="15" y="78" width="395" height="54" rx="4" fill="#0d1117" stroke="#30363d" />
@@ -72,7 +72,7 @@
 
     <text x="15" y="148" class="sub">🎯 <tspan fill="#e6edf3" font-weight="600">Primary Purpose:</tspan> Variables, buffers, stacks &amp; heap allocations.</text>
     <text x="15" y="164" class="sub">• Shared between Core 0 and Core 1 by the crossbar switch.</text>
-    <text x="15" y="180" class="sub">• Inspect free memory anytime with <tspan fill="#58a6ff" font-family="monospace">esp_get_free_heap_size()</tspan>.</text>
+    <text x="15" y="180" class="sub">• Inspect free memory: <tspan fill="#58a6ff" font-family="monospace">esp_get_free_heap_size()</tspan>.</text>
   </g>
 
   <!-- ================= TIER 3: EXTERNAL SPI FLASH ================= -->
@@ -85,16 +85,16 @@
     <text x="115" y="28" class="title" fill="#ffd33d">SPI Flash Memory (Off-Chip)</text>
     
     <text x="15" y="52" class="sub">⚡ Speed: <tspan fill="#e6edf3">40/80 MHz Quad SPI</tspan> (via 64 KB MMU cache window)</text>
-    <text x="15" y="68" class="sub">💾 Persistence: <tspan fill="#7ee787" font-weight="600">Non-Volatile</tspan> (retains code when power is disconnected)</text>
+    <text x="15" y="68" class="sub">💾 Persistence: <tspan fill="#7ee787" font-weight="600">Non-Volatile</tspan> (retains code when unpowered)</text>
     
     <!-- Code Box -->
     <rect x="15" y="78" width="385" height="54" rx="4" fill="#0d1117" stroke="#30363d" />
     <text x="25" y="96" class="mono-sm" fill="#e6edf3">const char HTML_PAGE[] PROGMEM = "&lt;html&gt;...&lt;/html&gt;";</text>
     <text x="25" y="114" class="mono-sm" fill="#8b949e">// Stored in Flash .rodata section, saving precious RAM!</text>
 
-    <text x="15" y="148" class="sub">🎯 <tspan fill="#e6edf3" font-weight="600">Primary Purpose:</tspan> Application code (.text), read-only strings (.rodata),</text>
-    <text x="15" y="164" class="sub">partition table, NVS keys (Wi-Fi passwords), and SPIFFS/LittleFS.</text>
-    <text x="15" y="180" class="sub">⚠️ Connected on GPIO 6–11; never use these pins for sensors!</text>
+    <text x="15" y="148" class="sub">🎯 <tspan fill="#e6edf3" font-weight="600">Primary Purpose:</tspan> Application binary code (.text),</text>
+    <text x="15" y="164" class="sub">read-only data (.rodata), partition table, NVS keys &amp; LittleFS.</text>
+    <text x="15" y="180" class="sub">⚠️ Uses GPIO 6–11; never connect sensors or wires to them!</text>
   </g>
 
   <!-- ================= TIER 4: RTC SRAM ================= -->
@@ -112,7 +112,7 @@
     <!-- Code Box -->
     <rect x="15" y="78" width="395" height="54" rx="4" fill="#0d1117" stroke="#30363d" />
     <text x="25" y="96" class="mono-sm" fill="#ffd33d">RTC_DATA_ATTR int boot_count = 0; // Preserved across sleep!</text>
-    <text x="25" y="114" class="mono-sm" fill="#8b949e">esp_sleep_enable_timer_wakeup(10 * 1000000); // 10s Deep Sleep</text>
+    <text x="25" y="114" class="mono-sm" fill="#8b949e">esp_sleep_enable_timer_wakeup(10 * 1000000); // 10s Sleep</text>
 
     <text x="15" y="148" class="sub">🎯 <tspan fill="#e6edf3" font-weight="600">Primary Purpose:</tspan> Sensor logging across deep-sleep wake cycles.</text>
     <text x="15" y="164" class="sub">• RTC Fast (8 KB): Executed by ULP coprocessor or boot CPU.</text>

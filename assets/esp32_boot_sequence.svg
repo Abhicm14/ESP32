@@ -154,13 +154,13 @@
     <text x="14" y="146" class="sub">FreeRTOS Task Stack</text>
 
     <text x="10" y="174" class="mono-sm" fill="#79c0ff">ARDUINO ENTRY:</text>
-    <rect x="8" y="182" width="138" height="48" rx="4" fill="#0d1117" stroke="#30363d" />
-    <text x="14" y="196" class="mono-sm" fill="#7ee787">setup()</text>
-    <text x="14" y="210" class="sub">Runs once on Core 1</text>
-    <text x="14" y="224" class="mono-sm" fill="#7ee787">loop()</text>
+    <rect x="8" y="182" width="138" height="52" rx="4" fill="#0d1117" stroke="#30363d" />
+    <text x="14" y="198" class="mono-sm" fill="#7ee787">setup()</text>
+    <text x="14" y="212" class="sub">Runs once on Core 1</text>
+    <text x="14" y="226" class="mono-sm" fill="#7ee787">loop()</text>
 
-    <text x="10" y="250" class="sub">Full peripheral matrix</text>
-    <text x="10" y="266" class="sub">ready for operations!</text>
+    <text x="10" y="254" class="sub">Full peripheral matrix</text>
+    <text x="10" y="270" class="sub">ready for operations!</text>
   </g>
 
   <!-- ================= BOTTOM: RESET REASONS REFERENCE ================= -->
@@ -168,31 +168,31 @@
     <rect x="0" y="0" width="850" height="110" class="card" fill="#13171f" stroke="#30363d" />
     <text x="18" y="22" class="title" fill="#58a6ff">COMMON BOOT CODES &amp; RESET REASONS (esp_reset_reason_t)</text>
     
-    <!-- Column 1 -->
-    <text x="18" y="44" class="mono-sm" fill="#3fb950">ESP_RST_POWERON (0x01):</text>
-    <text x="180" y="44" class="sub">Normal cold power plug-in or EN pin release.</text>
+    <!-- Column 1 (x=18 to x=425) -->
+    <text x="18" y="44" class="mono-sm" fill="#3fb950">ESP_RST_POWERON:</text>
+    <text x="155" y="44" class="sub">Cold power plug-in or EN pin release.</text>
     
-    <text x="18" y="62" class="mono-sm" fill="#58a6ff">ESP_RST_SW (0x03):</text>
-    <text x="180" y="62" class="sub">Software reset invoked via esp_restart().</text>
+    <text x="18" y="62" class="mono-sm" fill="#58a6ff">ESP_RST_SW:</text>
+    <text x="155" y="62" class="sub">Software reset invoked via esp_restart().</text>
 
-    <text x="18" y="80" class="mono-sm" fill="#bc8cff">ESP_RST_DEEPSLEEP (0x05):</text>
-    <text x="180" y="80" class="sub">Wakeup from deep sleep (timer, touch pin, or external ext0/ext1 GPIO).</text>
+    <text x="18" y="80" class="mono-sm" fill="#bc8cff">ESP_RST_DEEPSLEEP:</text>
+    <text x="155" y="80" class="sub">Wake from timer, touch, or ext0 GPIO.</text>
 
-    <text x="18" y="98" class="mono-sm" fill="#f85149">ESP_RST_PANIC (0x04):</text>
-    <text x="180" y="98" class="sub">Software exception / Guru Meditation Error / null pointer dereference.</text>
+    <text x="18" y="98" class="mono-sm" fill="#f85149">ESP_RST_PANIC:</text>
+    <text x="155" y="98" class="sub">Guru Meditation / memory exception.</text>
 
-    <!-- Column 2 -->
-    <text x="510" y="44" class="mono-sm" fill="#ffd33d">ESP_RST_TASK_WDT (0x07):</text>
-    <text x="680" y="44" class="sub">Task watchdog starved (infinite loop).</text>
+    <!-- Column 2 (x=445 to x=840) -->
+    <text x="445" y="44" class="mono-sm" fill="#ffd33d">ESP_RST_TASK_WDT:</text>
+    <text x="590" y="44" class="sub">Task watchdog starved (infinite loop).</text>
 
-    <text x="510" y="62" class="mono-sm" fill="#f85149">ESP_RST_BROWNOUT (0x0F):</text>
-    <text x="680" y="62" class="sub">Supply voltage dipped below 2.43V!</text>
+    <text x="445" y="62" class="mono-sm" fill="#f85149">ESP_RST_BROWNOUT:</text>
+    <text x="590" y="62" class="sub">Supply voltage dipped below 2.43V.</text>
 
-    <text x="510" y="80" class="mono-sm" fill="#8b949e">BOOTLOADER BAUD RATE:</text>
-    <text x="680" y="80" class="mono-sm" fill="#79c0ff">115200 baud (Standard Serial)</text>
+    <text x="445" y="80" class="mono-sm" fill="#8b949e">BOOTLOADER BAUD:</text>
+    <text x="590" y="80" class="mono-sm" fill="#79c0ff">115200 baud (Standard Serial)</text>
 
-    <text x="510" y="98" class="mono-sm" fill="#8b949e">ROM INITIAL BAUD:</text>
-    <text x="680" y="98" class="mono-sm" fill="#8b949e">74880 baud (Crystal 40MHz default)</text>
+    <text x="445" y="98" class="mono-sm" fill="#8b949e">ROM BOOT BAUD:</text>
+    <text x="590" y="98" class="mono-sm" fill="#8b949e">74880 baud (40 MHz crystal)</text>
   </g>
 
 </svg>
