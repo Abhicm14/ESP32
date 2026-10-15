@@ -3,80 +3,129 @@
     <style>
       .bg { fill: #0d1117; stroke: #30363d; stroke-width: 1.5; rx: 12px; }
       .header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 18px; font-weight: 700; fill: #58a6ff; }
-      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 600; fill: #e6edf3; }
-      .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 15px; font-weight: bold; }
-      .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; fill: #8b949e; }
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13.5px; font-weight: 600; fill: #e6edf3; }
+      .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 14px; font-weight: bold; }
+      .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #8b949e; }
       .card { fill: #161b22; stroke: #30363d; stroke-width: 1.5; rx: 8px; }
-      .v-glow { fill: #58a6ff; filter: drop-shadow(0 0 8px #1f6feb); animation: pulse-v 2.5s infinite; }
-      .i-glow { fill: #3fb950; filter: drop-shadow(0 0 8px #238636); animation: pulse-i 2.5s infinite; }
-      .r-glow { fill: #d29922; filter: drop-shadow(0 0 8px #9e6a03); animation: pulse-r 2.5s infinite; }
-      @keyframes pulse-v {
-        0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 4px #1f6feb); }
-        33% { opacity: 1; filter: drop-shadow(0 0 16px #58a6ff); }
+      
+      /* Synchronized 3-Phase Animation: V -> I -> R */
+      @keyframes anim-v {
+        0%, 30% { opacity: 1; filter: drop-shadow(0 0 12px #58a6ff); }
+        33%, 100% { opacity: 0.4; filter: none; }
       }
-      @keyframes pulse-i {
-        0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 4px #238636); }
-        66% { opacity: 1; filter: drop-shadow(0 0 16px #3fb950); }
+      @keyframes anim-i {
+        0%, 30% { opacity: 0.4; filter: none; }
+        33%, 63% { opacity: 1; filter: drop-shadow(0 0 12px #3fb950); }
+        66%, 100% { opacity: 0.4; filter: none; }
       }
-      @keyframes pulse-r {
-        0%, 100% { opacity: 1; filter: drop-shadow(0 0 16px #d29922); }
-        50% { opacity: 0.6; filter: drop-shadow(0 0 4px #9e6a03); }
+      @keyframes anim-r {
+        0%, 63% { opacity: 0.4; filter: none; }
+        66%, 96% { opacity: 1; filter: drop-shadow(0 0 12px #d29922); }
+        100% { opacity: 0.4; filter: none; }
       }
+      
+      /* Card Border Highlighting */
+      @keyframes card-v {
+        0%, 30% { stroke: #58a6ff; stroke-width: 2; fill: #1f2a3a; }
+        33%, 100% { stroke: #30363d; stroke-width: 1.2; fill: #161b22; }
+      }
+      @keyframes card-i {
+        0%, 30% { stroke: #30363d; stroke-width: 1.2; fill: #161b22; }
+        33%, 63% { stroke: #3fb950; stroke-width: 2; fill: #1a2e22; }
+        66%, 100% { stroke: #30363d; stroke-width: 1.2; fill: #161b22; }
+      }
+      @keyframes card-r {
+        0%, 63% { stroke: #30363d; stroke-width: 1.2; fill: #161b22; }
+        66%, 96% { stroke: #d29922; stroke-width: 2; fill: #2c2518; }
+        100% { stroke: #30363d; stroke-width: 1.2; fill: #161b22; }
+      }
+
+      .pulse-v { animation: anim-v 6s infinite ease-in-out; }
+      .pulse-i { animation: anim-i 6s infinite ease-in-out; }
+      .pulse-r { animation: anim-r 6s infinite ease-in-out; }
+      
+      .box-v { animation: card-v 6s infinite ease-in-out; }
+      .box-i { animation: card-i 6s infinite ease-in-out; }
+      .box-r { animation: card-r 6s infinite ease-in-out; }
     </style>
   </defs>
 
+  <!-- Background -->
   <rect x="15" y="15" width="820" height="310" class="bg" />
-  <text x="35" y="45" class="header">📐 Ohm's Law Magic Triangle: V = I × R</text>
-  <text x="35" y="68" class="sub">Cover the letter you want with your finger to instantly reveal the formula!</text>
+  <text x="35" y="44" class="header">📐 OHM'S LAW MAGIC TRIANGLE: V = I × R</text>
+  <text x="35" y="64" class="sub">Cover the letter you want to calculate with your finger to reveal the exact formula</text>
 
-  <!-- Left: The Master Triangle -->
-  <g transform="translate(60, 90)">
-    <!-- Main Triangle Body -->
-    <polygon points="140,20 20,200 260,200" fill="#161b22" stroke="#58a6ff" stroke-width="3"/>
+  <!-- LEFT: The Master Symmetrical Triangle -->
+  <g transform="translate(45, 90)">
+    <!-- Compartment 1: Top (Voltage V) Background -->
+    <polygon points="145,18 82,110 208,110" fill="#1c2533" stroke="none"/>
+    <!-- Compartment 2: Bottom-Left (Current I) Background -->
+    <polygon points="82,110 20,200 145,200 145,110" fill="#18271e" stroke="none"/>
+    <!-- Compartment 3: Bottom-Right (Resistance R) Background -->
+    <polygon points="208,110 145,110 145,200 270,200" fill="#282218" stroke="none"/>
+
+    <!-- Outer Triangle Border -->
+    <polygon points="145,18 20,200 270,200" fill="none" stroke="#58a6ff" stroke-width="2.5" stroke-linejoin="round"/>
     
     <!-- Dividing Lines -->
-    <line x1="60" y1="130" x2="220" y2="130" stroke="#58a6ff" stroke-width="2.5"/>
-    <line x1="140" y1="130" x2="140" y2="200" stroke="#58a6ff" stroke-width="2.5"/>
+    <!-- Horizontal Divider -->
+    <line x1="82" y1="110" x2="208" y2="110" stroke="#58a6ff" stroke-width="2.5"/>
+    <!-- Vertical Divider -->
+    <line x1="145" y1="110" x2="145" y2="200" stroke="#58a6ff" stroke-width="2.5"/>
 
-    <!-- V Letter -->
-    <text x="130" y="95" class="mono v-glow" font-size="34">V</text>
-    <text x="95" y="115" class="sub" font-size="10px">VOLTAGE (Volts)</text>
+    <!-- Top: V (Voltage) -->
+    <g class="pulse-v">
+      <text x="145" y="78" text-anchor="middle" class="mono" font-size="36" fill="#58a6ff">V</text>
+      <text x="145" y="98" text-anchor="middle" class="sub" font-size="10px" font-weight="bold" fill="#79c0ff">VOLTAGE (Volts)</text>
+    </g>
 
-    <!-- I Letter -->
-    <text x="75" y="175" class="mono i-glow" font-size="30">I</text>
-    <text x="50" y="195" class="sub" font-size="10px">CURRENT (Amps)</text>
+    <!-- Bottom-Left: I (Current) -->
+    <g class="pulse-i">
+      <text x="82" y="162" text-anchor="middle" class="mono" font-size="34" fill="#3fb950">I</text>
+      <text x="82" y="184" text-anchor="middle" class="sub" font-size="10px" font-weight="bold" fill="#7ee787">CURRENT (A)</text>
+    </g>
 
-    <!-- × Symbol -->
-    <text x="133" y="172" class="mono" fill="#8b949e" font-size="22">×</text>
+    <!-- Center Multiplication Symbol -->
+    <text x="145" y="160" text-anchor="middle" class="mono" fill="#8b949e" font-size="22">×</text>
 
-    <!-- R Letter -->
-    <text x="180" y="175" class="mono r-glow" font-size="30">R</text>
-    <text x="160" y="195" class="sub" font-size="10px">RESISTANCE (Ω)</text>
+    <!-- Bottom-Right: R (Resistance) -->
+    <g class="pulse-r">
+      <text x="208" y="162" text-anchor="middle" class="mono" font-size="34" fill="#d29922">R</text>
+      <text x="208" y="184" text-anchor="middle" class="sub" font-size="10px" font-weight="bold" fill="#e3b341">OHMS (Ω)</text>
+    </g>
   </g>
 
-  <!-- Right: 3 Interactive Formula Cards -->
+  <!-- RIGHT: 3 Live Synchronized Interactive Formula Cards -->
   <!-- Card 1: Find V -->
-  <rect x="360" y="85" width="450" height="65" class="card" stroke="#58a6ff" stroke-width="1.5"/>
-  <circle cx="390" cy="117" r="16" fill="#1f6feb" fill-opacity="0.3"/>
-  <text x="384" y="123" class="mono" fill="#58a6ff">V</text>
-  <text x="420" y="112" class="title" fill="#58a6ff">Cover V → You see I × R</text>
-  <text x="420" y="132" class="mono" fill="#e6edf3" font-size="13px">Voltage = Current × Resistance</text>
-  <text x="680" y="125" class="mono" fill="#58a6ff" font-size="13px">V = I × R</text>
+  <g transform="translate(355, 85)">
+    <rect x="0" y="0" width="460" height="66" rx="8" class="box-v"/>
+    <circle cx="28" cy="33" r="16" fill="#1f6feb" fill-opacity="0.3"/>
+    <text x="28" y="39" text-anchor="middle" class="mono" fill="#58a6ff" font-size="16px">V</text>
+    <text x="56" y="27" class="title" fill="#58a6ff">Cover V ──► You see: I × R</text>
+    <text x="56" y="47" class="mono" fill="#e6edf3" font-size="12px">Voltage = Current × Resistance</text>
+    <rect x="355" y="18" width="90" height="30" rx="5" fill="#161b22" stroke="#58a6ff" stroke-width="1.2"/>
+    <text x="400" y="38" text-anchor="middle" class="mono" fill="#58a6ff">V = I × R</text>
+  </g>
 
   <!-- Card 2: Find I -->
-  <rect x="360" y="160" width="450" height="65" class="card" stroke="#3fb950" stroke-width="1.5"/>
-  <circle cx="390" cy="192" r="16" fill="#238636" fill-opacity="0.3"/>
-  <text x="386" y="198" class="mono" fill="#3fb950">I</text>
-  <text x="420" y="187" class="title" fill="#3fb950">Cover I → You see V ÷ R</text>
-  <text x="420" y="207" class="mono" fill="#e6edf3" font-size="13px">Current = Voltage ÷ Resistance</text>
-  <text x="680" y="200" class="mono" fill="#3fb950" font-size="13px">I = V / R</text>
+  <g transform="translate(355, 160)">
+    <rect x="0" y="0" width="460" height="66" rx="8" class="box-i"/>
+    <circle cx="28" cy="33" r="16" fill="#238636" fill-opacity="0.3"/>
+    <text x="28" y="39" text-anchor="middle" class="mono" fill="#3fb950" font-size="16px">I</text>
+    <text x="56" y="27" class="title" fill="#3fb950">Cover I ──► You see: V ÷ R</text>
+    <text x="56" y="47" class="mono" fill="#e6edf3" font-size="12px">Current = Voltage ÷ Resistance</text>
+    <rect x="355" y="18" width="90" height="30" rx="5" fill="#161b22" stroke="#3fb950" stroke-width="1.2"/>
+    <text x="400" y="38" text-anchor="middle" class="mono" fill="#3fb950">I = V / R</text>
+  </g>
 
   <!-- Card 3: Find R -->
-  <rect x="360" y="235" width="450" height="65" class="card" stroke="#d29922" stroke-width="1.5"/>
-  <circle cx="390" cy="267" r="16" fill="#9e6a03" fill-opacity="0.3"/>
-  <text x="384" y="273" class="mono" fill="#d29922">R</text>
-  <text x="420" y="262" class="title" fill="#d29922">Cover R → You see V ÷ I</text>
-  <text x="420" y="282" class="mono" fill="#e6edf3" font-size="13px">Resistance = Voltage ÷ Current</text>
-  <text x="680" y="275" class="mono" fill="#d29922" font-size="13px">R = V / I</text>
+  <g transform="translate(355, 235)">
+    <rect x="0" y="0" width="460" height="66" rx="8" class="box-r"/>
+    <circle cx="28" cy="33" r="16" fill="#9e6a03" fill-opacity="0.3"/>
+    <text x="28" y="39" text-anchor="middle" class="mono" fill="#d29922" font-size="16px">R</text>
+    <text x="56" y="27" class="title" fill="#d29922">Cover R ──► You see: V ÷ I</text>
+    <text x="56" y="47" class="mono" fill="#e6edf3" font-size="12px">Resistance = Voltage ÷ Current</text>
+    <rect x="355" y="18" width="90" height="30" rx="5" fill="#161b22" stroke="#d29922" stroke-width="1.2"/>
+    <text x="400" y="38" text-anchor="middle" class="mono" fill="#d29922">R = V / I</text>
+  </g>
 </svg>
-

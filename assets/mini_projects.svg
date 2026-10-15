@@ -96,25 +96,31 @@
     <text x="50" y="149" class="chip-pin">GND</text>
 
     <!-- Potentiometer Graphic -->
-    <g transform="translate(130, 75)">
+    <g transform="translate(125, 75)">
       <!-- 3.3V top wire to Terminal 1 -->
-      <path d="M -39 10 L 40 10" class="wire-red" />
+      <path d="M -34 10 L 45 10 L 45 14" class="wire-red" />
       <!-- Pot Body -->
-      <circle cx="45" cy="40" r="28" fill="#21262d" stroke="#58a6ff" stroke-width="1.8"/>
-      <!-- Wiper Needle (Rotates strictly around dial center 45, 40) -->
-      <line x1="45" y1="40" x2="45" y2="18" stroke="#d29922" stroke-width="3" stroke-linecap="round">
-        <animateTransform attributeName="transform" type="rotate" values="-45 45 40; 45 45 40; -45 45 40" dur="3s" repeatCount="indefinite"/>
-      </line>
-      <circle cx="45" cy="40" r="5" fill="#d29922"/>
+      <circle cx="45" cy="40" r="26" fill="#21262d" stroke="#58a6ff" stroke-width="1.8"/>
+      <circle cx="45" cy="40" r="21" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      
+      <!-- Wiper Needle: Origin is strictly local (0,0) at dial center (45, 40) -->
+      <g transform="translate(45, 40)">
+        <g>
+          <animateTransform attributeName="transform" type="rotate" values="-50; 50; -50" dur="3s" repeatCount="indefinite"/>
+          <line x1="0" y1="0" x2="0" y2="-18" stroke="#d29922" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="0" cy="-18" r="2.5" fill="#ffd33d"/>
+        </g>
+        <circle cx="0" cy="0" r="5" fill="#d29922"/>
+      </g>
       
       <!-- Middle Terminal Wiper to GPIO 34 -->
-      <path d="M 45 40 L 45 40 L -39 40" class="wire-amber" />
+      <path d="M 45 40 L -34 40" class="wire-amber" />
       <!-- GND bottom wire from Terminal 3 -->
-      <path d="M 45 68 L 45 70 L -39 70" class="wire-blue" />
+      <path d="M 45 66 L 45 70 L -34 70" class="wire-blue" />
       
-      <text x="80" y="15" class="comp-label" fill="#f85149">Pin 1 (3V3)</text>
-      <text x="80" y="44" class="comp-label" fill="#d29922">Pin 2 (Wiper)</text>
-      <text x="80" y="74" class="comp-label" fill="#58a6ff">Pin 3 (GND)</text>
+      <text x="76" y="15" class="comp-label" fill="#f85149">Pin 1 (3V3)</text>
+      <text x="76" y="44" class="comp-label" fill="#d29922">Pin 2 (Wiper)</text>
+      <text x="76" y="74" class="comp-label" fill="#58a6ff">Pin 3 (GND)</text>
     </g>
 
     <!-- Explanatory Bullets -->

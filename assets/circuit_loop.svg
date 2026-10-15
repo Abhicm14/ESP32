@@ -80,27 +80,30 @@
   <!-- Panel 3: Short Circuit -->
   <rect x="575" y="15" width="255" height="290" class="bg" />
   <text x="590" y="42" class="title" fill="#f85149">⚠️ Dangerous Short Circuit</text>
-  <text x="590" y="60" class="sub">Zero resistance • Sparks &amp; fire!</text>
+  <text x="590" y="58" class="sub">Zero resistance • Direct path + to −</text>
 
   <!-- Short Loop directly across battery -->
-  <rect x="600" y="85" width="130" height="150" rx="10" class="wire wire-short"/>
+  <rect x="600" y="90" width="135" height="135" rx="10" fill="none" stroke="#f85149" stroke-width="2" opacity="0.3"/>
+  <rect x="600" y="90" width="135" height="135" rx="10" class="wire wire-short"/>
   
   <!-- Battery Component -->
-  <rect x="585" y="135" width="30" height="50" class="box" stroke="#f85149"/>
-  <text x="593" y="155" class="label" font-weight="bold" fill="#f85149">+</text>
-  <text x="595" y="175" class="label" font-weight="bold" fill="#f85149">−</text>
+  <rect x="585" y="132" width="30" height="50" class="box" stroke="#f85149"/>
+  <text x="593" y="152" class="label" font-weight="bold" fill="#f85149">+</text>
+  <text x="595" y="172" class="label" font-weight="bold" fill="#f85149">−</text>
 
-  <!-- Danger Sparks -->
-  <circle cx="665" cy="85" r="12" class="spark" fill-opacity="0.8"/>
-  <text x="656" y="90" font-size="16">💥</text>
-  <circle cx="665" cy="235" r="12" class="spark" fill-opacity="0.8"/>
-  <text x="656" y="240" font-size="16">🔥</text>
+  <!-- Danger Sparks: Strictly positioned within loop wires -->
+  <circle cx="668" cy="90" r="9" class="spark" fill-opacity="0.8"/>
+  <text x="661" y="94" font-size="12">💥</text>
+  <circle cx="668" cy="225" r="9" class="spark" fill-opacity="0.8"/>
+  <text x="661" y="229" font-size="12">🔥</text>
 
-  <rect x="740" y="125" width="80" height="70" class="box" stroke="#f85149" stroke-dasharray="3 3"/>
-  <text x="748" y="148" class="label" fill="#f85149" font-weight="bold">NO LOAD!</text>
-  <text x="746" y="166" class="sub" font-size="10px">R ≈ 0 Ohms</text>
-  <text x="746" y="182" class="sub" font-size="10px">I = Extreme!</text>
+  <!-- NO LOAD Warning Badge -->
+  <rect x="745" y="125" width="75" height="65" class="box" stroke="#f85149" stroke-dasharray="3 3"/>
+  <text x="751" y="145" class="label" fill="#f85149" font-weight="bold" font-size="11px">NO LOAD!</text>
+  <text x="751" y="162" class="sub" font-size="9.5px">R ≈ 0 Ω</text>
+  <text x="751" y="178" class="sub" font-size="9.5px" fill="#ff7b72">I = Extreme</text>
 
-  <text x="605" y="275" class="label" fill="#f85149">Board / Battery Destroys!</text>
+  <text x="590" y="260" class="label" fill="#f85149" font-size="11px">Board / Battery Destroys!</text>
+  <text x="590" y="278" class="sub" font-size="10px">Always require a load (resistor/bulb)</text>
 </svg>
 

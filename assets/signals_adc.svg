@@ -4,25 +4,26 @@
       .bg { fill: #0d1117; stroke: #30363d; stroke-width: 1.5; rx: 12px; }
       .header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 17px; font-weight: 700; }
       .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 600; fill: #e6edf3; }
-      .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 12px; }
+      .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; }
       .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #8b949e; }
       .grid { stroke: #21262d; stroke-width: 1; stroke-dasharray: 4 4; }
-      .digital-wave { stroke: #58a6ff; stroke-width: 3.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-      .analog-wave { stroke: #3fb950; stroke-width: 3.5; fill: none; stroke-linecap: round; }
-      .scan-sampler { animation: scan 3s linear infinite; }
-      .scanline { stroke: #d29922; stroke-width: 2; opacity: 0.8; }
-      .point-sample { fill: #ffd33d; filter: drop-shadow(0 0 6px #ffd33d); }
-      @keyframes scan {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(300px); }
-      }
+      
+      /* Digital Signal Motion */
+      .digital-flow { stroke: #58a6ff; stroke-width: 3.5; fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 10 6; animation: digi-stream 2s linear infinite; }
+      @keyframes digi-stream { to { stroke-dashoffset: -32; } }
+      .bit-pulse { fill: #79c0ff; filter: drop-shadow(0 0 6px #58a6ff); }
+      
+      /* Analog Wave Motion */
+      .analog-flow { stroke: #3fb950; stroke-width: 3.5; fill: none; stroke-linecap: round; stroke-dasharray: 10 6; animation: ana-stream 2s linear infinite; }
+      @keyframes ana-stream { to { stroke-dashoffset: -32; } }
+      .adc-tracer { fill: #ffd33d; filter: drop-shadow(0 0 6px #ffd33d); }
     </style>
   </defs>
 
   <!-- Left: Digital Signal -->
   <rect x="20" y="15" width="395" height="330" class="bg" />
-  <text x="40" y="45" class="header" fill="#58a6ff">1️⃣ DIGITAL SIGNAL</text>
-  <text x="40" y="65" class="sub">Exactly two binary states • No in-between</text>
+  <text x="40" y="44" class="header" fill="#58a6ff">1️⃣ DIGITAL SIGNAL (SQUARE WAVE)</text>
+  <text x="40" y="64" class="sub">Exactly two binary states • Sharp jumps • Clock &amp; Data buses</text>
 
   <!-- Voltage Rails -->
   <line x1="50" y1="120" x2="380" y2="120" class="grid"/>
@@ -31,45 +32,58 @@
   <line x1="50" y1="230" x2="380" y2="230" class="grid"/>
   <text x="45" y="248" class="mono" fill="#8b949e">0.0V (LOW / 0)</text>
 
-  <!-- Clean Square Wave -->
-  <path d="M 60 230 L 110 230 L 110 120 L 180 120 L 180 230 L 250 230 L 250 120 L 320 120 L 320 230 L 370 230" class="digital-wave"/>
+  <!-- Background static square wave track -->
+  <path d="M 60 230 L 110 230 L 110 120 L 180 120 L 180 230 L 250 230 L 250 120 L 320 120 L 320 230 L 370 230" fill="none" stroke="#21262d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Flowing Animated Square Wave -->
+  <path d="M 60 230 L 110 230 L 110 120 L 180 120 L 180 230 L 250 230 L 250 120 L 320 120 L 320 230 L 370 230" class="digital-flow"/>
+
+  <!-- Traveling Bit Particle following the square wave track -->
+  <circle r="6" class="bit-pulse">
+    <animateMotion path="M 60 230 L 110 230 L 110 120 L 180 120 L 180 230 L 250 230 L 250 120 L 320 120 L 320 230 L 370 230" dur="4s" repeatCount="indefinite"/>
+  </circle>
 
   <!-- Annotations -->
   <g transform="translate(50, 275)">
     <rect x="0" y="0" width="335" height="50" rx="6" fill="#161b22" stroke="#30363d"/>
     <text x="15" y="22" class="mono" fill="#58a6ff">digitalRead(pin) → 1 or 0</text>
-    <text x="15" y="40" class="sub">Used for: Pushbuttons, relays, I2C, SPI, UART</text>
+    <text x="15" y="38" class="sub">Used for: Buttons, relays, LEDs, I2C, SPI, UART</text>
   </g>
 
   <!-- Right: Analog Signal & ADC Conversion -->
   <rect x="435" y="15" width="395" height="330" class="bg" />
-  <text x="455" y="45" class="header" fill="#3fb950">2️⃣ ANALOG &amp; 12-BIT ADC</text>
-  <text x="455" y="65" class="sub">Continuous physical world translated to 0 – 4095</text>
+  <text x="455" y="44" class="header" fill="#3fb950">2️⃣ ANALOG &amp; 12-BIT ADC (SINE WAVE)</text>
+  <text x="455" y="64" class="sub">Continuous physical values translated to 0 – 4095 discrete steps</text>
 
   <!-- Voltage Grids with ADC Values -->
   <line x1="465" y1="110" x2="795" y2="110" class="grid"/>
-  <text x="465" y="102" class="mono" fill="#3fb950">3.3V → ADC: 4095</text>
+  <text x="465" y="102" class="mono" fill="#3fb950">3.3V → ADC: 4095 (Peak)</text>
 
   <line x1="465" y1="175" x2="795" y2="175" class="grid"/>
-  <text x="465" y="170" class="mono" fill="#d29922">1.65V → ADC: 2048</text>
+  <text x="465" y="170" class="mono" fill="#d29922">1.65V → ADC: 2048 (Mid)</text>
 
   <line x1="465" y1="240" x2="795" y2="240" class="grid"/>
-  <text x="465" y="255" class="mono" fill="#8b949e">0.0V → ADC: 0</text>
+  <text x="465" y="255" class="mono" fill="#8b949e">0.0V → ADC: 0 (Trough)</text>
 
-  <!-- Smooth Sine Wave -->
-  <path d="M 480 175 Q 525 70, 565 175 T 650 175 T 735 175 T 800 175" class="analog-wave"/>
+  <!-- Background static sine wave track -->
+  <path d="M 470 175 C 500 85 540 85 570 175 C 600 265 640 265 670 175 C 700 85 740 85 770 175" fill="none" stroke="#21262d" stroke-width="5" stroke-linecap="round"/>
+  
+  <!-- Flowing Animated Sine Wave -->
+  <path d="M 470 175 C 500 85 540 85 570 175 C 600 265 640 265 670 175 C 700 85 740 85 770 175" class="analog-flow"/>
 
-  <!-- Scanning Sampler Line -->
-  <g transform="translate(480, 0)" class="scan-sampler">
-    <line x1="0" y1="90" x2="0" y2="250" class="scanline"/>
-    <circle cx="0" cy="175" r="5" class="point-sample"/>
+  <!-- Traveling Sampling Tracer riding smoothly along the sine wave -->
+  <g>
+    <animateMotion path="M 470 175 C 500 85 540 85 570 175 C 600 265 640 265 670 175 C 700 85 740 85 770 175" dur="4s" repeatCount="indefinite"/>
+    <!-- Sampling Drop-line to baseline -->
+    <line x1="0" y1="0" x2="0" y2="25" stroke="#ffd33d" stroke-width="1.5" stroke-dasharray="2 2"/>
+    <!-- Tracer Dot -->
+    <circle cx="0" cy="0" r="6" class="adc-tracer"/>
   </g>
 
   <!-- Annotations -->
   <g transform="translate(465, 275)">
     <rect x="0" y="0" width="335" height="50" rx="6" fill="#161b22" stroke="#30363d"/>
     <text x="15" y="20" class="mono" fill="#3fb950">Voltage = (raw / 4095.0) × 3.3V</text>
-    <text x="15" y="38" class="sub">12-bit step size = 0.806 mV • 4096 discrete steps</text>
+    <text x="15" y="38" class="sub">12-bit step size = 0.806 mV • 4096 discrete levels</text>
   </g>
 </svg>
-

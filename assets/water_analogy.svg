@@ -51,7 +51,7 @@
   <path d="M 125 160 L 125 210" stroke="#30363d" stroke-width="20" fill="none"/>
   
   <!-- Constriction (Resistance) -->
-  <rect x="110" y="205" width="30" height="30" rx="4" fill="#21262d" stroke="#d29922" stroke-width="2"/>
+  <rect x="110" y="205" width="30" height="30" rx="4" fill="#21262d" stroke="#d29922" stroke-width="2" class="bubble"/>
   <line x1="110" y1="220" x2="140" y2="220" stroke="#d29922" stroke-width="6"/>
   <text x="155" y="218" class="title" fill="#d29922">RESISTANCE (R)</text>
   <text x="155" y="233" class="sub">Constriction / Squeeze</text>
