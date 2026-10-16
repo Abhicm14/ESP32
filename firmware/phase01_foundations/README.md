@@ -245,7 +245,85 @@ idf.py -p COM3 flash monitor
 # Note: Press Ctrl + ] to exit the ESP-IDF serial monitor cleanly.
 ```
 
-### 3.2 GPIO Pin Safety Hierarchy
+### 3.2 The 5-Stage Build & Flash Pipeline
+
+When you run `idf.py build flash` or click Upload in Arduino IDE, the toolchain executes a five-stage transformation pipeline:
+
+![ESP32 Build Pipeline](../../assets/build_pipeline.svg)
+
+```
+                       5-STAGE BUILD & FLASH PIPELINE
+  [Source Code] ──► 1. Preprocessor (gcc -E) ──► 2. Compiler (xtensa-gcc)
+                         │                              │
+                         ▼                              ▼
+                 Inlines #headers              Converts C to Xtensa
+                 Expands #defines              LX6 Machine Code (.o)
+                         │                              │
+                         └──────────────┬───────────────┘
+                                        ▼
+                           3. Linker (xtensa-ld)
+                         (Maps IRAM/DRAM/Flash via esp32.ld ──► .elf)
+                                        │
+                                        ▼
+                       4. Binary Converter (elf2image)
+                         (Strips debug symbols, packages firmware.bin)
+                                        │
+                                        ▼
+                       5. Serial Flasher (esptool.py)
+                         (UART DTR/RTS auto-reset ──► SPI Flash @ 921600)
+```
+
+### 3.3 Side-by-Side: The Same Blink Program Under the Hood
+
+```c
+// ==================== ARDUINO IDE C++ ====================
+// Abstracted, high-level API
+void setup() {
+    Serial.begin(115200);
+    pinMode(2, OUTPUT);
+}
+void loop() {
+    digitalWrite(2, HIGH);
+    delay(1000);
+    digitalWrite(2, LOW);
+    delay(1000);
+}
+
+// ==================== NATIVE ESP-IDF C ====================
+// Pure C, zero-overhead FreeRTOS task, direct driver access
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "driver/gpio.h"
+#include "esp_log.h"
+
+#define BLINK_GPIO GPIO_NUM_2
+static const char *TAG = "BLINK";
+
+void app_main(void) {
+    gpio_config_t io_conf = {
+        .pin_bit_mask = (1ULL << BLINK_GPIO),
+        .mode = GPIO_MODE_OUTPUT,
+        .pull_up_en = GPIO_PULLUP_DISABLE,
+        .pull_down_en = GPIO_PULLDOWN_DISABLE,
+        .intr_type = GPIO_INTR_DISABLE,
+    };
+    gpio_config(&io_conf);
+
+    while (1) {
+        gpio_set_level(BLINK_GPIO, 1);
+        ESP_LOGI(TAG, "LED ON");
+        vTaskDelay(pdMS_TO_TICKS(1000));
+
+        gpio_set_level(BLINK_GPIO, 0);
+        ESP_LOGI(TAG, "LED OFF");
+        vTaskDelay(pdMS_TO_TICKS(1000));
+    }
+}
+```
+
+> **Silicon Under-the-Hood Note:** When Arduino's `digitalWrite(2, HIGH)` executes, it internally calls ESP-IDF's `gpio_set_level(GPIO_NUM_2, 1)`, which writes a `1` directly into bit 2 of the 32-bit hardware register `GPIO_OUT_W1TS_REG` at physical address `0x3FF44008`.
+
+### 3.4 GPIO Pin Safety Hierarchy
 
 The ESP32 multiplexes 34 physical GPIO pins through an internal **GPIO Matrix**. However, hardware connections to the internal SPI Flash and strapping pins impose strict usage rules:
 
