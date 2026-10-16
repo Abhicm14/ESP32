@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 540" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #0d1117; stroke: #30363d; stroke-width: 1.5; rx: 12px; }
+      .card { fill: #161b22; stroke: #30363d; stroke-width: 1.2; rx: 8px; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 16px; font-weight: 700; }
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12.5px; font-weight: 600; fill: #e6edf3; }
+      .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; }
+      .mono-sm { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-size: 10px; }
+      .sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #8b949e; }
+      .badge { font-family: ui-monospace, SFMono-Regular, "SF Mono", monospace; font-size: 9.5px; font-weight: 700; }
+
+      /* Flow track animation */
+      .track-line { stroke: #21262d; stroke-width: 4; stroke-linecap: round; }
+      .flow-line { stroke: #58a6ff; stroke-width: 4; stroke-linecap: round; stroke-dasharray: 8 8; animation: pipe-stream 2s linear infinite; }
+      @keyframes pipe-stream { to { stroke-dashoffset: -32; } }
+
+      .pulse-marker { fill: #58a6ff; filter: drop-shadow(0 0 6px #58a6ff); }
+    </style>
+  </defs>
+
+  <!-- Canvas Outer Background -->
+  <rect x="10" y="10" width="900" height="520" class="bg" />
+
+  <!-- Main Title & Subtitle -->
+  <text x="35" y="38" class="header" fill="#58a6ff">⚙️ ESP32 5-STAGE BUILD &amp; FLASH PIPELINE</text>
+  <text x="35" y="56" class="sub">How Human-Readable C/C++ Code Transforms into Machine Code and Flashes into Onboard SPI Memory</text>
+
+  <!-- Pipeline Track -->
+  <line x1="60" y1="85" x2="860" y2="85" class="track-line" />
+  <line x1="60" y1="85" x2="860" y2="85" class="flow-line" />
+
+  <!-- Animated Traveling Particle -->
+  <circle r="6" class="pulse-marker">
+    <animateMotion path="M 60 85 L 860 85" dur="3.5s" repeatCount="indefinite" />
+  </circle>
+
+  <!-- ================= STAGE 1: PREPROCESS ================= -->
+  <g transform="translate(35, 105)">
+    <rect x="0" y="0" width="160" height="280" class="card" stroke="#39c5bb" stroke-width="1.2" />
+    <circle cx="80" cy="-20" r="12" fill="#161b22" stroke="#39c5bb" stroke-width="2" />
+    <text x="76" y="-16" class="badge" fill="#39c5bb">1</text>
+    
+    <text x="12" y="24" class="title" fill="#39c5bb">PREPROCESS</text>
+    <text x="12" y="40" class="badge" fill="#8b949e">Tool: cpp / gcc -E</text>
+    
+    <text x="12" y="65" class="sub">• Inlines header files</text>
+    <text x="12" y="80" class="mono-sm" fill="#e6edf3">  #include &lt;esp_log.h&gt;</text>
+    <text x="12" y="98" class="sub">• Expands macros</text>
+    <text x="12" y="114" class="mono-sm" fill="#ffd33d">  #define LED_PIN 2</text>
+    <text x="12" y="132" class="sub">• Evaluates conditionals</text>
+    <text x="12" y="148" class="mono-sm" fill="#8b949e">  #ifdef / #endif</text>
+    <text x="12" y="166" class="sub">• Strips code comments</text>
+    
+    <rect x="8" y="190" width="144" height="42" rx="4" fill="#0d1117" stroke="#30363d" />
+    <text x="14" y="206" class="mono-sm" fill="#39c5bb">Output:</text>
+    <text x="14" y="222" class="mono-sm" fill="#e6edf3">main.i (expanded text)</text>
+
+    <text x="12" y="252" class="sub">Execution Time:</text>
+    <text x="12" y="268" class="mono-sm" fill="#7ee787">&lt; 0.5 seconds</text>
+  </g>
+
+  <!-- ================= STAGE 2: COMPILE ================= -->
+  <g transform="translate(205, 105)">
+    <rect x="0" y="0" width="165" height="280" class="card" stroke="#58a6ff" stroke-width="1.2" />
+    <circle cx="82" cy="-20" r="12" fill="#161b22" stroke="#58a6ff" stroke-width="2" />
+    <text x="78" y="-16" class="badge" fill="#58a6ff">2</text>
+    
+    <text x="12" y="24" class="title" fill="#58a6ff">COMPILE</text>
+    <text x="12" y="40" class="badge" fill="#8b949e">xtensa-esp32-elf-gcc</text>
+    
+    <text x="12" y="65" class="sub">• Syntax &amp; grammar check</text>
+    <text x="12" y="82" class="sub">• Type validation</text>
+    <text x="12" y="99" class="sub">• Code optimization</text>
+    <text x="12" y="114" class="mono-sm" fill="#8b949e">  Flags: -Os / -O2</text>
+    <text x="12" y="132" class="sub">• Translates C to Xtensa</text>
+    <text x="12" y="148" class="sub">  32-bit assembly</text>
+    
+    <rect x="8" y="190" width="149" height="42" rx="4" fill="#0d1117" stroke="#30363d" />
+    <text x="14" y="206" class="mono-sm" fill="#58a6ff">Output:</text>
+    <text x="14" y="222" class="mono-sm" fill="#e6edf3">main.o (object binary)</text>
+
+    <text x="12" y="252" class="sub">Execution Time:</text>
+    <text x="12" y="268" class="mono-sm" fill="#ffd33d">5 — 30 seconds</text>
+  </g>
+
+  <!-- ================= STAGE 3: LINK ================= -->
+  <g transform="translate(380, 105)">
+    <rect x="0" y="0" width="165" height="280" class="card" stroke="#d29922" stroke-width="1.2" />
+    <circle cx="82" cy="-20" r="12" fill="#161b22" stroke="#d29922" stroke-width="2" />
+    <text x="78" y="-16" class="badge" fill="#ffd33d">3</text>
+    
+    <text x="12" y="24" class="title" fill="#ffd33d">LINK</text>
+    <text x="12" y="40" class="badge" fill="#8b949e">xtensa-esp32-elf-ld</text>
+    
+    <text x="12" y="65" class="sub">• Combines all .o objects</text>
+    <text x="12" y="82" class="sub">• Resolves symbols</text>
+    <text x="12" y="98" class="mono-sm" fill="#8b949e">  (FreeRTOS, LwIP, WiFi)</text>
+    <text x="12" y="116" class="sub">• Maps memory regions</text>
+    <text x="12" y="132" class="sub">  using esp32.ld scripts</text>
+    <text x="12" y="148" class="mono-sm" fill="#ffd33d">  IRAM / DRAM / Flash</text>
+    
+    <rect x="8" y="190" width="149" height="42" rx="4" fill="#0d1117" stroke="#30363d" />
+    <text x="14" y="206" class="mono-sm" fill="#ffd33d">Output:</text>
+    <text x="14" y="222" class="mono-sm" fill="#e6edf3">project.elf (executable)</text>
+
+    <text x="12" y="252" class="sub">Execution Time:</text>
+    <text x="12" y="268" class="mono-sm" fill="#7ee787">2 — 10 seconds</text>
+  </g>
+
+  <!-- ================= STAGE 4: CONVERT ================= -->
+  <g transform="translate(555, 105)">
+    <rect x="0" y="0" width="165" height="280" class="card" stroke="#bc8cff" stroke-width="1.2" />
+    <circle cx="82" cy="-20" r="12" fill="#161b22" stroke="#bc8cff" stroke-width="2" />
+    <text x="78" y="-16" class="badge" fill="#bc8cff">4</text>
+    
+    <text x="12" y="24" class="title" fill="#bc8cff">CONVERT IMAGE</text>
+    <text x="12" y="40" class="badge" fill="#8b949e">esptool.py elf2image</text>
+    
+    <text x="12" y="65" class="sub">• Strips debug symbols</text>
+    <text x="12" y="82" class="sub">• Extracts segments</text>
+    <text x="12" y="98" class="mono-sm" fill="#bc8cff">  .iram0.text, .dram0</text>
+    <text x="12" y="116" class="sub">• Appends image header</text>
+    <text x="12" y="132" class="sub">• Computes SHA-256 hash</text>
+    <text x="12" y="148" class="sub">• Prepares partition table</text>
+    
+    <rect x="8" y="190" width="149" height="42" rx="4" fill="#0d1117" stroke="#30363d" />
+    <text x="14" y="206" class="mono-sm" fill="#bc8cff">Output:</text>
+    <text x="14" y="222" class="mono-sm" fill="#e6edf3">firmware.bin (raw SPI)</text>
+
+    <text x="12" y="252" class="sub">Execution Time:</text>
+    <text x="12" y="268" class="mono-sm" fill="#7ee787">&lt; 1 second</text>
+  </g>
+
+  <!-- ================= STAGE 5: FLASH ================= -->
+  <g transform="translate(730, 105)">
+    <rect x="0" y="0" width="155" height="280" class="card" stroke="#3fb950" stroke-width="1.5" />
+    <circle cx="77" cy="-20" r="12" fill="#161b22" stroke="#3fb950" stroke-width="2" />
+    <text x="73" y="-16" class="badge" fill="#3fb950">5</text>
+    
+    <text x="10" y="24" class="title" fill="#3fb950">SERIAL FLASH</text>
+    <text x="10" y="40" class="badge" fill="#7ee787">esptool.py write_flash</text>
+    
+    <text x="10" y="65" class="sub">• DTR/RTS auto-resets</text>
+    <text x="10" y="80" class="mono-sm" fill="#ffd33d">  GPIO 0 LOW (Bootloader)</text>
+    <text x="10" y="98" class="sub">• UART sync @ 921600</text>
+    <text x="10" y="116" class="sub">• Writes SPI Flash:</text>
+    <text x="10" y="132" class="mono-sm" fill="#58a6ff">  0x1000: Bootloader</text>
+    <text x="10" y="148" class="mono-sm" fill="#ffd33d">  0x8000: Partitions</text>
+    <text x="10" y="164" class="mono-sm" fill="#7ee787">  0x10000: User App</text>
+    
+    <rect x="8" y="190" width="139" height="42" rx="4" fill="#0d1117" stroke="#30363d" />
+    <text x="14" y="206" class="mono-sm" fill="#39c5bb">Target:</text>
+    <text x="14" y="222" class="mono-sm" fill="#7ee787">4MB Onboard Flash</text>
+
+    <text x="10" y="252" class="sub">Execution Time:</text>
+    <text x="10" y="268" class="mono-sm" fill="#ffd33d">5 — 20 seconds</text>
+  </g>
+
+  <!-- ================= BOTTOM: ERROR CHEAT SHEET ================= -->
+  <g transform="translate(35, 400)">
+    <rect x="0" y="0" width="850" height="110" class="card" fill="#13171f" stroke="#30363d" />
+    <text x="18" y="22" class="title" fill="#58a6ff">BUILD PIPELINE ERROR MATRIX: WHERE DID YOUR BUILD FAIL?</text>
+    
+    <text x="18" y="44" class="mono-sm" fill="#39c5bb">Stage 1 &amp; 2 (Compile):</text>
+    <text x="190" y="44" class="sub">Syntax error ("expected ';'") or missing header ("No such file: driver/gpio.h")</text>
+    
+    <text x="18" y="62" class="mono-sm" fill="#ffd33d">Stage 3 (Linker &amp; Memory):</text>
+    <text x="190" y="62" class="sub">Unresolved symbol ("undefined reference") or memory overflow ("iram0_0_seg overflowed")</text>
+
+    <text x="18" y="80" class="mono-sm" fill="#bc8cff">Stage 4 (Image Size):</text>
+    <text x="190" y="80" class="sub">Image size exceeds flash partition boundary ("app partition is too small for binary")</text>
+
+    <text x="18" y="98" class="mono-sm" fill="#f85149">Stage 5 (UART Flashing):</text>
+    <text x="190" y="98" class="sub">Connection timeout ("Failed to connect: Timed out" → Hold BOOT) or serial noise ("MD5 mismatch")</text>
+  </g>
+
+</svg>
