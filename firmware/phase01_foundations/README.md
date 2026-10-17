@@ -1,44 +1,50 @@
-# ⚡ Phase 1: Architecture & Foundations (Days 1–8)
+﻿# âš¡ Phase 1: Architecture & Foundations (Days 1â€“8)
 
-> **Platform**: `ESP32-WROOM-32` (Xtensa Dual-Core 32-bit LX6 @ 240 MHz, 520 KB SRAM, 4 MB SPI Flash)  
-> **Roadmap Context**: [Master Roadmap](../../README.md#-the-350-day-execution-roadmap) | [Daily Tracker](../../DAILY_TRACKER.md)  
+> **Platform**: `ESP32-WROOM-32` (Xtensa Dual-Core 32-bit LX6 @ 240 MHz, 520 KB SRAM, 4 MB SPI Flash)
+> **Roadmap Context**: [Master Roadmap](../../README.md#-the-350-day-execution-roadmap) | [Daily Tracker](../../DAILY_TRACKER.md)
 > **Milestone Project**: Industrial System Profiler & Hardware Diagnostics Firmware (`day01_sysinfo_starter/`)
 
 ---
 
-## 🎯 Phase Overview & Objectives
+## ðŸŽ¯ Phase Overview & Objectives
+
+> ### ðŸ’¡ Welcome Beginners! Building Foundations Step-by-Step
+> If you are new to microcontrollers, welcome! Phase 1 builds your foundations slowly and thoroughly. You do not need to memorize silicon block diagrams or linker internals today.
+> - Before starting firmware code, ensure you have reviewed **[Day 0 â€” Electronics Prerequisites](../../Prerequisites.md)**.
+> - Check our **[Start Here Onboarding Guide](../../START_HERE.md)** for hardware requirements and safety rules.
+> - Take it one day at a time. What matters most is understanding the *purpose* of each tool and component!
 
 Phase 1 establishes the bedrock engineering principles of the ESP32 platform. Rather than treating the ESP32 as a black-box microcontroller, this phase tears down the silicon architecture to uncover how the dual-core processor functions, how memory is partitioned across on-chip SRAM and external SPI Flash, how the multi-stage bootloader initializes the system, and how to build modular, production-ready firmware using enterprise toolchains.
 
 ```
                          PHASE 1 CURRICULUM ARCHITECTURE
-  ┌─────────────────────────────────────────────────────────────────────────────┐
-  │ DAY 1: Hardware Architecture • Dual-Core Xtensa LX6 • Bus Matrix Interconnect│
-  ├─────────────────────────────────────────────────────────────────────────────┤
-  │ DAY 2: First Program • Serial Telemetry • Boot Log Autopsy • Reset Reasons  │
-  ├─────────────────────────────────────────────────────────────────────────────┤
-  │ DAY 3: Toolchains (ESP-IDF & Arduino IDE) • GPIO Safety Hierarchy & Rules   │
-  ├─────────────────────────────────────────────────────────────────────────────┤
-  │ DAY 4: 4-Tier Memory Model (DRAM, IRAM, Flash, RTC) • Dynamic Allocation     │
-  ├─────────────────────────────────────────────────────────────────────────────┤
-  │ DAY 5: Flash Partition Tables • Dual-Slot OTA Update Architecture           │
-  ├─────────────────────────────────────────────────────────────────────────────┤
-  │ DAY 6: Build System Mastery • CMake Component Architecture • Kconfig Menus  │
-  ├─────────────────────────────────────────────────────────────────────────────┤
-  │ DAY 7: Production Logging Framework • Log Filtering • Runtime Telemetry     │
-  ├─────────────────────────────────────────────────────────────────────────────┤
-  │ DAY 8: Phase Milestone Project: Full System Profiler & Diagnostics Firmware │
-  └─────────────────────────────────────────────────────────────────────────────┘
+  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  â”‚ DAY 1: Hardware Architecture â€¢ Dual-Core Xtensa LX6 â€¢ Bus Matrix Interconnectâ”‚
+  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+  â”‚ DAY 2: First Program â€¢ Serial Telemetry â€¢ Boot Log Autopsy â€¢ Reset Reasons  â”‚
+  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+  â”‚ DAY 3: Toolchains (ESP-IDF & Arduino IDE) â€¢ GPIO Safety Hierarchy & Rules   â”‚
+  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+  â”‚ DAY 4: 4-Tier Memory Model (DRAM, IRAM, Flash, RTC) â€¢ Dynamic Allocation     â”‚
+  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+  â”‚ DAY 5: Flash Partition Tables â€¢ Dual-Slot OTA Update Architecture           â”‚
+  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+  â”‚ DAY 6: Build System Mastery â€¢ CMake Component Architecture â€¢ Kconfig Menus  â”‚
+  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+  â”‚ DAY 7: Production Logging Framework â€¢ Log Filtering â€¢ Runtime Telemetry     â”‚
+  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+  â”‚ DAY 8: Phase Milestone Project: Full System Profiler & Diagnostics Firmware â”‚
+  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ---
 
-## 📅 Daily Execution & Topic Matrix
+## ðŸ“… Daily Execution & Topic Matrix
 
 | Status | Day | Module & Engineering Focus | Key Concepts & Deliverables | Completed Date |
 | :---: | :---: | :--- | :--- | :---: |
 | [x] | **1** | [System Architecture](#-day-1--esp32-hardware-architecture--dual-core-computing) | Dual-Core Xtensa LX6, Bus Matrix, PRO_CPU vs APP_CPU, Hardware specs | 2026-10-15 |
-| [x] | **2** | [Boot Process & First Code](#-day-2--boot-process-telemetry--first-program) | Boot stages (0–150ms), UART 115200 logs, Reset reasons (`esp_reset_reason_t`) | 2026-10-15 |
+| [x] | **2** | [Boot Process & First Code](#-day-2--boot-process-telemetry--first-program) | Boot stages (0â€“150ms), UART 115200 logs, Reset reasons (`esp_reset_reason_t`) | 2026-10-15 |
 | [x] | **3** | [Toolchains & Pin Safety](#-day-3--toolchains--gpio-pinout-safety-rules) | Native ESP-IDF CMake workflow, Safe GPIOs, Strapping pins, Input-only, Flash | 2026-10-15 |
 | [x] | **4** | [Memory Organization](#-day-4--the-4-memory-tiers--dynamic-allocation) | IRAM (`IRAM_ATTR`), DRAM, External Flash, RTC SRAM (`RTC_DATA_ATTR`), Heap | 2026-10-15 |
 | [x] | **5** | [Flash Partition Tables](#-day-5--flash-partition-tables--dual-ota-updates) | Custom CSV maps, Factory vs Dual-OTA slots, Anti-brick rollback, NVS, SPIFFS | 2026-10-15 |
@@ -48,27 +54,27 @@ Phase 1 establishes the bedrock engineering principles of the ESP32 platform. Ra
 
 ---
 
-## 🏛️ DAY 1 — ESP32 Hardware Architecture & Dual-Core Computing
+## ðŸ›ï¸ DAY 1 â€” ESP32 Hardware Architecture & Dual-Core Computing
 
 ### 1.1 What is the ESP32?
 
 The **ESP32-WROOM-32** is a complete System-on-Chip (SoC) packaged inside a surface-mount metal shield module. Unlike traditional 8-bit microcontrollers that execute instructions sequentially on a single thread at modest speeds, the ESP32 contains **two independent 32-bit processor cores** capable of running at clock speeds up to **240 MHz**, delivering combined compute performance of over **600 DMIPS** (Dhrystone Million Instructions Per Second).
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                       ESP32 HARDWARE SPECIFICATIONS                         │
-├───────────────────────┬─────────────────────────────────────────────────────┤
-│ Processor Architecture│ Dual-Core 32-bit Xtensa LX6 Microprocessors         │
-│ Maximum Clock Speed   │ 240 MHz (Adjustable to 80 MHz, 160 MHz, or 240 MHz) │
-│ Internal SRAM         │ 520 KB on-chip SRAM (IRAM + DRAM)                   │
-│ Internal ROM          │ 448 KB on-chip ROM (First-stage Bootloader)         │
-│ Low-Power Memory      │ 16 KB RTC SRAM (Fast & Slow domains)                │
-│ External Flash Memory │ 4 MB (32 Mbit) Quad-SPI Flash @ 80 MHz              │
-│ Wireless Connectivity │ Wi-Fi 802.11 b/g/n (150 Mbps) + Bluetooth 4.2 / BLE │
-│ Physical GPIO Count   │ 34 accessible General Purpose Input/Output pins     │
-│ Operating Voltage     │ 3.0V to 3.6V DC (Standard 3.3V Logic Levels)        │
-│ Current Consumption   │ ~80–240 mA (Active RF), ~5 µA (Deep Sleep)          │
-└───────────────────────┴─────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                       ESP32 HARDWARE SPECIFICATIONS                         â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ Processor Architectureâ”‚ Dual-Core 32-bit Xtensa LX6 Microprocessors         â”‚
+â”‚ Maximum Clock Speed   â”‚ 240 MHz (Adjustable to 80 MHz, 160 MHz, or 240 MHz) â”‚
+â”‚ Internal SRAM         â”‚ 520 KB on-chip SRAM (IRAM + DRAM)                   â”‚
+â”‚ Internal ROM          â”‚ 448 KB on-chip ROM (First-stage Bootloader)         â”‚
+â”‚ Low-Power Memory      â”‚ 16 KB RTC SRAM (Fast & Slow domains)                â”‚
+â”‚ External Flash Memory â”‚ 4 MB (32 Mbit) Quad-SPI Flash @ 80 MHz              â”‚
+â”‚ Wireless Connectivity â”‚ Wi-Fi 802.11 b/g/n (150 Mbps) + Bluetooth 4.2 / BLE â”‚
+â”‚ Physical GPIO Count   â”‚ 34 accessible General Purpose Input/Output pins     â”‚
+â”‚ Operating Voltage     â”‚ 3.0V to 3.6V DC (Standard 3.3V Logic Levels)        â”‚
+â”‚ Current Consumption   â”‚ ~80â€“240 mA (Active RF), ~5 ÂµA (Deep Sleep)          â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### 1.2 The Dual-Core Concept: The Two-Chef Analogy
@@ -77,25 +83,34 @@ Imagine a high-volume restaurant kitchen with **two chefs working side-by-side**
 
 ```
                        THE DUAL-CORE RESTAURANT KITCHEN
-  ┌─────────────────────────────────┐     ┌─────────────────────────────────┐
-  │     CHEF 0 (Core 0: PRO_CPU)    │     │     CHEF 1 (Core 1: APP_CPU)    │
-  │    "The Background Specialist"  │     │     "The Executive Head Chef"   │
-  ├─────────────────────────────────┤     ├─────────────────────────────────┤
-  │ • Manages Wi-Fi connections     │     │ • Runs YOUR code: setup/loop    │
-  │ • Handles Bluetooth handshakes  │     │ • Reads sensors (ADC, I2C, SPI) │
-  │ • Runs TCP/IP networking (LwIP) │     │ • Controls actuators and motors │
-  │ • Services radio interrupts     │     │ • Updates displays & GUI frames │
-  │ • Works silently in background  │     │ • Executes application logic    │
-  └─────────────────────────────────┘     └─────────────────────────────────┘
-                   │                                       │
-                   └───────────────────┬───────────────────┘
-                                       ▼
+  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”     â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  â”‚     CHEF 0 (Core 0: PRO_CPU)    â”‚     â”‚     CHEF 1 (Core 1: APP_CPU)    â”‚
+  â”‚    "System & Protocol Worker"   â”‚     â”‚   "Application & Task Worker"   â”‚
+  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤     â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+  â”‚ â€¢ Manages Wi-Fi connections     â”‚     â”‚ â€¢ Runs your application logic   â”‚
+  â”‚ â€¢ Handles Bluetooth handshakes  â”‚     â”‚ â€¢ Reads sensors (ADC, I2C, SPI) â”‚
+  â”‚ â€¢ Runs TCP/IP networking (LwIP) â”‚     â”‚ â€¢ Controls actuators and motors â”‚
+  â”‚ â€¢ Services radio interrupts     â”‚     â”‚ â€¢ Updates displays & GUI frames â”‚
+  â”‚ â€¢ Can also execute user tasks!  â”‚     â”‚ â€¢ Can also run protocol stacks! â”‚
+  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜     â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                   â”‚                                       â”‚
+                   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                                       â–¼
                        SHARED CROSSBAR BUS MATRIX & RAM
           (Both chefs share the same 520 KB refrigerator and storage)
 ```
 
-1. **Core 0 (`PRO_CPU` — Protocol CPU)**: Dedicated by default to time-critical wireless communications. When a Wi-Fi packet arrives or an encrypted TLS handshake occurs, Core 0 handles it immediately without interfering with sensor sampling.
-2. **Core 1 (`APP_CPU` — Application CPU)**: Dedicated to executing your custom application logic (`app_main()` in ESP-IDF, or `setup()` and `loop()` in Arduino). Because your application runs on Core 1, heavy computational tasks or display updates will **never stall Wi-Fi packet delivery**, and heavy network traffic will **never introduce jitter into your sensor control loops**.
+> **Dual-Core Architecture Reality**:
+> ESP32 has two CPU cores. System services often use one core, while application tasks can run on either core depending on configuration. Later FreeRTOS lessons explain task pinning and core placement.
+
+1. **Core 0 (`PRO_CPU` â€” Protocol CPU)**: In typical default network configurations, background Wi-Fi and Bluetooth stacks service events on Core 0 so they don't block user code. However, FreeRTOS can freely schedule user tasks here as well.
+2. **Core 1 (`APP_CPU` â€” Application CPU)**: Typically assigned to run the main application entry point (`app_main()` in ESP-IDF or `loop()` in Arduino). Tasks can be explicitly pinned to either core using FreeRTOS `xTaskCreatePinnedToCore()`.
+
+> ### ðŸ“Œ What You Need to Remember Today (Day 1)
+> 1. **Two independent 32-bit cores** running up to 240 MHz share 520 KB of on-chip RAM.
+> 2. **3.3 V logic level**: Never apply 5 V directly to any ESP32 pin.
+> 3. **Both cores can run application tasks**: System services often use one core, but task placement is flexible.
+> 4. Keep advanced terms like *IRAM_ATTR*, *linker scripts*, and *memory mapping* as "Later deep dive" topics. Focus first on the high-level layout!
 
 ### 1.3 Architectural Block Diagram
 
@@ -117,7 +132,7 @@ The internal architecture links the dual cores to memory blocks, DMA channels, a
 
 ---
 
-## ⏱️ DAY 2 — Boot Process, Telemetry & First Program
+## â±ï¸ DAY 2 â€” Boot Process, Telemetry & First Program
 
 ### 2.1 The 0 to 150 ms Boot Sequence
 
@@ -127,26 +142,26 @@ When 3.3V power is applied to the ESP32 (or when the `EN` pin transitions from `
 
 ```
 BOOT TIMELINE:
-  0 ms ─────────► 1 ms ─────────► 5 ms ─────────► 25 ms ────────► 80 ms ────────► 150 ms
+  0 ms â”€â”€â”€â”€â”€â”€â”€â”€â”€â–º 1 ms â”€â”€â”€â”€â”€â”€â”€â”€â”€â–º 5 ms â”€â”€â”€â”€â”€â”€â”€â”€â”€â–º 25 ms â”€â”€â”€â”€â”€â”€â”€â”€â–º 80 ms â”€â”€â”€â”€â”€â”€â”€â”€â–º 150 ms
   [Power-On]      [Strapping]     [1st ROM Boot]  [2nd Bootloader][ESP-IDF RTOS] [Your Code]
    VCC stabilizes  GPIO 0/2/12/15  Silicon ROM     Flash 0x1000    call_start_cpu0 app_main()
    Reset released  latched by HW   checks GPIO 0   loads IRAM/DRAM inits scheduler setup/loop
 ```
 
-1. **Stage 1: Power-On Reset & Strapping Latch (0–1 ms)**:
+1. **Stage 1: Power-On Reset & Strapping Latch (0â€“1 ms)**:
    - The power-on reset circuit holds the CPU in reset until internal voltage regulators stabilize at 3.3V.
    - The hardware samples the **strapping pins** (`GPIO 0`, `GPIO 2`, `GPIO 12`, `GPIO 15`). The logic levels on these pins determine whether the chip boots normally from SPI Flash or enters UART download flashing mode.
-2. **Stage 2: 1st Stage Bootloader in Silicon ROM (1–5 ms)**:
+2. **Stage 2: 1st Stage Bootloader in Silicon ROM (1â€“5 ms)**:
    - Hardcoded into 448 KB of read-only silicon during factory fabrication.
    - Core 0 starts executing from ROM address `0x40000800`; Core 1 is held in hardware reset.
    - If `GPIO 0` is `LOW`, the ROM bootloader halts and awaits serial firmware upload via `esptool.py`.
    - If `GPIO 0` is `HIGH`, the ROM bootloader configures the SPI Flash controller, reads the flash header at offset `0x1000`, and copies the 2nd Stage Bootloader into IRAM.
-3. **Stage 3: 2nd Stage Bootloader (5–25 ms)**:
+3. **Stage 3: 2nd Stage Bootloader (5â€“25 ms)**:
    - Stored in SPI Flash at offset `0x1000`.
    - Reads the **Partition Table** at offset `0x8000`.
    - Checks the `otadata` partition to determine whether to boot the `factory` app, `ota_0`, or `ota_1`.
    - Maps `.rodata` and `.text` code into virtual memory via the hardware Flash Cache MMU, copies critical routines into IRAM, and jumps to the application entry point.
-4. **Stage 4: ESP-IDF Startup & RTOS Scheduling (25–80 ms)**:
+4. **Stage 4: ESP-IDF Startup & RTOS Scheduling (25â€“80 ms)**:
    - `call_start_cpu0()` clears the `.bss` memory region, initializes the system heap memory allocator, and configures the CPU clock to its target speed (typically 160 or 240 MHz).
    - Initializes the FreeRTOS symmetric multiprocessing kernel, takes Core 1 out of reset, and launches the default system tasks.
    - Spawns the main user task and jumps to `app_main()` (ESP-IDF) or launches `loopTask()` (Arduino).
@@ -185,11 +200,11 @@ I (123) main_task: Calling app_main()
 
 ```
                           KEY TELEMETRY FIELDS DECODED
-  • rst:0x1 (POWERON_RESET)  ──► Indicates clean power supply plug-in or EN button press.
-  • boot:0x13                ──► Strapping pin status (0x13 = GPIO 0 HIGH, normal boot).
-  • mode:DIO, clock div:2    ──► Dual I/O SPI flash mode running at 40 MHz.
-  • load:0x40080400          ──► Critical routines being copied directly into on-chip IRAM.
-  • entry 0x40080694         ──► Program counter jumping to 2nd Stage Bootloader entry point.
+  â€¢ rst:0x1 (POWERON_RESET)  â”€â”€â–º Indicates clean power supply plug-in or EN button press.
+  â€¢ boot:0x13                â”€â”€â–º Strapping pin status (0x13 = GPIO 0 HIGH, normal boot).
+  â€¢ mode:DIO, clock div:2    â”€â”€â–º Dual I/O SPI flash mode running at 40 MHz.
+  â€¢ load:0x40080400          â”€â”€â–º Critical routines being copied directly into on-chip IRAM.
+  â€¢ entry 0x40080694         â”€â”€â–º Program counter jumping to 2nd Stage Bootloader entry point.
 ```
 
 ### 2.3 Hardware Reset Reasons Reference (`esp_reset_reason_t`)
@@ -205,27 +220,27 @@ When debugging erratic hardware reboots, query `esp_reset_reason()` to determine
 | `0x06` | `ESP_RST_TG0WDT` | Main System Watchdog Timer expired | A task blocked execution on Core 0 for >5 seconds. |
 | `0x07` | `ESP_RST_TG1WDT` | Secondary Watchdog Timer expired | A task blocked execution on Core 1 for >5 seconds. |
 | `0x08` | `ESP_RST_TASK_WDT` | FreeRTOS Task Watchdog starved | An infinite loop without `vTaskDelay()` starved the idle task. |
-| `0x0F` | `ESP_RST_BROWNOUT` | Supply voltage dipped below ~2.43V | Insufficient USB current; add a 470 µF decoupling capacitor! |
+| `0x0F` | `ESP_RST_BROWNOUT` | Supply voltage dipped below ~2.43V | Insufficient USB current; add a 470 ÂµF decoupling capacitor! |
 
 ---
 
-## 🚦 DAY 3 — Toolchains & GPIO Pinout Safety Rules
+## ðŸš¦ DAY 3 â€” Toolchains & GPIO Pinout Safety Rules
 
 ### 3.1 Toolchain Selection: Native ESP-IDF vs Arduino IDE
 
 ```
                             TOOLCHAIN COMPARISON MATRIX
-  ┌───────────────────────────────┬───────────────────────────────┐
-  │     NATIVE ESP-IDF C/C++      │        ARDUINO IDE C++        │
-  │    (Industry Professional)    │     (Rapid Prototyping)       │
-  ├───────────────────────────────┼───────────────────────────────┤
-  │ • Native CMake build engine   │ • Simplified sketch workflow  │
-  │ • Direct FreeRTOS SMP API     │ • Massive library ecosystem   │
-  │ • Fine-grained memory tuning  │ • Abstracted hardware drivers │
-  │ • Interactive Kconfig menus   │ • Faster initial bring-up     │
-  │ • Complete hardware control   │ • Limited multi-core control  │
-  │ • Used in production products │ • Excellent for quick proofs  │
-  └───────────────────────────────┴───────────────────────────────┘
+  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  â”‚     NATIVE ESP-IDF C/C++      â”‚        ARDUINO IDE C++        â”‚
+  â”‚    (Industry Professional)    â”‚     (Rapid Prototyping)       â”‚
+  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+  â”‚ â€¢ Native CMake build engine   â”‚ â€¢ Simplified sketch workflow  â”‚
+  â”‚ â€¢ Direct FreeRTOS SMP API     â”‚ â€¢ Massive library ecosystem   â”‚
+  â”‚ â€¢ Fine-grained memory tuning  â”‚ â€¢ Abstracted hardware drivers â”‚
+  â”‚ â€¢ Interactive Kconfig menus   â”‚ â€¢ Faster initial bring-up     â”‚
+  â”‚ â€¢ Complete hardware control   â”‚ â€¢ Limited multi-core control  â”‚
+  â”‚ â€¢ Used in production products â”‚ â€¢ Excellent for quick proofs  â”‚
+  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### 3.2 Step-by-Step Software Download & Setup Guide
@@ -265,19 +280,19 @@ The ESP32 communicates with your computer over a USB-to-UART bridge converter ch
    - Select **EXPRESS** configuration.
    - Select your target framework version: Choose **ESP-IDF v5.2.x** or **v5.1.x** (Stable).
    - Choose paths for the framework and tools (defaults in `C:\Users\<user>\esp` are recommended).
-   - Click **Install**. The extension will automatically download the Xtensa toolchain compiler (`xtensa-esp32-elf-gcc`), Ninja, CMake, and configure an isolated Python virtual environment (~15–20 minutes).
+   - Click **Install**. The extension will automatically download the Xtensa toolchain compiler (`xtensa-esp32-elf-gcc`), Ninja, CMake, and configure an isolated Python virtual environment (~15â€“20 minutes).
 5. **Step 5: Create a Sample Project**
    - Press `F1` $\to$ type `ESP-IDF: Create Project from Extension Template`.
    - Select your desired directory $\to$ choose **ESP-IDF** $\to$ select `sample_project`.
    - Your project is generated with `CMakeLists.txt`, `sdkconfig`, and `main/main.c`.
 6. **Step 6: VS Code Status Bar Controls**
    - Look at the bottom blue status bar in VS Code for one-click shortcuts:
-     - 🎯 **Target**: Set to `esp32`.
-     - 🔌 **COM Port**: Select the COM port identified in Device Manager.
-     - ⚙️ **menuconfig**: Opens the interactive configuration GUI.
-     - 🔨 **Build**: Compiles the project (`idf.py build`).
-     - ⚡ **Flash**: Writes binary to device (`idf.py flash`).
-     - 🖥️ **Monitor**: Opens real-time serial output (`idf.py monitor`).
+     - ðŸŽ¯ **Target**: Set to `esp32`.
+     - ðŸ”Œ **COM Port**: Select the COM port identified in Device Manager.
+     - âš™ï¸ **menuconfig**: Opens the interactive configuration GUI.
+     - ðŸ”¨ **Build**: Compiles the project (`idf.py build`).
+     - âš¡ **Flash**: Writes binary to device (`idf.py flash`).
+     - ðŸ–¥ï¸ **Monitor**: Opens real-time serial output (`idf.py monitor`).
 
 ---
 
@@ -332,24 +347,24 @@ When you run `idf.py build flash` or click Upload in Arduino IDE, the toolchain 
 
 ```
                        5-STAGE BUILD & FLASH PIPELINE
-  [Source Code] ──► 1. Preprocessor (gcc -E) ──► 2. Compiler (xtensa-gcc)
-                         │                              │
-                         ▼                              ▼
+  [Source Code] â”€â”€â–º 1. Preprocessor (gcc -E) â”€â”€â–º 2. Compiler (xtensa-gcc)
+                         â”‚                              â”‚
+                         â–¼                              â–¼
                  Inlines #headers              Converts C to Xtensa
                  Expands #defines              LX6 Machine Code (.o)
-                         │                              │
-                         └──────────────┬───────────────┘
-                                        ▼
+                         â”‚                              â”‚
+                         â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                                        â–¼
                            3. Linker (xtensa-ld)
-                         (Maps IRAM/DRAM/Flash via esp32.ld ──► .elf)
-                                        │
-                                        ▼
+                         (Maps IRAM/DRAM/Flash via esp32.ld â”€â”€â–º .elf)
+                                        â”‚
+                                        â–¼
                        4. Binary Converter (elf2image)
                          (Strips debug symbols, packages firmware.bin)
-                                        │
-                                        ▼
+                                        â”‚
+                                        â–¼
                        5. Serial Flasher (esptool.py)
-                         (UART DTR/RTS auto-reset ──► SPI Flash @ 921600)
+                         (UART DTR/RTS auto-reset â”€â”€â–º SPI Flash @ 921600)
 ```
 
 ### 3.5 Side-by-Side: The Same Blink Program Under the Hood
@@ -410,38 +425,38 @@ The ESP32 multiplexes 34 physical GPIO pins through an internal **GPIO Matrix**.
 
 ```
                             ESP32 PIN SAFETY CLASSIFICATION
-  ┌─────────────────────────────────────────────────────────────────────────────┐
-  │ 🟢 SAFE EVERYWHERE (14 PINS)                                                │
-  │ GPIO 4, 5, 16, 17, 18, 19, 21, 22, 23, 25, 26, 27, 32, 33                   │
-  │ Full digital input/output, configurable internal pull-up and pull-down.     │
-  │ Default I2C: 21 (SDA), 22 (SCL) • Default SPI: 18 (SCK), 19 (MISO), 23 (MOSI)│
-  ├─────────────────────────────────────────────────────────────────────────────┤
-  │ 🟡 STRAPPING PINS — CAUTION AT BOOT (4 PINS)                                │
-  │ • GPIO 0  : Connected to BOOT button. Must be HIGH to run; pull LOW to flash│
-  │ • GPIO 2  : On-board blue LED. Must be floating or LOW during flashing      │
-  │ • GPIO 12 : MTDI flash voltage select (0=3.3V, 1=1.8V). Pulling HIGH crashes │
-  │ • GPIO 15 : MTDO controls UART boot silence. Pulled HIGH internally          │
-  ├─────────────────────────────────────────────────────────────────────────────┤
-  │ 🔵 INPUT ONLY — NO OUTPUT DRIVER (4 PINS)                                   │
-  │ GPIO 34, 35, 36 (SENSOR_VP), 39 (SENSOR_VN)                                 │
-  │ CANNOT be outputs! NO internal pull-up or pull-down resistors!               │
-  │ Must use external 10 kΩ resistors when connecting push buttons.            │
-  ├─────────────────────────────────────────────────────────────────────────────┤
-  │ 🔴 FORBIDDEN — INTERNAL SPI FLASH (6 PINS)                                  │
-  │ GPIO 6, 7, 8, 9, 10, 11 (CLK, SD0, SD1, SD2, SD3, CMD)                      │
-  │ Hardwired directly to the 4 MB SPI flash chip. Touching these causes an     │
-  │ immediate Fatal Exception / Guru Meditation Reboot! Never wire anything here│
-  ├─────────────────────────────────────────────────────────────────────────────┤
-  │ ⚠️ CRITICAL SILICON CONFLICT: ADC2 & WI-FI                                  │
-  │ ADC2 channels (GPIO 0, 2, 4, 12–15, 25–27) share silicon with the Wi-Fi RF │
-  │ baseband. When Wi-Fi is active, ADC2 readings FAIL or return -1!            │
-  │ ALWAYS use ADC1 (GPIO 32, 33, 34, 35, 36, 39) for analog sensor readings.  │
-  └─────────────────────────────────────────────────────────────────────────────┘
+  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  â”‚ ðŸŸ¢ SAFE EVERYWHERE (14 PINS)                                                â”‚
+  â”‚ GPIO 4, 5, 16, 17, 18, 19, 21, 22, 23, 25, 26, 27, 32, 33                   â”‚
+  â”‚ Full digital input/output, configurable internal pull-up and pull-down.     â”‚
+  â”‚ Default I2C: 21 (SDA), 22 (SCL) â€¢ Default SPI: 18 (SCK), 19 (MISO), 23 (MOSI)â”‚
+  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+  â”‚ ðŸŸ¡ STRAPPING PINS â€” CAUTION AT BOOT (4 PINS)                                â”‚
+  â”‚ â€¢ GPIO 0  : Connected to BOOT button. Must be HIGH to run; pull LOW to flashâ”‚
+  â”‚ â€¢ GPIO 2  : On-board blue LED. Must be floating or LOW during flashing      â”‚
+  â”‚ â€¢ GPIO 12 : MTDI flash voltage select (0=3.3V, 1=1.8V). Pulling HIGH crashes â”‚
+  â”‚ â€¢ GPIO 15 : MTDO controls UART boot silence. Pulled HIGH internally          â”‚
+  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+  â”‚ ðŸ”µ INPUT ONLY â€” NO OUTPUT DRIVER (4 PINS)                                   â”‚
+  â”‚ GPIO 34, 35, 36 (SENSOR_VP), 39 (SENSOR_VN)                                 â”‚
+  â”‚ CANNOT be outputs! NO internal pull-up or pull-down resistors!               â”‚
+  â”‚ Must use external 10 kÎ© resistors when connecting push buttons.            â”‚
+  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+  â”‚ ðŸ”´ FORBIDDEN â€” INTERNAL SPI FLASH (6 PINS)                                  â”‚
+  â”‚ GPIO 6, 7, 8, 9, 10, 11 (CLK, SD0, SD1, SD2, SD3, CMD)                      â”‚
+  â”‚ Hardwired directly to the 4 MB SPI flash chip. Touching these causes an     â”‚
+  â”‚ immediate Fatal Exception / Guru Meditation Reboot! Never wire anything hereâ”‚
+  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+  â”‚ âš ï¸ CRITICAL SILICON CONFLICT: ADC2 & WI-FI                                  â”‚
+  â”‚ ADC2 channels (GPIO 0, 2, 4, 12â€“15, 25â€“27) share silicon with the Wi-Fi RF â”‚
+  â”‚ baseband. When Wi-Fi is active, ADC2 readings FAIL or return -1!            â”‚
+  â”‚ ALWAYS use ADC1 (GPIO 32, 33, 34, 35, 36, 39) for analog sensor readings.  â”‚
+  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ---
 
-## 🧠 DAY 4 — The 4 Memory Tiers & Dynamic Allocation
+## ðŸ§  DAY 4 â€” The 4 Memory Tiers & Dynamic Allocation
 
 ### 4.1 The 4 Memory Regions Explained
 
@@ -451,22 +466,22 @@ The ESP32 employs a tiered memory architecture engineered to balance execution s
 
 ```
                             THE 4 MEMORY REGIONS ANALOGY
-  ┌───────────────┬─────────────────────────────┬──────────────┬────────────────┐
-  │ Memory Region │ Everyday Workspace Analogy  │ Physical Size│ Access Speed   │
-  ├───────────────┼─────────────────────────────┼──────────────┼────────────────┤
-  │ 1. DRAM       │ Your physical desktop       │ ~320 KB      │ 1 CPU cycle    │
-  │ 2. IRAM       │ Fast toolbelt on your waist │ ~128 KB      │ 1 CPU cycle    │
-  │ 3. SPI Flash  │ Bookshelf in the warehouse  │ 4–16 MB      │ 40–80 MHz QSPI │
-  │ 4. RTC SRAM   │ Fireproof nightstand safe   │ 16 KB        │ ~8 MHz domain  │
-  └───────────────┴─────────────────────────────┴──────────────┴────────────────┘
+  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  â”‚ Memory Region â”‚ Everyday Workspace Analogy  â”‚ Physical Sizeâ”‚ Access Speed   â”‚
+  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+  â”‚ 1. DRAM       â”‚ Your physical desktop       â”‚ ~320 KB      â”‚ 1 CPU cycle    â”‚
+  â”‚ 2. IRAM       â”‚ Fast toolbelt on your waist â”‚ ~128 KB      â”‚ 1 CPU cycle    â”‚
+  â”‚ 3. SPI Flash  â”‚ Bookshelf in the warehouse  â”‚ 4â€“16 MB      â”‚ 40â€“80 MHz QSPI â”‚
+  â”‚ 4. RTC SRAM   â”‚ Fireproof nightstand safe   â”‚ 16 KB        â”‚ ~8 MHz domain  â”‚
+  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
-#### 1. DRAM (Data RAM — ~320 KB on-chip)
+#### 1. DRAM (Data RAM â€” ~320 KB on-chip)
 - **Role**: General-purpose memory for variables, buffers, stacks, and the dynamic heap.
 - **Access**: Fully byte-, 16-bit, and 32-bit addressable.
 - **Usage**: Allocated automatically for global variables (`.data` and `.bss`) and dynamic allocations (`malloc()`).
 
-#### 2. IRAM (Instruction RAM — ~128 KB on-chip)
+#### 2. IRAM (Instruction RAM â€” ~128 KB on-chip)
 - **Role**: Stores time-critical executable code that cannot tolerate cache misses.
 - **Access**: Strictly **32-bit aligned** instruction fetches.
 - **The `IRAM_ATTR` Qualifier**: When the ESP32 writes or erases external SPI Flash, the hardware Flash Cache MMU is disabled. If an interrupt fires during a flash write, executing code from Flash causes a fatal crash. Marking your Interrupt Service Routine (ISR) with `IRAM_ATTR` places the compiled machine instructions directly in on-chip IRAM, guaranteeing execution without stall:
@@ -484,7 +499,7 @@ void IRAM_ATTR gpio_isr_handler(void* arg) {
 
 #### 4. RTC SRAM (16 KB low-power on-chip)
 - **Role**: Ultra-low-power memory domain divided into **RTC Fast Memory** (8 KB) and **RTC Slow Memory** (8 KB).
-- **The `RTC_DATA_ATTR` Qualifier**: When the ESP32 enters Deep Sleep, the main CPU cores, high-speed clocks, and digital peripherals are powered down (reducing current draw to just ~5 µA). Standard DRAM is wiped. However, variables declared with `RTC_DATA_ATTR` reside in RTC Slow Memory and **retain their values across deep sleep wake cycles**:
+- **The `RTC_DATA_ATTR` Qualifier**: When the ESP32 enters Deep Sleep, the main CPU cores, high-speed clocks, and digital peripherals are powered down (reducing current draw to just ~5 ÂµA). Standard DRAM is wiped. However, variables declared with `RTC_DATA_ATTR` reside in RTC Slow Memory and **retain their values across deep sleep wake cycles**:
 ```c
 // This variable survives deep sleep reboots!
 RTC_DATA_ATTR int boot_count = 0;
@@ -507,18 +522,18 @@ To prevent memory leaks and out-of-memory crashes in embedded firmware, inspect 
 void inspect_memory(void) {
     // Current instantaneously available heap space
     uint32_t free_heap = esp_get_free_heap_size();
-    
+
     // Lowest free heap recorded since system booted (critical for sizing task stacks!)
     uint32_t min_free_heap = esp_get_minimum_free_heap_size();
 
-    ESP_LOGI("MEM_MAP", "Free Heap: %lu bytes | Watermark: %lu bytes", 
+    ESP_LOGI("MEM_MAP", "Free Heap: %lu bytes | Watermark: %lu bytes",
              free_heap, min_free_heap);
 }
 ```
 
 ---
 
-## 🗂️ DAY 5 — Flash Partition Tables & Dual OTA Updates
+## ðŸ—‚ï¸ DAY 5 â€” Flash Partition Tables & Dual OTA Updates
 
 ### 5.1 Flash Memory Allocation (4 MB / `0x400000` Bytes)
 
@@ -543,11 +558,11 @@ storage,   data, spiffs,  0x320000, 0xE0000,
 
 ```
                           PARTITION FIELD DEFINITIONS
-  • Name    : Human-readable label (up to 16 characters).
-  • Type    : 0x00 ('app') for executable binaries, or 0x01 ('data') for storage.
-  • SubType : Specific usage (nvs, ota, phy, ota_0, ota_1, spiffs, littlefs).
-  • Offset  : Starting byte address in flash (must be 64 KB aligned for app partitions).
-  • Size    : Size in bytes (supports decimal, hex '0x10000', or suffixes '1M', '256K').
+  â€¢ Name    : Human-readable label (up to 16 characters).
+  â€¢ Type    : 0x00 ('app') for executable binaries, or 0x01 ('data') for storage.
+  â€¢ SubType : Specific usage (nvs, ota, phy, ota_0, ota_1, spiffs, littlefs).
+  â€¢ Offset  : Starting byte address in flash (must be 64 KB aligned for app partitions).
+  â€¢ Size    : Size in bytes (supports decimal, hex '0x10000', or suffixes '1M', '256K').
 ```
 
 ### 5.3 Why Dual-Slot OTA Firmware Updates Never Brick Devices
@@ -561,7 +576,7 @@ In industrial deployments, remote Over-The-Air (OTA) firmware updates must be 10
 
 ---
 
-## 🛠️ DAY 6 — Build System Mastery & Component Architecture
+## ðŸ› ï¸ DAY 6 â€” Build System Mastery & Component Architecture
 
 ### 6.1 ESP-IDF CMake Build Engine
 
@@ -570,19 +585,19 @@ ESP-IDF utilizes CMake to resolve dependencies, compile translation units, and l
 ```
                             PROJECT DIRECTORY STRUCTURE
   my_esp32_project/
-  ├── CMakeLists.txt                 # Project-level build script
-  ├── sdkconfig                      # Generated build configuration
-  ├── partitions.csv                 # Custom partition table
-  ├── main/                          # Main application component
-  │   ├── CMakeLists.txt             # Component-level build script
-  │   ├── Kconfig.projbuild          # Custom interactive menu options
-  │   └── main.c                     # Primary application entry point
-  └── components/                    # Modular reusable libraries
-      └── sensor_driver/
-          ├── CMakeLists.txt         # Component registration script
-          ├── include/
-          │   └── sensor_driver.h    # Public API header
-          └── sensor_driver.c        # Hardware driver implementation
+  â”œâ”€â”€ CMakeLists.txt                 # Project-level build script
+  â”œâ”€â”€ sdkconfig                      # Generated build configuration
+  â”œâ”€â”€ partitions.csv                 # Custom partition table
+  â”œâ”€â”€ main/                          # Main application component
+  â”‚   â”œâ”€â”€ CMakeLists.txt             # Component-level build script
+  â”‚   â”œâ”€â”€ Kconfig.projbuild          # Custom interactive menu options
+  â”‚   â””â”€â”€ main.c                     # Primary application entry point
+  â””â”€â”€ components/                    # Modular reusable libraries
+      â””â”€â”€ sensor_driver/
+          â”œâ”€â”€ CMakeLists.txt         # Component registration script
+          â”œâ”€â”€ include/
+          â”‚   â””â”€â”€ sensor_driver.h    # Public API header
+          â””â”€â”€ sensor_driver.c        # Hardware driver implementation
 ```
 
 #### 1. Root `CMakeLists.txt`
@@ -623,7 +638,7 @@ endmenu
 
 ---
 
-## 📜 DAY 7 — Industrial Logging Framework & Telemetry
+## ðŸ“œ DAY 7 â€” Industrial Logging Framework & Telemetry
 
 ### 7.1 Production Logging vs Standard Printing
 
@@ -631,16 +646,16 @@ In production embedded software, raw `printf()` or `Serial.println()` statements
 
 ```
                        ESP_LOG vs STANDARD PRINTF / SERIAL
-  ┌───────────────────────────────┬───────────────────────────────┐
-  │         ESP_LOG MACROS        │        PRINTF / SERIAL        │
-  ├───────────────────────────────┼───────────────────────────────┤
-  │ • 5 Granular verbosity levels │ • No verbosity control        │
-  │ • Automatic ANSI color coding │ • Plain monochrome text       │
-  │ • Millisecond uptime stamp    │ • No timestamp information    │
-  │ • Component source tag        │ • Source origin unknown       │
-  │ • Zero overhead when disabled │ • Always consumes CPU & flash │
-  │ • Runtime filtering per tag   │ • Cannot be silenced at runtime│
-  └───────────────────────────────┴───────────────────────────────┘
+  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  â”‚         ESP_LOG MACROS        â”‚        PRINTF / SERIAL        â”‚
+  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+  â”‚ â€¢ 5 Granular verbosity levels â”‚ â€¢ No verbosity control        â”‚
+  â”‚ â€¢ Automatic ANSI color coding â”‚ â€¢ Plain monochrome text       â”‚
+  â”‚ â€¢ Millisecond uptime stamp    â”‚ â€¢ No timestamp information    â”‚
+  â”‚ â€¢ Component source tag        â”‚ â€¢ Source origin unknown       â”‚
+  â”‚ â€¢ Zero overhead when disabled â”‚ â€¢ Always consumes CPU & flash â”‚
+  â”‚ â€¢ Runtime filtering per tag   â”‚ â€¢ Cannot be silenced at runtimeâ”‚
+  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### 7.2 The 5 Log Verbosity Levels
@@ -672,7 +687,7 @@ esp_log_level_set("wifi", ESP_LOG_VERBOSE);
 
 ---
 
-## 🏆 DAY 8 — Milestone Project: System Profiler & Diagnostics
+## ðŸ† DAY 8 â€” Milestone Project: System Profiler & Diagnostics
 
 ### 8.1 Project Specification
 
@@ -683,7 +698,7 @@ The **Phase 1 Milestone Project** is an industrial hardware diagnostics firmware
 ```c
 /**
  * @file main.c
- * @brief Phase 01 Milestone Project — Industrial System Profiler & Diagnostics
+ * @brief Phase 01 Milestone Project â€” Industrial System Profiler & Diagnostics
  * @platform ESP32-WROOM-32 (Xtensa Dual-Core 32-bit LX6)
  */
 
@@ -720,7 +735,7 @@ static const char* get_reset_reason_desc(esp_reset_reason_t reason) {
 void app_main(void)
 {
     ESP_LOGI(TAG, "============================================================");
-    ESP_LOGI(TAG, "  ESP32 350-DAY MASTER PLAN — PHASE 1 SYSTEM PROFILER       ");
+    ESP_LOGI(TAG, "  ESP32 350-DAY MASTER PLAN â€” PHASE 1 SYSTEM PROFILER       ");
     ESP_LOGI(TAG, "============================================================");
 
     /* 1. Reset Reason Analysis */
@@ -738,15 +753,15 @@ void app_main(void)
 
     /* 3. Integrated Hardware Capabilities */
     ESP_LOGI(TAG, "Hardware Peripherals:");
-    ESP_LOGI(TAG, " • Wi-Fi 802.11 b/g/n: %s", (chip_info.features & CHIP_FEATURE_WIFI_BGN) ? "ENABLED" : "DISABLED");
-    ESP_LOGI(TAG, " • Bluetooth Classic:  %s", (chip_info.features & CHIP_FEATURE_BT) ? "ENABLED" : "DISABLED");
-    ESP_LOGI(TAG, " • Bluetooth Low E:    %s", (chip_info.features & CHIP_FEATURE_BLE) ? "ENABLED" : "DISABLED");
-    ESP_LOGI(TAG, " • Internal Flash:     %s", (chip_info.features & CHIP_FEATURE_EMB_FLASH) ? "YES" : "NO (External SPI)");
+    ESP_LOGI(TAG, " â€¢ Wi-Fi 802.11 b/g/n: %s", (chip_info.features & CHIP_FEATURE_WIFI_BGN) ? "ENABLED" : "DISABLED");
+    ESP_LOGI(TAG, " â€¢ Bluetooth Classic:  %s", (chip_info.features & CHIP_FEATURE_BT) ? "ENABLED" : "DISABLED");
+    ESP_LOGI(TAG, " â€¢ Bluetooth Low E:    %s", (chip_info.features & CHIP_FEATURE_BLE) ? "ENABLED" : "DISABLED");
+    ESP_LOGI(TAG, " â€¢ Internal Flash:     %s", (chip_info.features & CHIP_FEATURE_EMB_FLASH) ? "YES" : "NO (External SPI)");
 
     /* 4. External SPI Flash Metrics */
     uint32_t flash_size_bytes = 0;
     if (esp_flash_get_size(NULL, &flash_size_bytes) == ESP_OK) {
-        ESP_LOGI(TAG, "SPI Flash Capacity:   %" PRIu32 " MB (%" PRIu32 " Bytes)", 
+        ESP_LOGI(TAG, "SPI Flash Capacity:   %" PRIu32 " MB (%" PRIu32 " Bytes)",
                  flash_size_bytes / (1024 * 1024), flash_size_bytes);
     }
 
@@ -760,9 +775,9 @@ void app_main(void)
     /* 6. On-Chip SRAM Heap Telemetry */
     ESP_LOGI(TAG, "------------------------------------------------------------");
     ESP_LOGI(TAG, "INTERNAL MEMORY ALLOCATION MAP:");
-    ESP_LOGI(TAG, " • Instant Free Heap: %" PRIu32 " Bytes (~%" PRIu32 " KB)", 
+    ESP_LOGI(TAG, " â€¢ Instant Free Heap: %" PRIu32 " Bytes (~%" PRIu32 " KB)",
              esp_get_free_heap_size(), esp_get_free_heap_size() / 1024);
-    ESP_LOGI(TAG, " • Min Free Watermark:%" PRIu32 " Bytes (~%" PRIu32 " KB)", 
+    ESP_LOGI(TAG, " â€¢ Min Free Watermark:%" PRIu32 " Bytes (~%" PRIu32 " KB)",
              esp_get_minimum_free_heap_size(), esp_get_minimum_free_heap_size() / 1024);
     ESP_LOGI(TAG, "============================================================");
 
@@ -773,7 +788,7 @@ void app_main(void)
     while (1) {
         vTaskDelay(pdMS_TO_TICKS(5000));
         heartbeat_tick++;
-        
+
         ESP_LOGI(TAG, "HEARTBEAT #%" PRIu32 " | Uptime: %" PRIu32 " s | Free Heap: %" PRIu32 " B | Min Heap: %" PRIu32 " B",
                  heartbeat_tick,
                  (uint32_t)(esp_log_timestamp() / 1000),
@@ -799,7 +814,7 @@ void setup() {
     delay(500);
 
     Serial.println("\n============================================================");
-    Serial.println("  ESP32 ARDUINO BRING-UP — PHASE 1 SYSTEM PROFILER          ");
+    Serial.println("  ESP32 ARDUINO BRING-UP â€” PHASE 1 SYSTEM PROFILER          ");
     Serial.println("============================================================");
 
     // Silicon & CPU Information
@@ -835,7 +850,7 @@ void loop() {
 
 ```text
 ============================================================
-  ESP32 350-DAY MASTER PLAN — PHASE 1 SYSTEM PROFILER       
+  ESP32 350-DAY MASTER PLAN â€” PHASE 1 SYSTEM PROFILER
 ============================================================
 I (312) SYS_PROFILER: Boot Trigger:         [0x01] Power-On Reset (Cold boot / EN button)
 I (320) SYS_PROFILER: Silicon Model:        esp32
@@ -843,16 +858,16 @@ I (324) SYS_PROFILER: CPU Architecture:     Xtensa 32-bit LX6 Dual-Core
 I (330) SYS_PROFILER: Physical Cores:       2 Cores Active
 I (336) SYS_PROFILER: Silicon Revision:     v3.0
 I (340) SYS_PROFILER: Hardware Peripherals:
-I (345) SYS_PROFILER:  • Wi-Fi 802.11 b/g/n: ENABLED
-I (350) SYS_PROFILER:  • Bluetooth Classic:  ENABLED
-I (355) SYS_PROFILER:  • Bluetooth Low E:    ENABLED
-I (360) SYS_PROFILER:  • Internal Flash:     NO (External SPI)
+I (345) SYS_PROFILER:  â€¢ Wi-Fi 802.11 b/g/n: ENABLED
+I (350) SYS_PROFILER:  â€¢ Bluetooth Classic:  ENABLED
+I (355) SYS_PROFILER:  â€¢ Bluetooth Low E:    ENABLED
+I (360) SYS_PROFILER:  â€¢ Internal Flash:     NO (External SPI)
 I (367) SYS_PROFILER: SPI Flash Capacity:   4 MB (4194304 Bytes)
 I (373) SYS_PROFILER: Wi-Fi Station MAC:    B4:E6:2D:E2:1A:08
 ------------------------------------------------------------
 I (380) SYS_PROFILER: INTERNAL MEMORY ALLOCATION MAP:
-I (386) SYS_PROFILER:  • Instant Free Heap: 298412 Bytes (~291 KB)
-I (392) SYS_PROFILER:  • Min Free Watermark:293108 Bytes (~286 KB)
+I (386) SYS_PROFILER:  â€¢ Instant Free Heap: 298412 Bytes (~291 KB)
+I (392) SYS_PROFILER:  â€¢ Min Free Watermark:293108 Bytes (~286 KB)
 ============================================================
 I (399) SYS_PROFILER: Phase 1 Diagnostics complete. System entering periodic telemetry mode.
 I (5404) SYS_PROFILER: HEARTBEAT #1 | Uptime: 5 s | Free Heap: 298412 B | Min Heap: 293108 B
@@ -861,7 +876,7 @@ I (10404) SYS_PROFILER: HEARTBEAT #2 | Uptime: 10 s | Free Heap: 298412 B | Min 
 
 ---
 
-## ✅ Phase 1 Mastery Knowledge Checklist
+## âœ… Phase 1 Mastery Knowledge Checklist
 
 Before moving to **Phase 2: Digital I/O Operations**, ensure you can explain and verify every core competency:
 
@@ -887,4 +902,4 @@ Before moving to **Phase 2: Digital I/O Operations**, ensure you can explain and
 
 ---
 
-[⬅️ Master Curriculum](../../README.md#-the-350-day-execution-roadmap) | [Daily Tracker](../../DAILY_TRACKER.md) | [Next Phase: Phase 2 Digital I/O Operations ➡️](../phase02_digital_io/README.md)
+[â¬…ï¸ Master Curriculum](../../README.md#-the-350-day-execution-roadmap) | [Daily Tracker](../../DAILY_TRACKER.md) | [Next Phase: Phase 2 Digital I/O Operations âž¡ï¸](../phase02_digital_io/README.md)

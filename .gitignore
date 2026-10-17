@@ -1,7 +1,10 @@
-# ESP-IDF Build Artifacts
+﻿# ESP-IDF Build Artifacts
 build/
 sdkconfig.old
 sdkconfig
+
+# ESP-IDF managed component cache
+managed_components/
 
 # Editor & OS artifacts
 .vscode/*
