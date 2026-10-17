@@ -1,22 +1,22 @@
-﻿# ðŸ“Œ ESP32-WROOM-32 Hardware & GPIO Quick Reference
+# ESP32-WROOM-32 Hardware and GPIO Quick Reference
 
 A clear, beginner-friendly reference for the **ESP32-WROOM-32** development board. Keep this open whenever you wire breadboard circuits!
 
 ---
 
-## âš¡ Fundamental Operating Limits
+## Fundamental Operating Limits
 
-- **Operating Voltage**: **3.3 V DC** (Power pins include 3V3, 5V/VIN via on-board regulator, and GND).
-- **GPIO Logic Level**: **3.3 V ONLY**.
-  - High logic = 3.3 V
-  - Low logic = 0 V
-  - âš ï¸ **Never connect 5 V directly to any GPIO pin!**
-- **Recommended GPIO Output Current**: 5â€“12 mA continuous per pin.
+- **Operating Voltage**: **3.3V DC** (Power pins include 3V3, 5V/VIN via on-board regulator, and GND).
+- **GPIO Logic Level**: **3.3V ONLY**.
+  - High logic = 3.3V
+  - Low logic = 0V
+  - **Warning: Never connect 5V directly to any GPIO pin!**
+- **Recommended GPIO Output Current**: 5 to 12 mA continuous per pin.
 - **Flash Size**: Varies by board and vendor (typically **4 MB**, though some variants have 8 MB or 16 MB). Inspect your board during Phase 1 boot logs.
 
 ---
 
-## ðŸŸ¢ Recommended Beginner GPIO Pins
+## Recommended Beginner GPIO Pins
 
 These pins are general-purpose, safe, and do not interfere with standard boot modes:
 
@@ -24,7 +24,7 @@ These pins are general-purpose, safe, and do not interfere with standard boot mo
 GPIO 4, 5, 16, 17, 18, 19, 21, 22, 23, 25, 26, 27, 32, 33
 ```
 
-- **Output & Input**: All of these pins can be configured as digital outputs (`GPIO_MODE_OUTPUT`) or digital inputs (`GPIO_MODE_INPUT`).
+- **Output and Input**: All of these pins can be configured as digital outputs (`GPIO_MODE_OUTPUT`) or digital inputs (`GPIO_MODE_INPUT`).
 - **Internal Pull-up / Pull-down**: Supported on all of these pins.
 - **DAC Pins**: **GPIO 25** and **GPIO 26** feature true 8-bit digital-to-analog converters (DAC).
 - **Default I2C Pins**: Typically **GPIO 21** (SDA) and **GPIO 22** (SCL).
@@ -32,28 +32,28 @@ GPIO 4, 5, 16, 17, 18, 19, 21, 22, 23, 25, 26, 27, 32, 33
 
 ---
 
-## ðŸ”µ Input-Only GPIO Pins (GPI)
+## Input-Only GPIO Pins (GPI)
 
 ```text
 GPIO 34, GPIO 35, GPIO 36 (VP), GPIO 39 (VN)
 ```
 
 - **Input ONLY**: These pins **cannot output signals**. Do not attempt to drive LEDs, relays, or buzzers with them.
-- **No Internal Pull-up or Pull-down Resistors**: If you connect a button or switch to these pins, you **must wire an external resistor** (e.g., 10 kÎ©) to 3.3V or GND to prevent a floating input.
+- **No Internal Pull-up or Pull-down Resistors**: If you connect a button or switch to these pins, you **must wire an external resistor** (for example, 10k ohm) to 3.3V or GND to prevent a floating input.
 - **Great for**: Reading analog sensors (potentiometers, light sensors, temperature sensors) via ADC1.
 
 ---
 
-## âš ï¸ Important Hardware Warnings
+## Important Hardware Warnings
 
-### 1. The SPI Flash Pins (GPIO 6â€“11) â€” NEVER USE!
+### 1. The SPI Flash Pins (GPIO 6 to 11) - NEVER USE!
 - **Pins**: `GPIO 6`, `GPIO 7`, `GPIO 8`, `GPIO 9`, `GPIO 10`, `GPIO 11`.
 - **Warning**: These pins are connected internally to the SPI flash memory chip that stores your firmware code.
 - **What happens if used**: If you connect wires or components to any of these pins, your board will crash immediately or refuse to boot.
 
 ---
 
-### 2. Strapping / Boot Pins (GPIO 0, 2, 12, 15) â€” USE WITH CAUTION
+### 2. Strapping / Boot Pins (GPIO 0, 2, 12, 15) - USE WITH CAUTION
 - The ESP32 checks the voltage level on these pins during the first millisecond of power-on to decide how to boot:
   - **GPIO 0**: Must be HIGH for normal SPI Flash boot. Pulled LOW to enter serial flashing mode.
   - **GPIO 2**: Must be LOW or floating during flashing; often connected to on-board LED.
@@ -71,24 +71,24 @@ GPIO 34, GPIO 35, GPIO 36 (VP), GPIO 39 (VN)
 
 ---
 
-## ðŸ“‹ Quick Pin Summary Table
+## Quick Pin Summary Table
 
 | GPIO Number | Safe for Beginners? | Input? | Output? | Internal Pull-Up? | Special Function / Notes |
 | :---: | :---: | :---: | :---: | :---: | :--- |
-| **0** | âš ï¸ Caution | Yes | Yes | Yes | Strapping pin (Boot mode); BOOT button |
-| **2** | âš ï¸ Caution | Yes | Yes | Yes | Strapping pin; often on-board LED |
-| **4** | âœ… Yes | Yes | Yes | Yes | Great beginner output/input (Day 9 LED) |
-| **5** | âœ… Yes | Yes | Yes | Yes | Safe general GPIO |
-| **6â€“11**| âŒ NEVER | â€” | â€” | â€” | Connected to internal SPI Flash chip |
-| **12** | âš ï¸ Caution | Yes | Yes | Yes | Strapping pin (Flash voltage) |
-| **13, 14** | âœ… Yes | Yes | Yes | Yes | Safe general GPIO |
-| **15** | âš ï¸ Caution | Yes | Yes | Yes | Strapping pin (UART debug) |
-| **16, 17** | âœ… Yes | Yes | Yes | Yes | Safe general GPIO (UART2 default) |
-| **18, 19** | âœ… Yes | Yes | Yes | Yes | VSPI clock and MISO |
-| **21, 22** | âœ… Yes | Yes | Yes | Yes | Default I2C SDA and SCL |
-| **23** | âœ… Yes | Yes | Yes | Yes | VSPI MOSI |
-| **25, 26** | âœ… Yes | Yes | Yes | Yes | True 8-bit DAC channels (DAC1, DAC2) |
-| **27** | âœ… Yes | Yes | Yes | Yes | Safe general GPIO / ADC2 |
-| **32, 33** | âœ… Yes | Yes | Yes | Yes | ADC1 channels (safe with Wi-Fi) |
-| **34, 35** | âœ… Yes (Input only) | Yes | âŒ No | âŒ No | Input only; requires external pull-up |
-| **36, 39** | âœ… Yes (Input only) | Yes | âŒ No | âŒ No | Input only (VP/VN); requires external pull-up |
+| **0** | Caution | Yes | Yes | Yes | Strapping pin (Boot mode); BOOT button |
+| **2** | Caution | Yes | Yes | Yes | Strapping pin; often on-board LED |
+| **4** | Yes | Yes | Yes | Yes | Great beginner output/input (Day 9 LED) |
+| **5** | Yes | Yes | Yes | Yes | Safe general GPIO |
+| **6 to 11** | NEVER USE | No | No | No | Connected to internal SPI Flash chip |
+| **12** | Caution | Yes | Yes | Yes | Strapping pin (Flash voltage) |
+| **13, 14** | Yes | Yes | Yes | Yes | Safe general GPIO |
+| **15** | Caution | Yes | Yes | Yes | Strapping pin (UART debug) |
+| **16, 17** | Yes | Yes | Yes | Yes | Safe general GPIO (UART2 default) |
+| **18, 19** | Yes | Yes | Yes | Yes | VSPI clock and MISO |
+| **21, 22** | Yes | Yes | Yes | Yes | Default I2C SDA and SCL |
+| **23** | Yes | Yes | Yes | Yes | VSPI MOSI |
+| **25, 26** | Yes | Yes | Yes | Yes | True 8-bit DAC channels (DAC1, DAC2) |
+| **27** | Yes | Yes | Yes | Yes | Safe general GPIO / ADC2 |
+| **32, 33** | Yes | Yes | Yes | Yes | ADC1 channels (safe with Wi-Fi) |
+| **34, 35** | Yes (Input only) | Yes | No | No | Input only; requires external pull-up |
+| **36, 39** | Yes (Input only) | Yes | No | No | Input only (VP/VN); requires external pull-up |

@@ -1,27 +1,27 @@
-﻿# ðŸ’» ESP-IDF Windows Setup Guide: From Zero to First Flash
+# ESP-IDF Windows Setup Guide: From Zero to First Flash
 
 This step-by-step guide walks you through installing and configuring the official **Espressif IoT Development Framework (ESP-IDF)** on Microsoft Windows using Visual Studio Code.
 
 ---
 
-## âš ï¸ CRITICAL RULE: Folder Path Naming on Windows
+## CRITICAL RULE: Folder Path Naming on Windows
 
 Before installing anything or cloning projects, ensure your folder paths are safe:
 
-> ### ðŸ›‘ Avoid Special Characters (Especially `&`) in Directory Paths!
-> In Windows command processing (PowerShell and CMD), the ampersand character (`&`) serves as a command separator. If an ESP-IDF project path contains `&` or spaces, CMake and Python build tools can fail mysteriously with errors like:
+> ### Avoid Special Characters (Especially &) in Directory Paths!
+> In Windows command processing (PowerShell and CMD), the ampersand character (&) serves as a command separator. If an ESP-IDF project path contains & or spaces, CMake and Python build tools can fail mysteriously with errors like:
 > `'Electronics' is not recognized as an internal or external command`
 >
-> - **âœ… Good Path Example**:
+> - **[Good Path Example]**:
 >   `E:\Embedded_Electronics\github\ESP32`
-> - **âŒ Bad Path Example**:
+> - **[Bad Path Example]**:
 >   `E:\Embedded & Electronics\github\ESP32`
 
-Always keep directory names clean: use alphanumeric characters, underscores (`_`), and hyphens (`-`).
+Always keep directory names clean: use alphanumeric characters, underscores (_), and hyphens (-).
 
 ---
 
-## ðŸ› ï¸ Step 1: Install Visual Studio Code
+## Step 1: Install Visual Studio Code
 
 1. Download and install **[Visual Studio Code](https://code.visualstudio.com/)** for Windows.
 2. During installation, check the boxes for:
@@ -30,7 +30,7 @@ Always keep directory names clean: use alphanumeric characters, underscores (`_`
 
 ---
 
-## ðŸ”Œ Step 2: Install the Espressif ESP-IDF Extension
+## Step 2: Install the Espressif ESP-IDF Extension
 
 1. Open VS Code.
 2. Press `Ctrl + Shift + X` to open the Extensions tab.
@@ -39,21 +39,21 @@ Always keep directory names clean: use alphanumeric characters, underscores (`_`
 
 ---
 
-## âš™ï¸ Step 3: Configure ESP-IDF Tools
+## Step 3: Configure ESP-IDF Tools
 
 1. Once the extension is installed, press `Ctrl + Shift + P` to open the Command Palette.
 2. Type and select:
    `ESP-IDF: Configure ESP-IDF Extension`
 3. In the setup wizard:
    - Select **Express** setup.
-   - Choose your target ESP-IDF version (we recommend **ESP-IDF v6.1** or the latest stable v5.x/v6.x release).
-   - Choose installation directories without spaces (e.g., `C:\esp\v6.1\esp-idf` and `C:\Espressif\tools`).
+   - Choose your target ESP-IDF version (we recommend **ESP-IDF v6.1** or the latest stable release).
+   - Choose installation directories without spaces (for example, `C:\esp\v6.1\esp-idf` and `C:\Espressif\tools`).
 4. Click **Install**. The installer will automatically download the Python virtual environment, Git tools, and Xtensa GCC compiler toolchains.
-5. Wait for the installer to finish; this can take 10â€“20 minutes depending on your internet connection.
+5. Wait for the installer to finish; this can take 10 to 20 minutes depending on your internet connection.
 
 ---
 
-## ðŸ” Step 4: Find Your ESP32 COM Port in Windows
+## Step 4: Find Your ESP32 COM Port in Windows
 
 1. Connect your ESP32 board to your computer using a USB data cable.
 2. Press `Win + X` and select **Device Manager**.
@@ -61,28 +61,28 @@ Always keep directory names clean: use alphanumeric characters, underscores (`_`
 4. You should see a device like:
    - `Silicon Labs CP210x USB to UART Bridge (COM3)`
    - or `USB-SERIAL CH340 (COM4)`
-5. Note down your COM port number (e.g., `COM3`, `COM4`, etc.).
+5. Note down your COM port number (for example, `COM3`, `COM4`, etc.).
 
-> ðŸ’¡ **Don't see any COM port?**
+> **Tip: Do not see any COM port?**  
 > If Device Manager does not react when plugging the board in, your USB cable is likely **charge-only** (has no data wires), or you need to install the CP2102 / CH340 driver. See **[Troubleshooting Guide](TROUBLESHOOTING.md)**.
 
 ---
 
-## ðŸ“‚ Step 5: Open an ESP-IDF Project in VS Code
+## Step 5: Open an ESP-IDF Project in VS Code
 
 1. Open VS Code.
-2. Click **File â†’ Open Folder...** and select the root of an ESP-IDF project (for example, `firmware/phase02_digital_io/day09_gpio_output`).
+2. Click **File -> Open Folder...** and select the root of an ESP-IDF project (for example, `firmware/phase02_digital_io/day09_gpio_output`).
 3. Notice the blue status bar icons at the bottom of VS Code:
-   - **Target**: Set to `esp32` (or press `Ctrl + Shift + P` and choose `ESP-IDF: Set Espressif Device Target` $\to$ `esp32`).
-   - **Port**: Select your board's COM port (e.g., `COM3`).
+   - **Target**: Set to `esp32` (or press `Ctrl + Shift + P` and choose `ESP-IDF: Set Espressif Device Target` -> `esp32`).
+   - **Port**: Select your board COM port (for example, `COM3`).
    - **Flash Method**: Select `UART`.
 
 ---
 
-## ðŸš€ Step 6: The Core Commands â€” Build, Flash, and Monitor
+## Step 6: The Core Commands - Build, Flash, and Monitor
 
 Open the dedicated **ESP-IDF Terminal** in VS Code:
-- Press `Ctrl + Shift + P` $\to$ `ESP-IDF: Open ESP-IDF Terminal`
+- Press `Ctrl + Shift + P` -> `ESP-IDF: Open ESP-IDF Terminal`
 - Alternatively, click the small terminal icon on the bottom ESP-IDF status bar.
 
 ### 1. Build Firmware
@@ -90,14 +90,14 @@ Open the dedicated **ESP-IDF Terminal** in VS Code:
 idf.py build
 ```
 - **What it does**: Compiles all C source files, generates headers, links libraries, and creates binary files (`.bin` and `.elf`) inside the `build/` folder.
-- **Note**: The **first build takes significantly longer** (2â€“5 minutes) because it compiles the entire FreeRTOS kernel and ESP-IDF drivers. Subsequent builds only recompile changed files and finish in a few seconds!
+- **Note**: The **first build takes significantly longer** (2 to 5 minutes) because it compiles the entire FreeRTOS kernel and ESP-IDF drivers. Subsequent builds only recompile changed files and finish in a few seconds!
 
 ### 2. Flash to the ESP32
 ```bash
 idf.py -p COMx flash
 ```
-*(Replace `COMx` with your actual port, e.g., `COM3`)*
-- **What it does**: Connects via serial UART to the board's ROM bootloader and writes the compiled bootloader, partition table, and application binaries into the ESP32 SPI Flash memory.
+*(Replace `COMx` with your actual port, for example, `COM3`)*
+- **What it does**: Connects via serial UART to the board ROM bootloader and writes the compiled bootloader, partition table, and application binaries into the ESP32 SPI Flash memory.
 
 ### 3. Monitor Serial Output
 ```bash
@@ -112,7 +112,7 @@ idf.py -p COMx flash monitor
 
 ---
 
-## ðŸ›‘ How to Exit the Serial Monitor
+## How to Exit the Serial Monitor
 
 To exit the serial monitor in the terminal:
 Press:
@@ -123,7 +123,7 @@ Ctrl + ]
 
 ---
 
-## ðŸ’¡ Important Differences Beginners Must Know
+## Important Differences Beginners Must Know
 
 ### 1. Build vs Flash
 - **Build**: Compiles code on your computer. Does not communicate with or require your ESP32 board.
@@ -133,11 +133,11 @@ Ctrl + ]
 - If you open a standard Windows PowerShell window and run `idf.py build`, Windows will report:
   `'idf.py' is not recognized as an internal or external command`.
 - **Reason**: `idf.py` requires specific environment variables (`IDF_PATH`, Python virtual environment, Xtensa toolchain paths) loaded into the shell.
-- **Solution**: Always use the **ESP-IDF Terminal** inside VS Code (`Ctrl + Shift + P` $\to$ `ESP-IDF: Open ESP-IDF Terminal`) or launch the **ESP-IDF PowerShell Environment** shortcut created on your desktop/start menu.
+- **Solution**: Always use the **ESP-IDF Terminal** inside VS Code (`Ctrl + Shift + P` -> `ESP-IDF: Open ESP-IDF Terminal`) or launch the **ESP-IDF PowerShell Environment** shortcut created on your desktop/start menu.
 
 ---
 
-## ðŸ”„ Stuck at "Connecting..." During Flashing?
+## Stuck at "Connecting..." During Flashing?
 
 If you see:
 ```text
@@ -148,7 +148,7 @@ Your ESP32 did not enter UART download bootloader mode automatically.
 
 ### The Fix (The BOOT Button Method):
 1. Run `idf.py -p COMx flash` again.
-2. As soon as `Connecting........` appears on the screen, **press and hold the physical `BOOT` (or `IO0`) button** on your ESP32 board.
+2. As soon as `Connecting........` appears on the screen, **press and hold the physical BOOT (or IO0) button** on your ESP32 board.
 3. Release the button as soon as the flashing percentages (`Writing at 0x00010000... (10 %)`) start moving!
 
 ---

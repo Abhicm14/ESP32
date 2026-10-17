@@ -1,4 +1,4 @@
-﻿# ðŸš€ Start Here: Your Beginner Onboarding Guide
+# Start Here: Your Beginner Onboarding Guide
 
 Welcome to your hands-on journey with the **ESP32**!
 
@@ -6,7 +6,7 @@ Whether you are writing your very first line of microcontroller code or transiti
 
 ---
 
-## ðŸŽ¯ Who This Repository Is For
+## Who This Repository Is For
 
 - **Complete beginners** who have never touched a breadboard or microcontroller before.
 - **12th-pass students** wanting to explore electronics and computer engineering practically.
@@ -14,28 +14,28 @@ Whether you are writing your very first line of microcontroller code or transiti
 - **Arduino users** ready to move to industrial, production-grade **ESP-IDF** firmware.
 - **Aspiring embedded software engineers** who want to build real systems with FreeRTOS, networking, OTA updates, and secure IoT architectures.
 
-> ### ðŸ’¡ You Do NOT Need an Electronics Degree!
+> ### You Do NOT Need an Electronics Degree!
 > Everything you need to know is taught step by step. We start with plain-English analogies (like water flowing through pipes) and build practical circuits before writing complex code. If you can plug in a USB cable and follow simple instructions, you can master this roadmap.
 
 ---
 
-## ðŸ§° Required Starter Hardware
+## Required Starter Hardware
 
 To complete the foundational experiments in Phase 1 and Phase 2, you only need an inexpensive starter kit:
 
 1. **ESP32-WROOM-32 Development Board** (30-pin or 38-pin DevKit V1)
 2. **Micro-USB or USB-C Data Cable** (Make sure it is a **data cable**, not a charge-only cable!)
 3. **Half-size or Full-size Solderless Breadboard**
-4. **Male-to-Male Jumper Wires** (bundle of 20â€“30)
+4. **Male-to-Male Jumper Wires** (bundle of 20 to 30)
 5. **Standard 5mm LEDs** (Red, Green, Blue, or Yellow)
-6. **220 Î© (or 330 Î©) Resistors** (1/4 Watt, for current-limiting LEDs)
+6. **220 ohm (or 330 ohm) Resistors** (1/4 Watt, for current-limiting LEDs)
 7. **Tactile Push Buttons** (4-pin momentary buttons)
 
-> ðŸ›’ Need the full bill of materials for upcoming phases? See **[Hardware Bill of Materials (BOM)](docs/HARDWARE_BOM.md)**.
+> Need the full bill of materials for upcoming phases? See **[Hardware Bill of Materials (BOM)](docs/HARDWARE_BOM.md)**.
 
 ---
 
-## âš–ï¸ Arduino IDE vs ESP-IDF: Which One Are We Learning?
+## Arduino IDE vs ESP-IDF: Which One Are We Learning?
 
 You will learn **both**, but they serve distinct purposes:
 
@@ -44,52 +44,54 @@ You will learn **both**, but they serve distinct purposes:
 | **Primary Role** | Quick reference, rapid prototyping, beginner concepts | **The professional main path** |
 | **Ease of Start** | Very simple (`pinMode`, `digitalWrite`, `delay`) | Industry standard (`gpio_set_level`, FreeRTOS tasks) |
 | **Power & Control** | High-level abstraction; hides RTOS and registers | Full dual-core control, memory tuning, eFuses, deep diagnostics |
-| **Our Philosophy** | **Additional learning/reference tool** | **Core engineering foundation** |
+| **Our Philosophy** | **Additional learning and reference tool** | **Core engineering foundation** |
 
 > **Important**: Arduino is an additional learning and reference path to help you grasp concepts quickly. It does **not** replace ESP-IDF in this curriculum.
 
 ---
 
-## ðŸ—ºï¸ Recommended Beginner Learning Order
+## Recommended Beginner Learning Order
 
 Follow this exact sequence to build rock-solid foundations:
 
-```
-[Day 0: Electronics Basics] â”€â”€â–º [Tool Setup: ESP-IDF] â”€â”€â–º [Phase 1: Boot & System Info]
-                                                                     â”‚
-[Phase 2 Day 10: Button Input] â—„â”€â”€ [Phase 2 Day 9: LED Blink] â—„â”€â”€â”€â”€â”€â”€â”˜
+```text
+[Day 0: Electronics Basics] -> [Tool Setup: ESP-IDF] -> [Phase 1: Boot & System Info]
+                                                                     |
+[Phase 2 Day 10: Button Input] <- [Phase 2 Day 9: LED Blink] <-------+
 ```
 
-1. **Step 1: Master Day 0 Electronics Prerequisites**
-   Read **[Day 0 â€” Electronics Prerequisites](Prerequisites.md)**. Learn Voltage ($V$), Current ($I$), Resistance ($R$), Ohm's Law, and how to safely wire an LED.
-2. **Step 2: Set Up Your Development Environment**
+1. **Step 1: Master Day 0 Electronics Prerequisites**  
+   Read **[Day 0 - Electronics Prerequisites](Prerequisites.md)**. Learn Voltage (V), Current (I), Resistance (R), Ohm's Law, and how to safely wire an LED.
+2. **Step 2: Set Up Your Development Environment**  
    Follow **[ESP-IDF Windows Setup Guide](docs/ESP_IDF_WINDOWS_SETUP.md)** to install VS Code and configure ESP-IDF.
-3. **Step 3: Run Your First ESP-IDF Project**
+3. **Step 3: Run Your First ESP-IDF Project**  
    Explore **[Phase 1: Architecture & Foundations](firmware/phase01_foundations/README.md)** to see how the ESP32 boots and reports system diagnostic information.
-4. **Step 4: Wire and Blink Your First External LED**
+4. **Step 4: Wire and Blink Your First External LED**  
    Jump into **[Phase 2: Digital I/O](firmware/phase02_digital_io/README.md)** and execute **[Day 9: GPIO Output Blink](firmware/phase02_digital_io/day09_gpio_output/README.md)**.
-5. **Step 5: Add a Button and Practice Input**
+5. **Step 5: Add a Button and Practice Input**  
    Move to Day 10 to learn digital input, pull-up resistors, and state reading.
 
 ---
 
-## âš¡ Critical Hardware Safety Rules
+## Critical Hardware Safety Rules
 
 Please remember these rules before plugging any wire into your board:
 
-> âš ï¸ **ESP32 Uses 3.3V Logic!**
-> - ESP32 GPIO pins tolerate a maximum of **3.3 V**.
-> - **NEVER connect 5 V directly to an ESP32 GPIO pin.** Doing so will permanently destroy the pin or the entire SoC.
-> - **Always use a 220 Î© or 330 Î© resistor with LEDs.** Never connect an LED directly between GPIO and GND.
+> **Warning: ESP32 Uses 3.3V Logic!**  
+> - ESP32 GPIO pins tolerate a maximum of **3.3V**.
+> - **NEVER connect 5V directly to an ESP32 GPIO pin.** Doing so will permanently destroy the pin or the entire SoC.
+> - **Always use a 220 ohm or 330 ohm resistor with LEDs.** Never connect an LED directly between GPIO and GND.
 > - **NO mains AC electricity experiments for beginners!** All early experiments are strictly low-voltage DC (3.3V / 5V USB powered).
 
 ---
 
-## ðŸ”„ The Daily Engineering Workflow
+## The Daily Engineering Workflow
 
 For every daily lesson, follow this consistent 9-step learning loop:
 
-$$\text{Read} \longrightarrow \text{Wire} \longrightarrow \text{Code} \longrightarrow \text{Build} \longrightarrow \text{Flash} \longrightarrow \text{Monitor} \longrightarrow \text{Experiment} \longrightarrow \text{Commit} \longrightarrow \text{Document}$$
+```text
+Read -> Wire -> Code -> Build -> Flash -> Monitor -> Experiment -> Commit -> Document
+```
 
 1. **Read**: Review the daily concept and pin constraints.
 2. **Wire**: Assemble the circuit on your breadboard with power disconnected.
@@ -103,13 +105,13 @@ $$\text{Read} \longrightarrow \text{Wire} \longrightarrow \text{Code} \longright
 
 ---
 
-## ðŸ§­ Essential Links & Resources
+## Essential Links and Resources
 
-- ðŸ“– **[Day 0 â€” Electronics Prerequisites](Prerequisites.md)**
-- ðŸ“… **[Daily Progress Tracker](DAILY_TRACKER.md)**
-- ðŸ’» **[ESP-IDF Windows Setup Guide](docs/ESP_IDF_WINDOWS_SETUP.md)**
-- ðŸ› ï¸ **[Beginner Troubleshooting Guide](docs/TROUBLESHOOTING.md)**
-- ðŸ“Œ **[ESP32-WROOM-32 Pin Reference](docs/ESP32_WROOM_32_REFERENCE.md)**
-- ðŸŽ“ **[Our Learning Method](docs/LEARNING_METHOD.md)**
-- ðŸ—ºï¸ **[Full 350-Day Roadmap](docs/ROADMAP.md)**
-- ðŸ“¦ **[Hardware Bill of Materials](docs/HARDWARE_BOM.md)**
+- **[Day 0 - Electronics Prerequisites](Prerequisites.md)**
+- **[Daily Progress Tracker](DAILY_TRACKER.md)**
+- **[ESP-IDF Windows Setup Guide](docs/ESP_IDF_WINDOWS_SETUP.md)**
+- **[Beginner Troubleshooting Guide](docs/TROUBLESHOOTING.md)**
+- **[ESP32-WROOM-32 Pin Reference](docs/ESP32_WROOM_32_REFERENCE.md)**
+- **[Our Learning Method](docs/LEARNING_METHOD.md)**
+- **[Full 350-Day Roadmap](docs/ROADMAP.md)**
+- **[Hardware Bill of Materials](docs/HARDWARE_BOM.md)**
